@@ -18,7 +18,7 @@ public class start extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-    Parent startMenu = FXMLLoader.load(getClass().getClassLoader().getResource("StartMenu.fxml"));
+    Parent startMenu = FXMLLoader.load(getClass().getResource("StartMenu.fxml"));
     Scene scene1 = new Scene(startMenu);
     stage.setScene(scene1);
     stage.show();
