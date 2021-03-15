@@ -35,13 +35,13 @@ public class Game{
 
     public void pauseClicked(MouseEvent mouseEvent) throws IOException {
         if(timer!=null) {
-//            Parent root = FXMLLoader.load(getClass().getResource("PauseMenu.fxml"));
-//            Scene pauseScreen = new Scene(root);
-//            Stage popWindow = new Stage();
-//            popWindow.setScene(pauseScreen);
-//            popWindow.centerOnScreen();
-//            popWindow.initModality(Modality.APPLICATION_MODAL);
-//            popWindow.show();
+            Parent root = FXMLLoader.load(getClass().getResource("PauseMenu.fxml"));
+            Scene pauseScreen = new Scene(root);
+            Stage popWindow = new Stage();
+            popWindow.setScene(pauseScreen);
+            popWindow.centerOnScreen();
+            popWindow.initModality(Modality.APPLICATION_MODAL);
+            popWindow.show();
             timer.stop();
         }
     }
