@@ -1,7 +1,14 @@
+package com.group1;
+
 import java.util.Random;
 
 class Moving extends Enemies{
   private int range; //sets the range of the enemy movement
+
+  public Moving(int health, int[][] pos, int[][] size, float speed, int damageDone, int range) {
+        super(health, pos, size, speed, damageDone);
+        this.range = range;
+  }
 
   public int getRange(){ //getter
     return range; 
