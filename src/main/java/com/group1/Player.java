@@ -8,9 +8,6 @@ class Player extends Character{
   public Player(int health, int[][] pos, int[][] size, float speed) {
         super(health, pos, size, speed);
   }
-  // public void followPlayer(){
-    //unneeded
-  // }
 
 
   public void damage(Character c){ //class sets damage done
