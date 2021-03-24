@@ -14,4 +14,8 @@ class ChasingZombie extends Moving{
   public void setWeapon(boolean newWeapon){ //setter
     this.weapon = newWeapon;
   }
+
+  public void followPlayer(){
+    
+  }
 }
