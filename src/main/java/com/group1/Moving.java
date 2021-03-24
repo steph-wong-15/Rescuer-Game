@@ -5,8 +5,8 @@ import java.util.Random;
 class Moving extends Enemies{
   private int range; //sets the range of the enemy movement
 
-  public Moving(int health, int[][] pos, int[][] size, float speed, int damageDone, int range) {
-        super(health, pos, size, speed, damageDone);
+  public Moving(int health, int[][] pos, int[][] size, float speed, double x, double y, double r, double dx, double dy, double dr, int damageDone, int range) {
+        super(health, pos, size, speed, x, y, r, dx, dy, dr, damageDone);
         this.range = range;
   }
 

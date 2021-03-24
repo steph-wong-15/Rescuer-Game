@@ -5,8 +5,8 @@ import java.util.ArrayList; // import the ArrayList class
 class Player extends Character{
   public ArrayList<String> hostages = new ArrayList<String>(); // Create an ArrayList object that holds strings of possible hostages
 
-  public Player(int health, int[][] pos, int[][] size, float speed) {
-        super(health, pos, size, speed);
+  public Player(int health, int[][] pos, int[][] size, float speed, double x, double y, double r, double dx, double dy, double dr) {
+        super(health, pos, size, speed, x, y, r, dx, dy, dr);
   }
   // public void followPlayer(){
     //unneeded

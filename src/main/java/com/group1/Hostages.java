@@ -7,8 +7,8 @@ class Hostages extends Character{
   private String ability; //ability
 
 
-  public Hostages(int health, int[][] pos, int[][] size, float speed, int[][] lockedPos, String ability) {
-        super(health, pos, size, speed); 
+  public Hostages(int health, int[][] pos, int[][] size, float speed, double x, double y, double r, double dx, double dy, double dr, int[][] lockedPos, String ability) {
+        super(health, pos, size, speed, x, y, r, dx, dy, dr); 
         this.lockedPos = lockedPos;
         this.ability = ability;    
   }

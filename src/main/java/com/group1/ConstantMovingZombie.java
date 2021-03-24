@@ -3,8 +3,8 @@ package com.group1;
 class ConstantMovingZombie extends Moving{
   private String movementPattern; //possible values: vertical, horizontal, or diagonal
 
-  public ConstantMovingZombie(int health, int[][] pos, int[][] size, float speed, int damageDone, int range, String movementPattern) {
-        super(health, pos, size, speed, damageDone, range);
+  public ConstantMovingZombie(int health, int[][] pos, int[][] size, float speed, double x, double y, double r, double dx, double dy, double dr, int damageDone, int range, String movementPattern) {
+        super(health, pos, size, speed, x, y, r, dx, dy, dr,damageDone, range);
         this.movementPattern = movementPattern;
   }
 
