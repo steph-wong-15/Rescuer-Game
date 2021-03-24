@@ -1,15 +1,55 @@
 package com.group1;
 
-import java.util.ArrayList; // import the ArrayList class
+import java.util.*; //import arraylist
 
-class Player extends Character{
-  public ArrayList<String> hostages = new ArrayList<String>(); // Create an ArrayList object that holds strings of possible hostages
+public class Player extends Character{
+  double speed;
 
-  public Player(int health, int[][] pos, int[][] size, float speed, double x, double y, double r, double dx, double dy, double dr) {
-        super(health, pos, size, speed, x, y, r, dx, dy, dr);
+  double playerShipMinX;
+  double playerShipMaxX;
+  double playerShipMinY;
+  double playerShipMaxY;
+  
+  ArrayList<String> hostages = new ArrayList<String>(); // Create an ArrayList object that holds strings of possible hostages
+
+
+  public Player(int health, int[][] pos, int[][] size, double x, double y, double r, double dx, double dy, double dr, double speed) {
+        super(health, pos, size, x, y, r, dx, dy, dr);
+        this.speed = speed;
+        bounds();
+  } 
+  private void bounds() {
+     // calculate movement bounds of the player
   }
 
+  @Override
+    public void move() {
 
+        super.move();
+
+        // ensure the ship can't move outside of the screen
+        checkBounds();
+
+
+    }
+
+    private void checkBounds() {
+
+      // vertical
+      if( Double.compare( y, playerShipMinY) < 0) {
+         y = playerShipMinY;
+      } else if( Double.compare(y, playerShipMaxY) > 0) {
+            y = playerShipMaxY;
+        }
+
+        // horizontal
+        if( Double.compare( x, playerShipMinX) < 0) {
+            x = playerShipMinX;
+        } else if( Double.compare(x, playerShipMaxX) > 0) {
+            x = playerShipMaxX;
+        }
+
+    }
   public void damage(Character c){ //class sets damage done
     int enemyDmg = 0; //default damage is 0 
     for (int i = 0; i<hostages.size(); i++){ //iterate through size of hostages
@@ -37,7 +77,7 @@ class Player extends Character{
   }
 
   public void sword(){
-    //sword?
+    //sword
   }
 
   public void axe(){

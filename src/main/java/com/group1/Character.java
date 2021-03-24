@@ -1,10 +1,9 @@
 package com.group1;
 
-abstract class Character{ 
+public abstract class Character{ 
   private int health;
   private int[][] pos;
   private int[][] size;
-  private float speed;
 
   double x;
   double y;
@@ -15,11 +14,10 @@ abstract class Character{
   double dr;
   
   boolean canMove = true;
-
-  public Character(int health, int[][] pos, int[][] size, float speed, double x, double y, double r, double dx, double dy, double dr) {
+  boolean removable = false;
+  public Character(int health, int[][] pos, int[][] size, double x, double y, double r, double dx, double dy, double dr) {
         this.health = health;
         this.pos= pos;
-        this.speed = speed;
         this.size = size;
 
         this.x = x;
@@ -72,15 +70,6 @@ abstract class Character{
       this.size = size;
   }
 
-  public float getSpeed() {
-    return speed;
-  }
-
-  //set the damageDone
-  public void setSpeed(float speed){
-    this.speed = speed;
-  } 
-
   public void draw(){
     //implement a drawing function
   }
@@ -128,5 +117,20 @@ abstract class Character{
     public void setDr(double dr) {
         this.dr = dr;
     }
-  
+    //kill player
+    public void kill() {
+        setHealth(0);
+    }
+
+    public boolean isRemovable() { //getter for removable
+        return removable;
+    }
+
+    public void setRemovable(boolean removable) {
+        this.removable = removable;
+    }
+
+    public void checkRemovability() {
+        //default
+    }
 }
