@@ -16,6 +16,6 @@ class ChasingZombie extends Moving{
   }
 
   public void followPlayer(){
-    
+    //implement
   }
 }
