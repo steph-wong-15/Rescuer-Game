@@ -11,7 +11,8 @@ import java.util.BitSet;
 public class Input {
 
     /**
-     * Bitset which registers if any {@link KeyCode} keeps being pressed or if it is released.
+     * Inputs
+     * Keyboard Inputs
      */
     private BitSet keyboardBitSet = new BitSet();
 
@@ -24,8 +25,7 @@ public class Input {
     private KeyCode downKey = KeyCode.DOWN;
     private KeyCode leftKey = KeyCode.LEFT;
     private KeyCode rightKey = KeyCode.RIGHT;
-    private KeyCode primaryWeaponKey = KeyCode.SPACE;
-    private KeyCode secondaryWeaponKey = KeyCode.CONTROL;
+
 
     Scene scene;
 
@@ -47,9 +47,6 @@ public class Input {
 
     }
 
-    /**
-     * "Key Pressed" handler for all input events: register pressed key in the bitset
-     */
     private EventHandler<KeyEvent> keyPressedEventHandler = new EventHandler<KeyEvent>() {
         @Override
         public void handle(KeyEvent event) {
@@ -60,9 +57,6 @@ public class Input {
         }
     };
 
-    /**
-     * "Key Released" handler for all input events: unregister released key in the bitset
-     */
     private EventHandler<KeyEvent> keyReleasedEventHandler = new EventHandler<KeyEvent>() {
         @Override
         public void handle(KeyEvent event) {
@@ -93,14 +87,6 @@ public class Input {
 
     public boolean isMoveRight() {
         return keyboardBitSet.get( rightKey.ordinal()) && !keyboardBitSet.get( leftKey.ordinal());
-    }
-
-    public boolean isFirePrimaryWeapon() {
-        return keyboardBitSet.get( primaryWeaponKey.ordinal());
-    }
-
-    public boolean isFireSecondaryWeapon() {
-        return keyboardBitSet.get( secondaryWeaponKey.ordinal());
     }
 
 }

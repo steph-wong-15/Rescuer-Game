@@ -6,6 +6,11 @@ import javafx.scene.layout.Pane;
 
 import java.util.Iterator;
 
+/**
+ * Person abstract Superclass
+ * Gives attributes to Enemy, Goal, Hostage and Player subclasses
+ */
+
 public abstract class Person{
     public int health;
     private int[][] pos;
@@ -168,25 +173,24 @@ public abstract class Person{
         imageView.setRotate(r);
 
     }
+    //getters
     public double getWidth() {
         return w;
     }
-
     public double getHeight() {
         return h;
     }
-
     public double getCenterX() { //get the centre x coordinate
         return x + w * 0.5;
     }
-
     public double getCenterY() { //get the centre y coordinate
         return y + h * 0.5;
     }
-
     public boolean isRemovable() { //getter for removable
         return removable;
     }
+
+    //remove methods
     public void remove() { //CHANGE TO REMOVABLE OBJECT
         setRemovable(true);
     }
@@ -196,12 +200,11 @@ public abstract class Person{
     public void stopMovement() { //prevent movement
         this.canMove = false;
     }
-
+    public void getDamaged( Person sprite) {
+        health -= 1;
+    }
     public void checkRemovability() {
         //default
-    }
-    public void getDamaged( Person sprite) {
-        health -= sprite.getDamage();
     }
     public boolean CharacterCollision( Person otherSprite) {
 

@@ -5,6 +5,11 @@ import javafx.scene.layout.Pane;
 
 import java.util.*; //import arraylist
 
+/**
+ * Player Class
+ * Extends off the Person class to generate the main character
+ */
+
 public class Player extends Person{
   double speed;
 

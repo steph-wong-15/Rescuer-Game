@@ -3,7 +3,11 @@ package com.group1;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 
-import java.util.Arrays;  //import Arrays class
+
+/**
+ * Hostage Generator
+ * Extends off the Person class to generate Hostages
+ */
 
 class Hostages extends Person{
 
