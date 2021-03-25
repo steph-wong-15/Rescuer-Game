@@ -8,8 +8,8 @@ class Projectile extends Moving{
   private String direction; //set to left, right, up, or down 
   private int frequency; //sets the timing interval of when projectiles come out (ex: 1s, 2s, 5s, etc.)
 
-  public Projectile(Image image, Pane layer, int health, int damage,  double x, double y, double r, double dx, double dy, double dr, int damageDone, int range, String direction, int frequency) {
-        super(image, layer, health, damage, x, y, r, dx, dy, dr, damageDone, range);
+  public Projectile(Image image, Pane layer, int health, int damage,  double x, double y, double r, double dx, double dy, double dr, int range, String direction, int frequency) {
+        super(image, layer, health, damage, x, y, r, dx, dy, dr, range);
     this.direction = direction;
         this.frequency = frequency;
   }
