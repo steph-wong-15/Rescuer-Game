@@ -62,6 +62,10 @@ public class StartMenu {
     Stage mainWindow;
     Stage primaryStage;
 
+    /**
+     * Main game method where game loop runs
+     * @param mouseEvent when player clicks play button
+     */
     public void startButtonClick(MouseEvent mouseEvent) {
         ///////////////////////UI for main game screen//////////////////////
         loadGame();
@@ -126,7 +130,11 @@ public class StartMenu {
 
     }
 
-    public void settingButtonClicked() throws IOException {
+    /**
+     * Setting window is created and game pauses.
+     * Includes quit and resume options
+     */
+    public void settingButtonClicked() {
         ///////////////////////UI for setting popup window///////////////////
         BorderPane borderPane = new BorderPane();
         HBox hbox = new HBox();
@@ -156,6 +164,9 @@ public class StartMenu {
         });
     }
 
+    /**
+     * Load window/stage assets
+     */
     public void test() {
         primaryStage = new Stage();
         primaryStage.centerOnScreen();
@@ -169,13 +180,10 @@ public class StartMenu {
         root.getChildren().add( playfieldLayer);
         root.getChildren().add( scoreLayer);
         root.getChildren().add(pauseButton);
+
         pauseButton.setOnAction(e->{
-            try {
-                settingButtonClicked();
-                gameLoop.stop();
-            } catch (IOException ioException) {
-                ioException.printStackTrace();
-            }
+            settingButtonClicked();
+            gameLoop.stop();
         });
 
         scene = new Scene( root, Settings.SCENE_WIDTH, Settings.SCENE_HEIGHT);
@@ -218,11 +226,17 @@ public class StartMenu {
 //        return pane;
 //    }
 
+    /**
+     * load images
+     */
     private void loadGame() {
         playerImage = new Image(getClass().getResource("/photos/player.png").toExternalForm());
         enemyImage = new Image(getClass().getResource("/photos/enemy.png").toExternalForm());
     }
 
+    /**
+     * Collision effect when player touches enemies
+     */
     private void createScoreLayer() {
 
 
@@ -243,6 +257,9 @@ public class StartMenu {
 
     }
 
+    /**
+     * Creating player
+     */
     private void createPlayers() {
 
         // player input
@@ -265,6 +282,10 @@ public class StartMenu {
 
     }
 
+    /**
+     * Enemy spawner
+     * @param random helps with randomzing enemy creation
+     */
     private void spawnEnemies(boolean random) {
 
         if (random && rnd.nextInt(Settings.ENEMY_SPAWN_RANDOMNESS) != 0) {
@@ -306,6 +327,9 @@ public class StartMenu {
 //        }
 //    }
 
+    /**
+     * Collison detection
+     */
     private void checkCollisions() {
 
         collision = false;
@@ -319,6 +343,9 @@ public class StartMenu {
         }
     }
 
+    /**
+     * Track score
+     */
     private void updateScore() {
         if (collision) {
             collisionText.setText("Collision!\n -1 hp!");

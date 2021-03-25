@@ -10,6 +10,11 @@ import javafx.stage.Stage;
 
 
 public class Main extends Application {
+    /**
+     * loads starting screen UI
+     * @param stage starting stage
+     * @throws Exception exception handling if FXMLLoader fails
+     */
     @Override
     public void start(Stage stage) throws Exception {
     Parent startMenu = FXMLLoader.load(getClass().getResource("StartMenu.fxml"));
