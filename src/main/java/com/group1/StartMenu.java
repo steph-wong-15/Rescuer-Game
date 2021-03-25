@@ -11,9 +11,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
@@ -23,14 +21,11 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextBoundsType;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Random;
-import java.util.Date;
 import java.util.concurrent.TimeUnit;
 /**
  * StartMenu
@@ -38,14 +33,13 @@ import java.util.concurrent.TimeUnit;
  */
 
 public class StartMenu {
-    @FXML
 
+    public StackPane stackPane;
     Random rnd = new Random();
     Pane playfieldLayer = new Pane();
     Pane scoreLayer = new Pane();
 
 
-    Scene scene;
     List<Player> players = new ArrayList<>();
     List<Enemies> enemies = new ArrayList<>();
     List<Hostages> hostages = new ArrayList<>();
@@ -70,12 +64,13 @@ public class StartMenu {
 
     public Canvas theCanvas; //generate canvas
     int mv = 0;
-    final int gameWidth = 700;
-    final int gameHeight = 700;
+    double gameWidth;
+    double gameHeight;
     public GameTimer timer;
     public AnimationTimer gameLoop;
     Stage mainWindow;
     Stage primaryStage;
+    Scene gameScene;
 
     /**
      * Main game method where game loop runs
@@ -84,20 +79,39 @@ public class StartMenu {
     public void startButtonClick(MouseEvent mouseEvent) {
         ///////////////////////UI for main game screen//////////////////////
 
-        BorderPane borderPane = new BorderPane();
-        Canvas canvas = new Canvas();
-        Button pauseButton = new Button("PAUSE");
-        canvas.setWidth(gameWidth);
-        canvas.setHeight(gameHeight);
-        pauseButton.setPrefSize(110, 30);
-        borderPane.setCenter(canvas);
-        borderPane.setBottom(pauseButton);
-        borderPane.setAlignment(pauseButton, Pos.CENTER);
+//        BorderPane borderPane = new BorderPane();
+//        Canvas canvas = new Canvas();
+//        Button pauseButton = new Button("PAUSE");
+//        canvas.setWidth(gameWidth);
+//        canvas.setHeight(gameHeight);
+//        pauseButton.setPrefSize(110, 30);
+//        borderPane.setCenter(canvas);
+//        borderPane.setBottom(pauseButton);
+//        borderPane.setAlignment(pauseButton, Pos.CENTER);
+//
+//        Scene gameScene = new Scene(borderPane);
+        gameHeight= stackPane.getHeight();
+        gameWidth= stackPane.getWidth();
+        ImagePattern pattern = new ImagePattern(Main.myImage);
+        BorderPane root = new BorderPane();
+        StackPane group = new StackPane();
+        gameScene = new Scene(root);
+       // gameScene.setFill(pattern);
 
-        Scene gameScene = new Scene(borderPane);
-        ImagePattern bg = new ImagePattern(Main.myImage);
-        gameScene.setFill(bg);
 
+        // create layers
+        playfieldLayer = new Pane();
+        playfieldLayer.setPrefSize(gameWidth,gameHeight);
+        BackgroundSize backgroundSize= new BackgroundSize(Settings.SCENE_WIDTH,Settings.SCENE_HEIGHT,true,true,true,false);
+        BackgroundImage backgroundImage= new BackgroundImage(Main.myImage, BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.CENTER, backgroundSize);
+        playfieldLayer.setBackground(new Background(backgroundImage));
+        scoreLayer = new Pane();
+        scoreLayer.setPrefSize(gameWidth,gameHeight);
+        Button pauseButton =new Button("Pause");
+
+        group.getChildren().addAll( playfieldLayer,scoreLayer);
+        root.setCenter(group);
+        root.setBottom(pauseButton);
         //////////////////////UI for main game screen////////////////////////
 
         //get stage from start menu to change scenes with same stage
@@ -109,8 +123,6 @@ public class StartMenu {
         //Game loop
         System.out.println("Loading");
         gameLoop = new AnimationTimer() {
-
-
             @Override
             public void handle(long now) {
 
@@ -135,15 +147,23 @@ public class StartMenu {
                 // check if sprite can be removed
                 enemies.forEach(sprite -> sprite.checkRemovability());
 
-
                 // update score, health, etc
                 updateScore();
             }
 
         };
-        System.out.println("Loaded.");
+        createScoreLayer();
+        createPlayers();
         gameLoop.start();
-        test();
+        pauseButton.setOnAction(e->{
+            try {
+                settingButtonClicked();
+                gameLoop.stop();
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
+        });
+        //test();
 
     }
     /**
@@ -153,8 +173,6 @@ public class StartMenu {
 
     public void settingButtonClicked() throws IOException {
         ///////////////////////UI for setting popup window///////////////////
-
-
         BorderPane borderPane = new BorderPane();
         HBox hbox = new HBox();
         hbox.setPrefSize(gameWidth / 2, gameHeight / 2);
@@ -172,59 +190,50 @@ public class StartMenu {
         stage.setTitle("Settings");
         stage.show();
         ///////////////////////UI for setting popup window///////////////////
-
         resumeButton.setOnAction(e -> {
             stage.close();
             gameLoop.start();
-
         });
 
         quitButton.setOnAction(e -> {
             stage.close();
-            primaryStage.close();
-            System.exit(0);
-
+            mainWindow.close();
         });
     }
-    /**
-     * Load window/stage assets
-     */
 
-    public void test() {
-        ImagePattern pattern = new ImagePattern(Main.myImage);
-        Group root = new Group();
-        scene = new Scene( root, Settings.SCENE_WIDTH, Settings.SCENE_HEIGHT);
-        scene.setFill(pattern);
-        primaryStage = new Stage();
-        primaryStage.centerOnScreen();
-
-
-        // create layers
-        playfieldLayer = new Pane();
-        scoreLayer = new Pane();
-        Button pauseButton =new Button("Pause");
-
-        root.getChildren().add( playfieldLayer);
-        root.getChildren().add( scoreLayer);
-        root.getChildren().add(pauseButton);
-        pauseButton.setOnAction(e->{
-            try {
-                settingButtonClicked();
-                gameLoop.stop();
-            } catch (IOException ioException) {
-                ioException.printStackTrace();
-            }
-        });
-
-
-        primaryStage.setScene( scene);
-        primaryStage.show();
-
-        createScoreLayer();
-        createPlayers();
-
-
-    }
+//    public void test() {
+//        ImagePattern pattern = new ImagePattern(Main.myImage);
+//        Group root = new Group();
+//        scene = new Scene( root, Settings.SCENE_WIDTH, Settings.SCENE_HEIGHT);
+//        scene.setFill(pattern);
+//        primaryStage = new Stage();
+//        primaryStage.centerOnScreen();
+//
+//
+//        // create layers
+//        playfieldLayer = new Pane();
+//        scoreLayer = new Pane();
+//        Button pauseButton =new Button("Pause");
+//
+//        root.getChildren().add( playfieldLayer);
+//        root.getChildren().add( scoreLayer);
+//        root.getChildren().add(pauseButton);
+//        pauseButton.setOnAction(e->{
+//            try {
+//                settingButtonClicked();
+//                gameLoop.stop();
+//            } catch (IOException ioException) {
+//                ioException.printStackTrace();
+//            }
+//        });
+//
+//
+//        primaryStage.setScene( scene);
+//        primaryStage.show();
+//
+//        createScoreLayer();
+//        createPlayers();
+//    }
 
 
     private void createScoreLayer() { //create some text layer
@@ -250,7 +259,7 @@ public class StartMenu {
     private void createPlayers() {
 
         // player input
-        Input input = new Input(scene); //use temporary scene var
+        Input input = new Input(gameScene); //use temporary scene var
 
         // register input listeners
         input.addListeners();
@@ -453,9 +462,9 @@ public class StartMenu {
 
         });
 
-        scene = new Scene( root, Settings.SCENE_WIDTH, Settings.SCENE_HEIGHT);
-        scene.setFill(pattern);
-        primaryStage.setScene( scene);
+        gameScene = new Scene( root, Settings.SCENE_WIDTH, Settings.SCENE_HEIGHT);
+        gameScene.setFill(pattern);
+        primaryStage.setScene( gameScene);
         primaryStage.show();
 
         System.out.println("Thanks for playing!");
@@ -483,9 +492,9 @@ public class StartMenu {
 
         });
 
-        scene = new Scene( root, Settings.SCENE_WIDTH, Settings.SCENE_HEIGHT);
-        scene.setFill(pattern);
-        primaryStage.setScene( scene);
+        gameScene = new Scene( root, Settings.SCENE_WIDTH, Settings.SCENE_HEIGHT);
+        gameScene.setFill(pattern);
+        primaryStage.setScene( gameScene);
         primaryStage.show();
 
         System.out.println("Try again next time.");
