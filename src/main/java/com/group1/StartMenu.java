@@ -26,7 +26,8 @@ public class StartMenu {
     final int gameWidth =600;
     final int gameHeight =400;
     public GameTimer timer;
-    public void startButtonClick(MouseEvent mouseEvent) throws IOException {
+    Stage mainWindow;
+    public void startButtonClick(MouseEvent mouseEvent){
         //UI for main game screen
         BorderPane borderPane = new BorderPane();
         Canvas canvas = new Canvas();
@@ -39,10 +40,10 @@ public class StartMenu {
         borderPane.setAlignment(pauseButton,Pos.CENTER);
         Scene gameScene = new Scene(borderPane);
         //get stage from start menu to change scene to game
-        Stage window = (Stage)(((Node)mouseEvent.getSource()).getScene().getWindow());
-        window.setScene(gameScene);
-        window.centerOnScreen();
-        window.show();
+        mainWindow = (Stage)(((Node)mouseEvent.getSource()).getScene().getWindow());
+        mainWindow.setScene(gameScene);
+        mainWindow.centerOnScreen();
+        mainWindow.show();
         //Game loop
         timer = new GameTimer() {
             @Override
@@ -53,22 +54,21 @@ public class StartMenu {
                 gc.setFill(Color.BLUE);
                 gc.fillRect(100+mv,100,50,50);
                 mv++;
-                pauseButton.setOnAction(e-> {
-                    try {
-                        settingButtonClicked();
-                    } catch (IOException ioException) {
-                        ioException.printStackTrace();
-                    }
-                });
             }
         };
+        pauseButton.setOnAction(e-> {
+            try {
+                settingButtonClicked();
+                timer.stop();
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
+        });
         timer.start();
     }
 
-    public void pauseClicked(MouseEvent mouseEvent) {
-
-    }
     public void settingButtonClicked() throws IOException {
+        //UI for setting popup window
         BorderPane borderPane = new BorderPane();
         HBox hbox = new HBox();
         hbox.setPrefSize(gameWidth/2,gameHeight/2);
@@ -84,6 +84,16 @@ public class StartMenu {
         stage.centerOnScreen();
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.show();
+
+        resumeButton.setOnAction(e->{
+            stage.close();
+            timer.start();
+        });
+
+        quitButton.setOnAction(e->{
+            stage.close();
+            mainWindow.close();
+        });
     }
 
 }
