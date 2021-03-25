@@ -4,6 +4,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
+import java.util.Iterator;
+
 public abstract class Person{
     private int health;
     private int[][] pos;
@@ -26,14 +28,13 @@ public abstract class Person{
     int damage;
     boolean canMove = true;
     boolean removable = false;
-    public Person(Image image, Pane layer, int health, int damage, int[][] pos, int[][] size, double x, double y, double r, double dx, double dy, double dr) {
+    public Person(Image image, Pane layer, int health, int damage, double x, double y, double r, double dx, double dy, double dr) {
 
         this.image = image;
         this.layer = layer;
         this.health = health;
         this.damage = damage;
-        this.pos= pos;
-        this.size = size;
+
 
         this.x = x;
         this.y = y;
@@ -50,6 +51,10 @@ public abstract class Person{
         this.h = image.getHeight(); // imageView.getBoundsInParent().getHeight();
 
         addToLayer();
+    }
+
+    public static Iterator<? extends Person> iterator() {
+        return iterator();
     }
 
     public void addToLayer() { //Add Sprite to Layer
@@ -96,22 +101,7 @@ public abstract class Person{
         //implement wallCollision
     }
 
-    public int[][] getPos() {
-        return pos;
-    }
 
-    public void setPos(int[][] pos) {
-        this.pos = pos;
-    }
-
-
-    public int[][] getSize() {
-        return size;
-    }
-
-    public void setSize(int[][] size) {
-        this.size = size;
-    }
 
     public void draw(){
         //implement a drawing function

@@ -6,8 +6,8 @@ import javafx.scene.layout.Pane;
 class Enemies extends Person{
   private int damageDone;
 
-  public Enemies(Image image, Pane layer, int health, int damage, int[][] pos, int[][] size, double x, double y, double r, double dx, double dy, double dr) {
-        super(image, layer, health, damage, pos, size, x, y, r, dx, dy, dr);
+  public Enemies(Image image, Pane layer, int health, int damage, double x, double y, double r, double dx, double dy, double dr) {
+        super(image, layer, health, damage, x, y, r, dx, dy, dr);
         this.damageDone = damageDone;
     }
   //return the damageDone
