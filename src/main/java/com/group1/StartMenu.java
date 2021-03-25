@@ -69,9 +69,15 @@ public class StartMenu {
     public AnimationTimer gameLoop;
     Stage mainWindow;
     Stage primaryStage;
+<<<<<<< HEAD
 
+=======
+>>>>>>> f62bc7f3d3a8a99edd23e793287cd05c212bd845
 
-
+    /**
+     * Main game method where game loop runs
+     * @param mouseEvent when player clicks play button
+     */
     public void startButtonClick(MouseEvent mouseEvent) {
         ///////////////////////UI for main game screen//////////////////////
         loadGame();
@@ -98,7 +104,10 @@ public class StartMenu {
 
         System.out.println("Loading");
         gameLoop = new AnimationTimer() {
+<<<<<<< HEAD
 
+=======
+>>>>>>> f62bc7f3d3a8a99edd23e793287cd05c212bd845
 
             @Override
             public void handle(long now) {
@@ -136,7 +145,11 @@ public class StartMenu {
 
     }
 
-    public void settingButtonClicked() throws IOException {
+    /**
+     * Setting window is created and game pauses.
+     * Includes quit and resume options
+     */
+    public void settingButtonClicked() {
         ///////////////////////UI for setting popup window///////////////////
         BorderPane borderPane = new BorderPane();
         HBox hbox = new HBox();
@@ -158,19 +171,31 @@ public class StartMenu {
         resumeButton.setOnAction(e -> {
             stage.close();
             gameLoop.start();
+<<<<<<< HEAD
 
+=======
+>>>>>>> f62bc7f3d3a8a99edd23e793287cd05c212bd845
         });
 
         quitButton.setOnAction(e -> {
             stage.close();
             primaryStage.close();
+<<<<<<< HEAD
 
+=======
+>>>>>>> f62bc7f3d3a8a99edd23e793287cd05c212bd845
         });
     }
 
+    /**
+     * Load window/stage assets
+     */
     public void test() {
+<<<<<<< HEAD
         ImagePattern pattern = new ImagePattern(myImage);
 
+=======
+>>>>>>> f62bc7f3d3a8a99edd23e793287cd05c212bd845
         primaryStage = new Stage();
         primaryStage.centerOnScreen();
         Group root = new Group();
@@ -183,6 +208,7 @@ public class StartMenu {
         root.getChildren().add( playfieldLayer);
         root.getChildren().add( scoreLayer);
         root.getChildren().add(pauseButton);
+<<<<<<< HEAD
         pauseButton.setOnAction(e->{
             try {
                 settingButtonClicked();
@@ -190,6 +216,12 @@ public class StartMenu {
             } catch (IOException ioException) {
                 ioException.printStackTrace();
             }
+=======
+
+        pauseButton.setOnAction(e->{
+            settingButtonClicked();
+            gameLoop.stop();
+>>>>>>> f62bc7f3d3a8a99edd23e793287cd05c212bd845
         });
 
         scene = new Scene( root, Settings.SCENE_WIDTH, Settings.SCENE_HEIGHT);
@@ -204,6 +236,40 @@ public class StartMenu {
 
     }
 
+<<<<<<< HEAD
+=======
+//    public Pane InitPane() {
+//
+//        Pane pane = new Pane();
+//
+//        for (int i = 0; i < mapSize; i += unitSize) {
+//
+//            for (int j = 0; j < mapSize; j += unitSize) {
+//
+//                Rectangle tile = new Rectangle(i, j, unitSize, unitSize);
+//
+//                if (map[i][j] == 0) {
+//
+//                    tile.setFill(Color.BLUEVIOLET);
+//
+//                } else if (map[i][j] == 1) {
+//
+//                    tile.setFill(Color.GREENYELLOW);
+//                }
+//                if (i == mapSize - unitSize && j == mapSize - unitSize * 2) {
+//
+//                    tile.setFill(Color.DARKORANGE);
+//                }
+//                pane.getChildren().add(tile);
+//            }
+//        }
+//        return pane;
+//    }
+
+    /**
+     * load images
+     */
+>>>>>>> f62bc7f3d3a8a99edd23e793287cd05c212bd845
     private void loadGame() {
         playerImage = new Image(getClass().getResource("/photos/player.png").toExternalForm());
         enemyImage = new Image(getClass().getResource("/photos/enemy.png").toExternalForm());
@@ -212,6 +278,9 @@ public class StartMenu {
         myImage = new Image(getClass().getResource("/photos/background.png").toExternalForm());
     }
 
+    /**
+     * Collision effect when player touches enemies
+     */
     private void createScoreLayer() {
 
 
@@ -232,6 +301,9 @@ public class StartMenu {
 
     }
 
+    /**
+     * Creating player
+     */
     private void createPlayers() {
 
         // player input
@@ -271,6 +343,7 @@ public class StartMenu {
     }
     private void spawnHostages() {
 
+<<<<<<< HEAD
         // image
         Image image = hostageImage;
 
@@ -294,6 +367,12 @@ public class StartMenu {
         hostages.add(hostage4);
 
     }
+=======
+    /**
+     * Enemy spawner
+     * @param random helps with randomzing enemy creation
+     */
+>>>>>>> f62bc7f3d3a8a99edd23e793287cd05c212bd845
     private void spawnEnemies(boolean random) {
 
         if (random && rnd.nextInt(Settings.ENEMY_SPAWN_RANDOMNESS) != 0) {
@@ -320,6 +399,9 @@ public class StartMenu {
     }
 
 
+    /**
+     * Collison detection
+     */
     private void checkCollisions() {
 
         collision = false;
@@ -350,6 +432,9 @@ public class StartMenu {
         }
     }
 
+    /**
+     * Track score
+     */
     private void updateScore() {
         if (collision) {
             collisionText.setText("Collision!\n -1 hp!");
