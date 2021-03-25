@@ -6,13 +6,14 @@ package com.group1;
 import java.util.ArrayList;
 
 public class CreateMap {
-    private int row;
-    private  int col;
-    private int r;
-    private int c;
+    private final int row;
+    private final int col;
+    private final int r;
+    private final int c;
     public int[][] map;
 
-    void initMap(int initRow, int initCol){
+
+    CreateMap(int initRow, int initCol){
         row = initRow;
         col = initCol;
         r = (2 * row) + 1;
@@ -21,7 +22,7 @@ public class CreateMap {
         map = new int[r][c];
     }
 
-    void createMap(){
+    public void InitMap(){
         for (int i = 0; i < r; i++) // Set all grids as walls
             for (int j = 0; j < c; j++)
                 map[i][j] = 0; //0 is an unbreakable wall, 1 is not a wall

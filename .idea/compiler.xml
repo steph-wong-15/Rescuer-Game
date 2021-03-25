@@ -10,7 +10,11 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+<<<<<<< Updated upstream
       <module name="project" target="12" />
+=======
+      <module name="project" target="11" />
+>>>>>>> Stashed changes
     </bytecodeTargetLevel>
   </component>
 </project>
