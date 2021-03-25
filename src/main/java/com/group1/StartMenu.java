@@ -1,20 +1,14 @@
 package com.group1;
 
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.SceneAntialiasing;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -28,7 +22,7 @@ public class StartMenu {
     public GameTimer timer;
     Stage mainWindow;
     public void startButtonClick(MouseEvent mouseEvent){
-        //UI for main game screen
+        ///////////////////////UI for main game screen//////////////////////
         BorderPane borderPane = new BorderPane();
         Canvas canvas = new Canvas();
         Button pauseButton = new Button("PAUSE");
@@ -39,7 +33,9 @@ public class StartMenu {
         borderPane.setBottom(pauseButton);
         borderPane.setAlignment(pauseButton,Pos.CENTER);
         Scene gameScene = new Scene(borderPane);
-        //get stage from start menu to change scene to game
+        //////////////////////UI for main game screen////////////////////////
+
+        //get stage from start menu to change scenes with same stage
         mainWindow = (Stage)(((Node)mouseEvent.getSource()).getScene().getWindow());
         mainWindow.setScene(gameScene);
         mainWindow.centerOnScreen();
@@ -56,6 +52,8 @@ public class StartMenu {
                 mv++;
             }
         };
+        timer.start();
+        //Action Listener for pausing game
         pauseButton.setOnAction(e-> {
             try {
                 settingButtonClicked();
@@ -64,11 +62,10 @@ public class StartMenu {
                 ioException.printStackTrace();
             }
         });
-        timer.start();
     }
 
     public void settingButtonClicked() throws IOException {
-        //UI for setting popup window
+        ///////////////////////UI for setting popup window///////////////////
         BorderPane borderPane = new BorderPane();
         HBox hbox = new HBox();
         hbox.setPrefSize(gameWidth/2,gameHeight/2);
@@ -84,6 +81,7 @@ public class StartMenu {
         stage.centerOnScreen();
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.show();
+        ///////////////////////UI for setting popup window///////////////////
 
         resumeButton.setOnAction(e->{
             stage.close();
