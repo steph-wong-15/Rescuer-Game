@@ -7,7 +7,7 @@ import javafx.scene.layout.Pane;
 import java.util.Iterator;
 
 public abstract class Person{
-    private int health;
+    public int health;
     private int[][] pos;
     private int[][] size;
 

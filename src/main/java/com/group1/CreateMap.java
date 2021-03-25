@@ -1,7 +1,4 @@
-/* https://www.programmersought.com/article/41285517394/ referenced
-*/
 package com.group1;
-
 
 import java.util.ArrayList;
 

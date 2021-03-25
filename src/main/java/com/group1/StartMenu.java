@@ -1,5 +1,5 @@
 package com.group1;
-
+import java.lang.*;
 import javafx.animation.AnimationTimer;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
@@ -9,19 +9,11 @@ import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
-<<<<<<< HEAD
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-=======
-import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
->>>>>>> d9c2333f23abefc270db09249c05ed158e9c573f
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
@@ -30,6 +22,7 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextBoundsType;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import java.util.concurrent.TimeUnit;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -38,7 +31,6 @@ import java.util.List;
 import java.util.Random;
 
 public class StartMenu {
-<<<<<<< HEAD
     @FXML
 
     Random rnd = new Random();
@@ -55,7 +47,7 @@ public class StartMenu {
     Text collisionText = new Text();
     boolean collision = false;
 
-    public int mapSize = 400; //temporarily set to 400 adjust if needed
+    public int mapSize = 600; //temporarily set to 400 adjust if needed
     public int unitSize = 20;
     public int[][] map = new int[mapSize][mapSize];
     public CreateMap create = new CreateMap(mapSize, mapSize);
@@ -63,13 +55,8 @@ public class StartMenu {
 
     public Canvas theCanvas;
     int mv = 0;
-    final int gameWidth = 400;
-    final int gameHeight = 400;
-=======
-    int mv=0;
-    public static final int gameWidth =600;
-    public static final int gameHeight =400;
->>>>>>> d9c2333f23abefc270db09249c05ed158e9c573f
+    final int gameWidth = 600;
+    final int gameHeight = 600;
     public GameTimer timer;
 
     Stage mainWindow;
@@ -93,33 +80,13 @@ public class StartMenu {
         //get stage from start menu to change scenes with same stage
         mainWindow = (Stage) (((Node) mouseEvent.getSource()).getScene().getWindow());
         mainWindow.setScene(gameScene);
-        mainWindow.setTitle("Game");
         mainWindow.centerOnScreen();
         mainWindow.show();
         //Game loop
-        timer = new GameTimer() {
-            @Override
-            public void tick(long now) {
-                GraphicsContext gc = canvas.getGraphicsContext2D();
-                gc.setFill(Color.WHITE);
-                gc.fillRect(0, 0, 1000, 1000);
-                gc.setFill(Color.BLUE);
-                gc.fillRect(100 + mv, 100, 50, 50);
-                mv++;
-            }
-        };
         loadGame();
-        timer.start();
         //Action Listener for pausing game
-        pauseButton.setOnAction(e -> {
-            try {
-                settingButtonClicked();
-                timer.stop();
-            } catch (IOException ioException) {
-                ioException.printStackTrace();
-            }
-        });
-        System.out.println("test");
+
+        System.out.println("Loading");
         AnimationTimer gameLoop = new AnimationTimer() {
 
             @Override
@@ -153,7 +120,7 @@ public class StartMenu {
             }
 
         };
-        System.out.println("test");
+        System.out.println("Loaded.");
         gameLoop.start();
         test();
 
@@ -172,7 +139,6 @@ public class StartMenu {
         borderPane.setCenter(hbox);
         Scene settingScene = new Scene(borderPane);
         Stage stage = new Stage();
-        stage.setTitle("Paused");
         stage.setScene(settingScene);
         stage.centerOnScreen();
         stage.initModality(Modality.APPLICATION_MODAL);
@@ -250,7 +216,7 @@ public class StartMenu {
     private void createScoreLayer() {
 
 
-        collisionText.setFont(Font.font(null, FontWeight.BOLD, 64));
+        collisionText.setFont(Font.font(null, FontWeight.BOLD, 32));
         collisionText.setStroke(Color.BLACK);
         collisionText.setFill(Color.RED);
 
@@ -345,7 +311,23 @@ public class StartMenu {
 
     private void updateScore() {
         if (collision) {
-            collisionText.setText("Collision! You are losing 1 hp!");
+            collisionText.setText("Collision!\n -1 hp!");
+            for (Player player : players) {
+                player.getDamaged(player);
+                if (player.isAlive()==false){
+                    collisionText.setText("Game over, 0 HP.");
+                    try
+                    {
+                        Thread.sleep(3000);
+                    }
+                    catch(InterruptedException ex)
+                    {
+                        Thread.currentThread().interrupt();
+                    }
+                    System.exit(0);
+                }
+            }
+
 
 
         } else {
