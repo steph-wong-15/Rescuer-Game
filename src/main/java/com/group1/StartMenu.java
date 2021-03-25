@@ -15,6 +15,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
@@ -40,12 +41,19 @@ public class StartMenu {
 
     Image playerImage;
     Image enemyImage;
+    Image hostageImage;
+    Image myImage;
+    Image greenImage;
     Scene scene;
     List<Player> players = new ArrayList<>();
     List<Enemies> enemies = new ArrayList<>();
-
+    List<Hostages> hostages = new ArrayList<>();
+    List<Goal> goals = new ArrayList<>();
     Text collisionText = new Text();
     boolean collision = false;
+    boolean hostageCollision = false;
+    boolean goalCollision = false;
+    int hostageCount = 0;
 
     public int mapSize = 600; //temporarily set to 400 adjust if needed
     public int unitSize = 20;
@@ -58,8 +66,10 @@ public class StartMenu {
     final int gameWidth = 600;
     final int gameHeight = 600;
     public GameTimer timer;
-
+    public AnimationTimer gameLoop;
     Stage mainWindow;
+    Stage primaryStage;
+
 
 
     public void startButtonClick(MouseEvent mouseEvent) {
@@ -87,7 +97,8 @@ public class StartMenu {
         //Action Listener for pausing game
 
         System.out.println("Loading");
-        AnimationTimer gameLoop = new AnimationTimer() {
+        gameLoop = new AnimationTimer() {
+
 
             @Override
             public void handle(long now) {
@@ -97,7 +108,8 @@ public class StartMenu {
 
                 // add random enemies
                 spawnEnemies(true);
-
+                // add hostages
+                spawnHostages();
                 // movement
                 players.forEach(sprite -> sprite.move());
                 enemies.forEach(sprite -> sprite.move());
@@ -112,8 +124,6 @@ public class StartMenu {
                 // check if sprite can be removed
                 enemies.forEach(sprite -> sprite.checkRemovability());
 
-                // remove removables from list, layer, etc
-//                removeSprites(enemies);
 
                 // update score, health, etc
                 updateScore();
@@ -147,29 +157,43 @@ public class StartMenu {
 
         resumeButton.setOnAction(e -> {
             stage.close();
-            timer.start();
+            gameLoop.start();
+
         });
 
         quitButton.setOnAction(e -> {
             stage.close();
-            mainWindow.close();
+            primaryStage.close();
+
         });
     }
 
     public void test() {
-        Stage primaryStage = new Stage();
+        ImagePattern pattern = new ImagePattern(myImage);
+
+        primaryStage = new Stage();
         primaryStage.centerOnScreen();
         Group root = new Group();
 
         // create layers
         playfieldLayer = new Pane();
         scoreLayer = new Pane();
+        Button pauseButton =new Button("Pause");
 
         root.getChildren().add( playfieldLayer);
         root.getChildren().add( scoreLayer);
+        root.getChildren().add(pauseButton);
+        pauseButton.setOnAction(e->{
+            try {
+                settingButtonClicked();
+                gameLoop.stop();
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
+        });
 
         scene = new Scene( root, Settings.SCENE_WIDTH, Settings.SCENE_HEIGHT);
-
+        scene.setFill(pattern);
         primaryStage.setScene( scene);
         primaryStage.show();
 
@@ -180,37 +204,12 @@ public class StartMenu {
 
     }
 
-//    public Pane InitPane() {
-//
-//        Pane pane = new Pane();
-//
-//        for (int i = 0; i < mapSize; i += unitSize) {
-//
-//            for (int j = 0; j < mapSize; j += unitSize) {
-//
-//                Rectangle tile = new Rectangle(i, j, unitSize, unitSize);
-//
-//                if (map[i][j] == 0) {
-//
-//                    tile.setFill(Color.BLUEVIOLET);
-//
-//                } else if (map[i][j] == 1) {
-//
-//                    tile.setFill(Color.GREENYELLOW);
-//                }
-//                if (i == mapSize - unitSize && j == mapSize - unitSize * 2) {
-//
-//                    tile.setFill(Color.DARKORANGE);
-//                }
-//                pane.getChildren().add(tile);
-//            }
-//        }
-//        return pane;
-//    }
-
     private void loadGame() {
         playerImage = new Image(getClass().getResource("/photos/player.png").toExternalForm());
         enemyImage = new Image(getClass().getResource("/photos/enemy.png").toExternalForm());
+        hostageImage = new Image(getClass().getResource("/photos/hostages.png").toExternalForm());
+        greenImage = new Image(getClass().getResource("/photos/green.png").toExternalForm());
+        myImage = new Image(getClass().getResource("/photos/background.png").toExternalForm());
     }
 
     private void createScoreLayer() {
@@ -254,7 +253,47 @@ public class StartMenu {
         players.add(player);
 
     }
+    private void createGoal() {
 
+
+        Image image = greenImage;
+
+        // center horizontally, position at 70% vertically
+        double x = (Settings.SCENE_WIDTH - image.getWidth()) / 2.0;
+        double y = Settings.SCENE_HEIGHT * 0.7;
+
+        // create player
+        Goal end = new Goal(image, playfieldLayer, 1, 0, x, y, 0, 0, 0, 0);
+
+        // register player
+        goals.add(end);
+
+    }
+    private void spawnHostages() {
+
+        // image
+        Image image = hostageImage;
+
+        // random speed
+        double speed = 0;
+
+        // make enemy is always fully inside the screen, no part of it is outside
+        // y position: right on top of the view, so that it becomes visible with the next game iteration
+        double x = 200;
+        double y = 50;
+
+        // create a sprite
+        Hostages hostage = new Hostages(image, playfieldLayer, 1, 1, x, 0, speed, 0, 1, 1, "speed");
+        Hostages hostage2 = new Hostages(image, playfieldLayer, 1, 1, x-150, 0, speed, 0, 1, 1, "health");
+        Hostages hostage3 = new Hostages(image, playfieldLayer, 1, 1, x+200, 0, speed, 0, 1, 1, "sword");
+        Hostages hostage4 = new Hostages(image, playfieldLayer, 1, 1, x+400, 0, speed, 0, 1, 1, "axe");
+        // manage sprite
+        hostages.add(hostage);
+        hostages.add(hostage2);
+        hostages.add(hostage3);
+        hostages.add(hostage4);
+
+    }
     private void spawnEnemies(boolean random) {
 
         if (random && rnd.nextInt(Settings.ENEMY_SPAWN_RANDOMNESS) != 0) {
@@ -267,7 +306,7 @@ public class StartMenu {
         // random speed
         double speed = rnd.nextDouble() * 1.0 + 2.0;
 
-        // x position range: enemy is always fully inside the screen, no part of it is outside
+        // make enemy is always fully inside the screen, no part of it is outside
         // y position: right on top of the view, so that it becomes visible with the next game iteration
         double x = rnd.nextDouble() * (Settings.SCENE_WIDTH - image.getWidth());
         double y = -image.getHeight();
@@ -280,30 +319,32 @@ public class StartMenu {
 
     }
 
-//    private void removeSprites(List<? extends Person> spriteList) {
-//        Iterator<? extends Person> iter = Person.iterator();
-//        while (iter.hasNext()) {
-//            Person sprite = iter.next();
-//
-//            if (sprite.isRemovable()) {
-//
-//                // remove from layer
-//                sprite.removeFromLayer();
-//
-//                // remove from list
-//                iter.remove();
-//            }
-//        }
-//    }
 
     private void checkCollisions() {
 
         collision = false;
-
+        hostageCollision = false;
+        goalCollision = false;
         for (Player player : players) {
             for (Enemies enemy : enemies) {
                 if (player.CharacterCollision(enemy)) { //if player hits enemy, true
                     collision = true;
+                }
+            }
+            for (Hostages hostage: hostages){
+                if (player.CharacterCollision(hostage)) { //if player hits hostage, true
+                    hostageCollision = true;
+
+
+
+                }
+            }
+            for (Goal end: goals){
+                if (player.CharacterCollision(end)) { //if player hits hostage, true
+                    goalCollision = true;
+
+
+
                 }
             }
         }
@@ -314,22 +355,28 @@ public class StartMenu {
             collisionText.setText("Collision!\n -1 hp!");
             for (Player player : players) {
                 player.getDamaged(player);
-                if (player.isAlive()==false){
+                if (player.isAlive() == false) {
+                    System.out.println("dead");
                     collisionText.setText("Game over, 0 HP.");
-                    try
-                    {
+                    try {
                         Thread.sleep(3000);
-                    }
-                    catch(InterruptedException ex)
-                    {
+                    } catch (InterruptedException ex) {
                         Thread.currentThread().interrupt();
                     }
                     System.exit(0);
                 }
             }
 
+        }else if (hostageCollision&&hostageCount<4){
+            collisionText.setText("You saved one hostage!\n Well done!");
+            hostageCount++;
+        }else if (hostageCollision&&hostageCount>4) {
+            collisionText.setText("You saved four hostages!\n Go back to start!");
+            createGoal();
 
-
+        }else if (goalCollision&&hostageCount>4) {
+            collisionText.setText("You win!");
+            System.exit(0);
         } else {
             collisionText.setText("");
         }

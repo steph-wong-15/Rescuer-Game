@@ -6,27 +6,25 @@ import javafx.scene.layout.Pane;
 import java.util.Arrays;  //import Arrays class
 
 class Hostages extends Person{
-  private int[][] lockedPos; //lockedPosition
-  private String ability; //ability
 
-
-  public Hostages(Image image, Pane layer, int health, int damage, double x, double y, double r, double dx, double dy, double dr, int[][] lockedPos, String ability) {
+    String name;
+  public Hostages(Image image, Pane layer, int health, int damage, double x, double y, double r, double dx, double dy, double dr, String name) {
         super(image, layer, health, damage, x, y, r, dx, dy, dr);
-        this.lockedPos = lockedPos;
-        this.ability = ability;    
-  }
+        this.name = name;
 
-  public void returnToLocked(int[][] currentPos){
-   for( int i = 0, j=0; i*j < currentPos.length; i++, j++)
-      currentPos[i] = lockedPos[i]; //set current position to locked position 
   }
+    public void checkRemovability() {
+        //default
+        if( Double.compare( getY(), Settings.SCENE_HEIGHT) > 0) {
+            setRemovable(true);
+        }
+    }
 
-  public String getAbility(){
-    return ability;
-  }
+    public String getName() {
+        return name;
+    }
 
-  public void setAbility(String ability){
-    this.ability = ability;
-  }
-
+    public void setName(String name) {
+        this.name = name;
+    }
 }

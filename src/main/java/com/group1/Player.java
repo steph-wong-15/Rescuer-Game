@@ -80,8 +80,9 @@ public class Player extends Person{
   }
 
 
-  public void speedUp(double newSpeed){ //import speed
-    newSpeed = newSpeed*2; //doubles player speed, useful for getting a better score
+  public double speedUp(double speed){ //import speed
+    speed = speed*2.0; //doubles player speed, useful for getting a better score
+    return speed;
   } 
 
   public void freezeEnemies(){
