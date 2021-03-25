@@ -427,7 +427,11 @@ public class StartMenu {
 
     private void updateScore() {
         if (hostageCollision&&hostageCount<4){
-            collisionText.setText("You saved a hostage!\n Well done!");
+            collisionText.setFill(Color.GREEN);
+            collisionText.setStroke(Color.GREEN);
+            collisionText.setText("Hostaged rescued. \nNicely done!");
+            collisionText.setFill(Color.RED);
+            collisionText.setStroke(Color.BLACK);
 
         }else if (hostageCollision==true && hostageCount==4) {
             collisionText.setText("You saved four hostages!\n Go back to start!");
