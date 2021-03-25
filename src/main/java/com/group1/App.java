@@ -17,7 +17,7 @@ import java.io.IOException;
  */
 public class App extends Application {
 
-    /**
+    /**Myron
      * loads starting screen UI
      * @param stage starting stage
      * @throws Exception exception handling if FXMLLoader fails
