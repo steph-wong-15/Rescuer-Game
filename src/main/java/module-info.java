@@ -1,4 +1,4 @@
-module com.group1 {
+module com.group1{
     requires javafx.controls;
     requires javafx.fxml;
 

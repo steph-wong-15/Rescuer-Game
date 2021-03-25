@@ -1,7 +1,17 @@
+package com.group1;
+
+import javafx.scene.image.Image;
+import javafx.scene.layout.Pane;
+
 import java.util.Random;
 
 class Moving extends Enemies{
   private int range; //sets the range of the enemy movement
+
+  public Moving(Image image, Pane layer, int health, int damage, int[][] pos, int[][] size, double x, double y, double r, double dx, double dy, double dr, int damageDone, int range) {
+        super(image, layer, health, damage, pos, size, x, y, r, dx, dy, dr);
+        this.range = range;
+  }
 
   public int getRange(){ //getter
     return range; 
