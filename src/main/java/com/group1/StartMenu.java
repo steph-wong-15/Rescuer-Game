@@ -41,17 +41,9 @@ public class StartMenu {
     @FXML
 
     Random rnd = new Random();
-
     Pane playfieldLayer = new Pane();
     Pane scoreLayer = new Pane();
 
-    Image playerImage; //image imports
-    Image enemyImage;
-    Image hostageImage;
-    Image myImage;
-    Image greenImage;
-    Image winnerImage;
-    Image loserImage;
 
     Scene scene;
     List<Player> players = new ArrayList<>();
@@ -89,11 +81,8 @@ public class StartMenu {
      * Main game method where game loop runs
      * @param mouseEvent when player clicks play button
      */
-
-
     public void startButtonClick(MouseEvent mouseEvent) {
         ///////////////////////UI for main game screen//////////////////////
-        loadGame();
 
         BorderPane borderPane = new BorderPane();
         Canvas canvas = new Canvas();
@@ -106,9 +95,8 @@ public class StartMenu {
         borderPane.setAlignment(pauseButton, Pos.CENTER);
 
         Scene gameScene = new Scene(borderPane);
-        ImagePattern bg = new ImagePattern(myImage);
+        ImagePattern bg = new ImagePattern(Main.myImage);
         gameScene.setFill(bg);
-
 
         //////////////////////UI for main game screen////////////////////////
 
@@ -118,11 +106,7 @@ public class StartMenu {
         mainWindow.centerOnScreen();
         mainWindow.show();
 
-
         //Game loop
-        loadGame();
-        //Action Listener for pausing game
-
         System.out.println("Loading");
         gameLoop = new AnimationTimer() {
 
@@ -207,7 +191,7 @@ public class StartMenu {
      */
 
     public void test() {
-        ImagePattern pattern = new ImagePattern(myImage);
+        ImagePattern pattern = new ImagePattern(Main.myImage);
         Group root = new Group();
         scene = new Scene( root, Settings.SCENE_WIDTH, Settings.SCENE_HEIGHT);
         scene.setFill(pattern);
@@ -236,22 +220,12 @@ public class StartMenu {
         primaryStage.setScene( scene);
         primaryStage.show();
 
-        loadGame();
         createScoreLayer();
         createPlayers();
 
 
     }
 
-    private void loadGame() { //load game
-        playerImage = new Image(getClass().getResource("/photos/player.png").toExternalForm());
-        enemyImage = new Image(getClass().getResource("/photos/enemy.png").toExternalForm());
-        hostageImage = new Image(getClass().getResource("/photos/hostages.png").toExternalForm());
-        greenImage = new Image(getClass().getResource("/photos/green.png").toExternalForm());
-        myImage = new Image(getClass().getResource("/photos/background.png").toExternalForm());
-        winnerImage = new Image(getClass().getResource("/photos/winner.png").toExternalForm());
-        loserImage = new Image(getClass().getResource("/photos/death.png").toExternalForm());
-    }
 
     private void createScoreLayer() { //create some text layer
 
@@ -280,8 +254,7 @@ public class StartMenu {
 
         // register input listeners
         input.addListeners();
-        loadGame();
-        Image image = playerImage;
+        Image image = Main.playerImage;
 
         // center horizontally, position at 70% vertically
         double x = (Settings.SCENE_WIDTH - image.getWidth()) / 2.0;
@@ -297,7 +270,7 @@ public class StartMenu {
     private void createGoal() {
 
 
-        Image image = greenImage;
+        Image image = Main.greenImage;
 
         // center horizontally, position at 70% vertically
         double x = (Settings.SCENE_WIDTH - image.getWidth()) / 2.0;
@@ -313,7 +286,7 @@ public class StartMenu {
     private void spawnHostages() {
 
         // image
-        Image image = hostageImage;
+        Image image = Main.hostageImage;
 
         // random speed
         double speed = 0;
@@ -342,7 +315,7 @@ public class StartMenu {
         }
 
         // image
-        Image image = enemyImage;
+        Image image = Main.enemyImage;
 
         // random speed
         double speed = rnd.nextDouble() * 1.0 + 2.0;
@@ -461,7 +434,7 @@ public class StartMenu {
     }
 
     public void end() { //ending screen
-        ImagePattern pattern = new ImagePattern(winnerImage);
+        ImagePattern pattern = new ImagePattern(Main.winnerImage);
 
         Group root = new Group();
 
@@ -491,7 +464,7 @@ public class StartMenu {
     }
 
     public void loss() { //ending screen
-        ImagePattern pattern = new ImagePattern(loserImage);
+        ImagePattern pattern = new ImagePattern(Main.loserImage);
 
         Group root = new Group();
 
