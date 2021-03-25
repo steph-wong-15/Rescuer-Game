@@ -1,10 +1,13 @@
 package com.group1;
 
+import javafx.scene.image.Image;
+import javafx.scene.layout.Pane;
+
 class ConstantMovingZombie extends Moving{
   private String movementPattern; //possible values: vertical, horizontal, or diagonal
 
-  public ConstantMovingZombie(int health, int[][] pos, int[][] size, double x, double y, double r, double dx, double dy, double dr, int damageDone, int range, String movementPattern) {
-        super(health, pos, size, x, y, r, dx, dy, dr,damageDone, range);
+  public ConstantMovingZombie(Image image, Pane layer, int health, int damage, int[][] pos, int[][] size, double x, double y, double r, double dx, double dy, double dr, int damageDone, int range, String movementPattern) {
+        super(image, layer, health, damage, pos, size, x, y, r, dx, dy, dr, damageDone, range);
         this.movementPattern = movementPattern;
   }
 

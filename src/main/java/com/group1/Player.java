@@ -1,8 +1,11 @@
 package com.group1;
 
+import javafx.scene.image.Image;
+import javafx.scene.layout.Pane;
+
 import java.util.*; //import arraylist
 
-public class Player extends Character{
+public class Player extends Person{
   double speed;
 
   double playerShipMinX;
@@ -13,8 +16,8 @@ public class Player extends Character{
   ArrayList<String> hostages = new ArrayList<String>(); // Create an ArrayList object that holds strings of possible hostages
 
 
-  public Player(int health, int[][] pos, int[][] size, double x, double y, double r, double dx, double dy, double dr, double speed) {
-        super(health, pos, size, x, y, r, dx, dy, dr);
+  public Player(Image image, Pane layer, int health, int damage, int[][] pos, int[][] size, double x, double y, double r, double dx, double dy, double dr, double speed) {
+        super(image, layer, health, damage, pos, size, x, y, r, dx, dy, dr);
         this.speed = speed;
         bounds();
   } 
