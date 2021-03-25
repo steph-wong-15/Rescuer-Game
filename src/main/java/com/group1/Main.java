@@ -16,6 +16,7 @@ public class Main extends Application {
     Parent startMenu = FXMLLoader.load(getClass().getResource("StartMenu.fxml"));
     Scene scene1 = new Scene(startMenu);
     stage.setScene(scene1);
+    stage.setTitle("Start");
     stage.show();
 
     }

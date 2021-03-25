@@ -38,6 +38,7 @@ public class StartMenu {
         //get stage from start menu to change scenes with same stage
         mainWindow = (Stage)(((Node)mouseEvent.getSource()).getScene().getWindow());
         mainWindow.setScene(gameScene);
+        mainWindow.setTitle("Game");
         mainWindow.centerOnScreen();
         mainWindow.show();
         //Game loop
@@ -77,6 +78,7 @@ public class StartMenu {
         borderPane.setCenter(hbox);
         Scene settingScene = new Scene(borderPane);
         Stage stage = new Stage();
+        stage.setTitle("Paused");
         stage.setScene(settingScene);
         stage.centerOnScreen();
         stage.initModality(Modality.APPLICATION_MODAL);
