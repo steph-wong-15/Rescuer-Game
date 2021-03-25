@@ -79,6 +79,7 @@ public class Player extends Person{
   public void checkRemovability() { //override in case things go wrong
   }
 
+
   public void speedUp(double newSpeed){ //import speed
     newSpeed = newSpeed*2; //doubles player speed, useful for getting a better score
   } 

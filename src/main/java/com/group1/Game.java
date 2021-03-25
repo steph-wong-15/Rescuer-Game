@@ -6,6 +6,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
+import javafx.animation.AnimationTimer;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
@@ -87,6 +88,45 @@ public class Game {
         stage.centerOnScreen();
         stage.setTitle("RESCUE GAME");
         stage.show();
+        loadGame();
+
+        createScoreLayer();
+        createPlayers();
+        AnimationTimer gameLoop = new AnimationTimer() {
+
+            @Override
+            public void handle(long now) {
+
+                // player input
+                players.forEach(sprite -> sprite.processInput());
+
+                // add random enemies
+                spawnEnemies( true);
+
+                // movement
+                players.forEach(sprite -> sprite.move());
+                enemies.forEach(sprite -> sprite.move());
+
+                // check collisions
+                checkCollisions();
+
+                // update sprites in scene
+                players.forEach(sprite -> sprite.updateUI());
+                enemies.forEach(sprite -> sprite.updateUI());
+
+                // check if sprite can be removed
+                enemies.forEach(sprite -> sprite.checkRemovability());
+
+                // remove removables from list, layer, etc
+//                removeSprites( enemies);
+
+                // update score, health, etc
+                updateScore();
+            }
+
+        };
+        gameLoop.start();
+
     }
 
     public Pane InitPane() {
@@ -188,21 +228,21 @@ public class Game {
 
     }
 
-    private void removeSprites(  List<? extends Person> spriteList) {
-        Iterator<? extends Person> iter = Person.iterator();
-        while( iter.hasNext()) {
-            Person sprite = iter.next();
-
-            if( sprite.isRemovable()) {
-
-                // remove from layer
-                sprite.removeFromLayer();
-
-                // remove from list
-                iter.remove();
-            }
-        }
-    }
+//    private void removeSprites(  List<? extends Person> spriteList) {
+//        Iterator<? extends Person> iter = Person.iterator();
+//        while( iter.hasNext()) {
+//            Person sprite = iter.next();
+//
+//            if( sprite.isRemovable()) {
+//
+//                // remove from layer
+//                sprite.removeFromLayer();
+//
+//                // remove from list
+//                iter.remove();
+//            }
+//        }
+//    }
 
     private void checkCollisions() {
 
