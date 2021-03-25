@@ -8,7 +8,7 @@ import java.util.Random;
 class Moving extends Enemies{
   private int range; //sets the range of the enemy movement
 
-  public Moving(Image image, Pane layer, int health, int damage,  double x, double y, double r, double dx, double dy, double dr, int damageDone, int range) {
+  public Moving(Image image, Pane layer, int health, int damage,  double x, double y, double r, double dx, double dy, double dr, int range) {
         super(image, layer, health, damage, x, y, r, dx, dy, dr);
         this.range = range;
   }
