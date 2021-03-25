@@ -1,5 +1,6 @@
 package com.group1;
 
+import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -7,6 +8,8 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
@@ -63,6 +66,23 @@ public class StartMenu {
                 timer.stop();
             } catch (IOException ioException) {
                 ioException.printStackTrace();
+            }
+        });
+        gameScene.setOnKeyPressed(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent keyEvent) {
+                if(keyEvent.getCode()== KeyCode.A) {
+                    System.out.println("LEFT");
+                }
+                else if(keyEvent.getCode()== KeyCode.D) {
+                    System.out.println("RIGHT");
+                }
+                else if(keyEvent.getCode()== KeyCode.W) {
+                    System.out.println("UP");
+                }
+                else if(keyEvent.getCode()== KeyCode.S) {
+                    System.out.println("DOWN");
+                }
             }
         });
     }
