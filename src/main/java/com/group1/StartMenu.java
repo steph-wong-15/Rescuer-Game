@@ -17,8 +17,8 @@ import java.io.IOException;
 
 public class StartMenu {
     int mv=0;
-    final int gameWidth =600;
-    final int gameHeight =400;
+    public static final int gameWidth =600;
+    public static final int gameHeight =400;
     public GameTimer timer;
     Stage mainWindow;
     public void startButtonClick(MouseEvent mouseEvent){
