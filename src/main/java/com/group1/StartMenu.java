@@ -9,11 +9,19 @@ import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
+<<<<<<< HEAD
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+=======
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
+>>>>>>> d9c2333f23abefc270db09249c05ed158e9c573f
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
@@ -30,6 +38,7 @@ import java.util.List;
 import java.util.Random;
 
 public class StartMenu {
+<<<<<<< HEAD
     @FXML
 
     Random rnd = new Random();
@@ -56,6 +65,11 @@ public class StartMenu {
     int mv = 0;
     final int gameWidth = 400;
     final int gameHeight = 400;
+=======
+    int mv=0;
+    public static final int gameWidth =600;
+    public static final int gameHeight =400;
+>>>>>>> d9c2333f23abefc270db09249c05ed158e9c573f
     public GameTimer timer;
 
     Stage mainWindow;
@@ -79,6 +93,7 @@ public class StartMenu {
         //get stage from start menu to change scenes with same stage
         mainWindow = (Stage) (((Node) mouseEvent.getSource()).getScene().getWindow());
         mainWindow.setScene(gameScene);
+        mainWindow.setTitle("Game");
         mainWindow.centerOnScreen();
         mainWindow.show();
         //Game loop
@@ -157,6 +172,7 @@ public class StartMenu {
         borderPane.setCenter(hbox);
         Scene settingScene = new Scene(borderPane);
         Stage stage = new Stage();
+        stage.setTitle("Paused");
         stage.setScene(settingScene);
         stage.centerOnScreen();
         stage.initModality(Modality.APPLICATION_MODAL);
