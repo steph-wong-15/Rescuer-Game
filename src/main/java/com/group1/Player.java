@@ -8,21 +8,24 @@ import java.util.*; //import arraylist
 public class Player extends Person{
   double speed;
 
-  double playerShipMinX;
-  double playerShipMaxX;
-  double playerShipMinY;
-  double playerShipMaxY;
-  
-  ArrayList<String> hostages = new ArrayList<String>(); // Create an ArrayList object that holds strings of possible hostages
+  double playerMinX;
+  double playerMaxX;
+  double playerMinY;
+  double playerMaxY;
 
+  Input input;
 
-  public Player(Image image, Pane layer, int health, int damage, int[][] pos, int[][] size, double x, double y, double r, double dx, double dy, double dr, double speed) {
+  public Player(Image image, Pane layer, int health, int damage, int[][] pos, int[][] size, double x, double y, double r, double dx, double dy, double dr, double speed, Input input) {
         super(image, layer, health, damage, pos, size, x, y, r, dx, dy, dr);
+        this.input = input;
         this.speed = speed;
         bounds();
   } 
   private void bounds() {
-     // calculate movement bounds of the player
+    playerMinX = 0 - image.getWidth() / 2.0;
+    playerMaxX = Settings.SCENE_WIDTH - image.getWidth() / 2.0;
+    playerMinY = 0 - image.getHeight() / 2.0;
+    playerMaxY = Settings.SCENE_HEIGHT -image.getHeight() / 2.0;
   }
 
   @Override
@@ -30,48 +33,53 @@ public class Player extends Person{
 
         super.move();
 
-        // ensure the ship can't move outside of the screen
+        // ensure the player can't move outside of the screen
         checkBounds();
-
 
     }
 
     private void checkBounds() {
 
       // vertical
-      if( Double.compare( y, playerShipMinY) < 0) {
-         y = playerShipMinY;
-      } else if( Double.compare(y, playerShipMaxY) > 0) {
-            y = playerShipMaxY;
-        }
+      if (Double.compare(y, playerMinY) < 0) {
+        y = playerMinY;
+      } else if (Double.compare(y, playerMaxY) > 0) {
+        y = playerMaxY;
+      }
 
-        // horizontal
-        if( Double.compare( x, playerShipMinX) < 0) {
-            x = playerShipMinX;
-        } else if( Double.compare(x, playerShipMaxX) > 0) {
-            x = playerShipMaxX;
-        }
+      // horizontal
+      if (Double.compare(x, playerMinX) < 0) {
+        x = playerMinX;
+      } else if (Double.compare(x, playerMaxX) > 0) {
+        x = playerMaxX;
+      }
 
     }
-  public void damage(Character c){ //class sets damage done
-    int enemyDmg = 0; //default damage is 0 
-    for (int i = 0; i<hostages.size(); i++){ //iterate through size of hostages
-      if (hostages.get(i) == "sword"){
-        enemyDmg = 1; //if player holds sword, damage is 1 to enemy players
-      }
+
+
+  public void processInput() {
+    // up and down
+    if( input.isMoveUp()) {
+      dy = -speed;
+    } else if( input.isMoveDown()) {
+      dy = speed;
+    } else { //if no input set speed to zero
+      dy = 0.0;
+    }
+
+    // left and right
+    if( input.isMoveLeft()) {
+      dx = -speed;
+    } else if( input.isMoveRight()) {
+      dx = speed;
+    } else { //if no input set speed to zero
+      dx = 0.0;
     }
   }
-
-  public void damageWall(Wall w){ //class sets damage done
-    int wallDmg = 0; //default damage is 0 
-    for (int i = 0; i<hostages.size(); i++){ //iterate through size of hostages
-      if (hostages.get(i) == "axe"){
-        wallDmg = 1; //if player holds axe, damage is 1 to BREAKABLE walls
-      }
-    }
+  public void checkRemovability() { //override in case things go wrong
   }
 
-  public void speedUp(float newSpeed){ //import speed
+  public void speedUp(double newSpeed){ //import speed
     newSpeed = newSpeed*2; //doubles player speed, useful for getting a better score
   } 
 
