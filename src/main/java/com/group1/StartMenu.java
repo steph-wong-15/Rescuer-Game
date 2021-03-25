@@ -58,9 +58,9 @@ public class StartMenu {
     final int gameWidth = 600;
     final int gameHeight = 600;
     public GameTimer timer;
-
+    public AnimationTimer gameLoop;
     Stage mainWindow;
-
+    Stage primaryStage;
 
     public void startButtonClick(MouseEvent mouseEvent) {
         ///////////////////////UI for main game screen//////////////////////
@@ -87,7 +87,7 @@ public class StartMenu {
         //Action Listener for pausing game
 
         System.out.println("Loading");
-        AnimationTimer gameLoop = new AnimationTimer() {
+        gameLoop = new AnimationTimer() {
 
             @Override
             public void handle(long now) {
@@ -147,26 +147,36 @@ public class StartMenu {
 
         resumeButton.setOnAction(e -> {
             stage.close();
-            timer.start();
+            gameLoop.start();
         });
 
         quitButton.setOnAction(e -> {
             stage.close();
-            mainWindow.close();
+            primaryStage.close();
         });
     }
 
     public void test() {
-        Stage primaryStage = new Stage();
+        primaryStage = new Stage();
         primaryStage.centerOnScreen();
         Group root = new Group();
 
         // create layers
         playfieldLayer = new Pane();
         scoreLayer = new Pane();
+        Button pauseButton =new Button("Pause");
 
         root.getChildren().add( playfieldLayer);
         root.getChildren().add( scoreLayer);
+        root.getChildren().add(pauseButton);
+        pauseButton.setOnAction(e->{
+            try {
+                settingButtonClicked();
+                gameLoop.stop();
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
+        });
 
         scene = new Scene( root, Settings.SCENE_WIDTH, Settings.SCENE_HEIGHT);
 
