@@ -7,8 +7,8 @@ class Traps extends Enemies{
   private boolean invisible; //set to true or false, sets if the traps are visible to the player or not
   private boolean destroyable; //set to true or false, sets if traps are destroyable with the Axe or not
 
-  public Traps(Image image, Pane layer, int health, int damage, int[][] pos, int[][] size, double x, double y, double r, double dx, double dy, double dr, int damageDone, boolean invisible, boolean destroyable) {
-        super(image, layer, health, damage, pos, size, x, y, r, dx, dy, dr);
+  public Traps(Image image, Pane layer, int health, int damage, double x, double y, double r, double dx, double dy, double dr, int damageDone, boolean invisible, boolean destroyable) {
+        super(image, layer, health, damage, x, y, r, dx, dy, dr);
         this.invisible = invisible;
         this.destroyable = destroyable;
 
