@@ -2,19 +2,12 @@ package com.group1;
 import java.lang.*;
 import javafx.animation.AnimationTimer;
 import javafx.geometry.Pos;
-import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.ImagePattern;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
-import javafx.scene.text.TextBoundsType;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import java.util.*;
@@ -26,22 +19,12 @@ import java.io.IOException;
 
 public class StartMenu {
 
-    Random rnd = new Random();
-    Pane playfieldLayer = new Pane();
-    Pane scoreLayer = new Pane();
 
-
-    List<Player> players = new ArrayList<>();
-    List<Enemies> enemies = new ArrayList<>();
-    List<Hostages> hostages = new ArrayList<>();
-    List<Goal> goals = new ArrayList<>();
-    Text collisionText = new Text();
-    boolean over = false; //check if game is over
-    boolean collision = false; //check collision with enemy
-    boolean hostageCollision = false; //hostage collision
-    boolean goalState = false; //goalstate if true
-
-    int hostageCount = 0;
+//    boolean over = false; //check if game is over
+//    boolean collision = false; //check collision with enemy
+//    boolean hostageCollision = false; //hostage collision
+//    boolean goalState = false; //goalstate if true
+//    int hostageCount = 0;
 
     public AnimationTimer gameLoop;
     Stage mainWindow;
@@ -59,13 +42,13 @@ public class StartMenu {
         gameScene = new Scene(root);
 
         // Inner layers
-        playfieldLayer = new Pane();
+        Pane playfieldLayer = new Pane();
         playfieldLayer.setPrefSize(Settings.SCENE_WIDTH, Settings.SCENE_HEIGHT);
         BackgroundSize backgroundSize= new BackgroundSize(Settings.SCENE_WIDTH,Settings.SCENE_HEIGHT,true,true,true,false);
         BackgroundImage backgroundImage= new BackgroundImage(Main.myImage, BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.CENTER, backgroundSize);
         playfieldLayer.setBackground(new Background(backgroundImage));
 
-        scoreLayer = new Pane();
+        Pane scoreLayer = new Pane();
         scoreLayer.setPrefSize(Settings.SCENE_WIDTH, Settings.SCENE_HEIGHT);
         Button pauseButton =new Button("Pause");
 

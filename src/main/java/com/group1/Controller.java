@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.Random;
 
 public class Controller {
-    Text collisionText;
     Pane layer;
     Scene scene;
     Player player;
