@@ -1,5 +1,6 @@
 package com.group1;
 
+import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 
@@ -100,6 +101,24 @@ public class Player extends Person{
 
   public void axe(){
     //axe
-  } 
+  }
+  /**
+   * Make player
+   */
+  public static Player createPlayer(Pane pane) {
+    //image
+    Image image = Main.playerImage;
+    // player input
+    Input input = new Input(pane.getScene()); //use temporary scene var
 
+    // register input listeners
+    input.addListeners();
+
+    // center horizontally, position at 70% vertically
+    double x = (Settings.SCENE_WIDTH - image.getWidth()) / 2.0;
+    double y = Settings.SCENE_HEIGHT * 0.7;
+
+    // create player
+    return new Player(image, pane, Settings.PLAYER_HEALTH, 0, x, y, 0, 0, 0, 0, Settings.PLAYER_SPEED, input);
+  }
 }

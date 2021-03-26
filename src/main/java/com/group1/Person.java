@@ -200,7 +200,7 @@ public abstract class Person{
     public void stopMovement() { //prevent movement
         this.canMove = false;
     }
-    public void getDamaged( Person sprite) {
+    public void getDamaged() {
         health -= 1;
     }
     public void checkRemovability() {

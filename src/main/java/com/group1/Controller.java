@@ -11,33 +11,36 @@ import java.util.Random;
 public class Controller {
     Pane layer;
     Scene scene;
-    Player player;
+    Player thePlayer;
+    Score theScore;
     List<Person> objects = new ArrayList<>();
+    List<Goal> goals = new ArrayList<>();
     boolean firstHostage = false; //1st hostage checker
     boolean secondHostage = false; //2nd hostage checker
     boolean thirdHostage = false; //3rd hostage checker
     boolean fourthHostage = false; //4th hostage checker
     boolean collision = false; //check collision with enemy
     boolean hostageCollision = false; //hostage collision
-    int hostageCount = 0;
 
-    Controller(Pane pane) {
+
+    Controller(Pane pane,Player player,Score score) {
         layer = pane;
         scene = pane.getScene();
-        createPlayer();
+        theScore=score;
+        thePlayer=player;
         spawnHostages();
     }
 
     public void tick() {
-        player.processInput();
+        thePlayer.processInput();
         spawnEnemies(true);
         //move
-        player.move();
+        thePlayer.move();
         objects.forEach(sprite -> sprite.move());
         // check collisions
         checkCollisions();
         // update sprites in scene
-        player.updateUI();
+        thePlayer.updateUI();
         objects.forEach(sprite -> sprite.updateUI());
         // check if sprite can be removed
         //enemies.forEach(sprite -> sprite.checkRemovability());
@@ -45,26 +48,25 @@ public class Controller {
         //updateScore();
     }
 
-    /**
-     * Make player
-     */
-    private void createPlayer() {
-        //image
-        Image image = Main.playerImage;
-        // player input
-        Input input = new Input(scene); //use temporary scene var
-
-        // register input listeners
-        input.addListeners();
-
-        // center horizontally, position at 70% vertically
-        double x = (Settings.SCENE_WIDTH - image.getWidth()) / 2.0;
-        double y = Settings.SCENE_HEIGHT * 0.7;
-
-        // create player
-        player = new Player(image, layer, Settings.PLAYER_HEALTH, 0, x, y, 0, 0, 0, 0, Settings.PLAYER_SPEED, input);
-    }
-
+//    /**
+//     * Make player
+//     */
+//    private void createPlayer() {
+//        //image
+//        Image image = Main.playerImage;
+//        // player input
+//        Input input = new Input(scene); //use temporary scene var
+//
+//        // register input listeners
+//        input.addListeners();
+//
+//        // center horizontally, position at 70% vertically
+//        double x = (Settings.SCENE_WIDTH - image.getWidth()) / 2.0;
+//        double y = Settings.SCENE_HEIGHT * 0.7;
+//
+//        // create player
+//        player = new Player(image, layer, Settings.PLAYER_HEALTH, 0, x, y, 0, 0, 0, 0, Settings.PLAYER_SPEED, input);
+//    }
 
     /**
      * Make hostages
@@ -122,8 +124,6 @@ public class Controller {
         objects.add(enemy);
 
     }
-
-
     private void checkCollisions() {
         collision = false;
         hostageCollision = false;
@@ -143,41 +143,46 @@ public class Controller {
 //            }
             if(object instanceof Hostages) {
                 Hostages tempHostage = (Hostages) object;
-                if (player.CharacterCollision(tempHostage) && firstHostage == false && tempHostage.getName() == "speed") { //if player hits hostage, true
-                    hostageCollision = true;
-                    firstHostage = true;
-                    hostageCount++;
+                if (thePlayer.CharacterCollision(tempHostage)){//&& firstHostage == false && tempHostage.getName() == "speed") { //if player hits hostage, true
+                    //hostageCollision = true;
+                    //firstHostage = true;
+                    //hostageCount++;
                     //updateScore();
-                    System.out.println("HOSTAGE");
-                } else if (player.CharacterCollision(tempHostage) && secondHostage == false && tempHostage.getName() == "sword") { //if player hits hostage, true
-                    hostageCollision = true;
-                    secondHostage = true;
-                    hostageCount++;
+                    //objects.remove(object);
+                    theScore.increaseScore();
+                } else if (thePlayer.CharacterCollision(tempHostage)){// && secondHostage == false && tempHostage.getName() == "sword") { //if player hits hostage, true
+//                    hostageCollision = true;
+//                    secondHostage = true;
+                    //hostageCount++;
                     //updateScore();
-                    System.out.println("HOSTAGE");
-                } else if (player.CharacterCollision(tempHostage) && thirdHostage == false && tempHostage.getName() == "axe") { //if player hits hostage, true
-                    hostageCollision = true;
-                    thirdHostage = true;
-                    hostageCount++;
+                    //objects.remove(object);
+                    theScore.increaseScore();
+                } else if (thePlayer.CharacterCollision(tempHostage)){//&& thirdHostage == false && tempHostage.getName() == "axe") { //if player hits hostage, true
+//                    hostageCollision = true;
+//                    thirdHostage = true;
+                    //hostageCount++;
                     //updateScore();
-                    System.out.println("HOSTAGE");
-                } else if (player.CharacterCollision(tempHostage) && fourthHostage == false && tempHostage.getName() == "health") { //if player hits hostage, true
-                    hostageCollision = true;
-                    fourthHostage = true;
-                    hostageCount++;
+                    //objects.remove(object);
+                    theScore.increaseScore();
+                } else if (thePlayer.CharacterCollision(tempHostage)){// && fourthHostage == false && tempHostage.getName() == "health") { //if player hits hostage, true
+//                    hostageCollision = true;
+//                    fourthHostage = true;
+                    //hostageCount++;
                     //updateScore();
-                    System.out.println("HOSTAGE");
+                    //objects.remove(object);
+                    theScore.increaseScore();
                 }
             }
             else if(object instanceof Enemies){
                 Enemies tempEnemy = (Enemies) object;
-                if (player.CharacterCollision(tempEnemy)) { //if player hits enemy, true
-                    collision = true;
+                if (thePlayer.CharacterCollision(tempEnemy)) { //if player hits enemy, true
+                    //collision = true;
                     System.out.println("ENEMy");
                 }
             }
         }
     }
+
 }
 
 

@@ -65,12 +65,14 @@ public class StartMenu {
         //////////////////////UI for main game screen////////////////////////
 
         //////////////////////Game loop/////////////////////////////////////
-        Controller controller = new Controller(root);
+        Player thePlayer= Player.createPlayer(playfieldLayer);
+        Score score = new Score(scoreLayer,thePlayer);
+        Controller controller = new Controller(root,thePlayer,score);
         gameLoop = new AnimationTimer() {
             @Override
             public void handle(long now) {
-//                updateScore();
                 controller.tick();
+                score.updateScore();
             }
         };
         gameLoop.start();
