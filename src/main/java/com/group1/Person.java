@@ -58,10 +58,22 @@ public abstract class Person{
         addToLayer();
     }
 
-    public static Iterator<? extends Person> iterator() {
-        return iterator();
+    public void move(){
+        //if moveable, return
+        if(!canMove){
+            return;
+        }
+        x += dx;
+        y += dy;
+        r += dr;
     }
-
+    public void updateUI() {
+        imageView.relocate(x, y);
+        imageView.setRotate(r);
+    }
+    public Pane getLayer() { //get the Layer
+        return layer;
+    }
     public void addToLayer() { //Add Sprite to Layer
         this.layer.getChildren().add(this.imageView);
     }
@@ -69,9 +81,8 @@ public abstract class Person{
     public void removeFromLayer() { //Remove the Sprite from Layer
         this.layer.getChildren().remove(this.imageView);
     }
-
-    public Pane getLayer() { //get the Layer
-        return layer;
+    public boolean CharacterCollision( Person otherSprite) {
+        return ( otherSprite.x + otherSprite.w >= x && otherSprite.y + otherSprite.h >= y && otherSprite.x <= x + w && otherSprite.y <= y + h);
     }
 
     public void setLayer(Pane layer) { //set the Layer
@@ -93,24 +104,6 @@ public abstract class Person{
         this.health = newHealth;
     }
 
-    public void move(){
-        if( !canMove) //if moveable, return
-            return;
-
-        x += dx;
-        y += dy;
-        r += dr;
-    }
-
-    public void wallCollision(Wall w){
-        //implement wallCollision
-    }
-
-
-
-    public void draw(){
-        //implement a drawing function
-    }
     //extra setters and getters
     public void setX(double x) {
         this.x = x;
@@ -167,12 +160,6 @@ public abstract class Person{
     public ImageView getView() { //get the view
         return imageView;
     }
-    public void updateUI() {
-
-        imageView.relocate(x, y);
-        imageView.setRotate(r);
-
-    }
     //getters
     public double getWidth() {
         return w;
@@ -190,10 +177,6 @@ public abstract class Person{
         return removable;
     }
 
-    //remove methods
-    public void remove() { //CHANGE TO REMOVABLE OBJECT
-        setRemovable(true);
-    }
     public void setRemovable(boolean removable) {
         this.removable = removable;
     }
@@ -203,12 +186,6 @@ public abstract class Person{
     public void getDamaged() {
         health -= 1;
     }
-    public void checkRemovability() {
-        //default
-    }
-    public boolean CharacterCollision( Person otherSprite) {
 
-        return ( otherSprite.x + otherSprite.w >= x && otherSprite.y + otherSprite.h >= y && otherSprite.x <= x + w && otherSprite.y <= y + h);
 
-    }
 }

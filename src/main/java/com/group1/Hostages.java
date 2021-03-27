@@ -17,21 +17,13 @@ class Hostages extends Person{
         this.name = name;
 
   }
-    public void checkRemovability() {
-        //default
-        if( Double.compare( getY(), Settings.SCENE_HEIGHT) > 0) {
-            setRemovable(true);
-        }
+    public void move(){
     }
-
     public String getName() {
         return name;
     }
-
     public void setName(String name) {
         this.name = name;
     }
-    public void move(){
 
-    }
 }
