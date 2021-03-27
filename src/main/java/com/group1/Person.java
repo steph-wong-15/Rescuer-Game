@@ -34,27 +34,21 @@ public abstract class Person{
     boolean canMove = true;
     boolean removable = false;
     public Person(Image image, Pane layer, int health, int damage, double x, double y, double r, double dx, double dy, double dr) {
-
         this.image = image;
         this.layer = layer;
         this.health = health;
         this.damage = damage;
-
-
         this.x = x;
         this.y = y;
         this.r = r;
         this.dx = dx;
         this.dy = dy;
         this.dr = dr;
-
         this.imageView = new ImageView(image);
         this.imageView.relocate(x, y);
         this.imageView.setRotate(r);
-
         this.w = image.getWidth(); // Get the Width of Image
         this.h = image.getHeight(); // imageView.getBoundsInParent().getHeight();
-
         addToLayer();
     }
 

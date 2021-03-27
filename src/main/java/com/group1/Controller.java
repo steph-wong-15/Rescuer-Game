@@ -15,14 +15,6 @@ public class Controller {
     Player thePlayer;
     Score theScore;
     List<Person> objects = new ArrayList<>();
-    List<Goal> goals = new ArrayList<>();
-    boolean firstHostage = false; //1st hostage checker
-    boolean secondHostage = false; //2nd hostage checker
-    boolean thirdHostage = false; //3rd hostage checker
-    boolean fourthHostage = false; //4th hostage checker
-    boolean collision = false; //check collision with enemy
-    boolean hostageCollision = false; //hostage collision
-
 
     Controller(Pane pane,Player player,Score score) {
         layer = pane;
@@ -43,31 +35,7 @@ public class Controller {
         // update sprites in scene
         thePlayer.updateUI();
         objects.forEach(sprite -> sprite.updateUI());
-        // check if sprite can be removed
-        //enemies.forEach(sprite -> sprite.checkRemovability());
-        // update score, health, etc
-        //updateScore();
     }
-
-//    /**
-//     * Make player
-//     */
-//    private void createPlayer() {
-//        //image
-//        Image image = Main.playerImage;
-//        // player input
-//        Input input = new Input(scene); //use temporary scene var
-//
-//        // register input listeners
-//        input.addListeners();
-//
-//        // center horizontally, position at 70% vertically
-//        double x = (Settings.SCENE_WIDTH - image.getWidth()) / 2.0;
-//        double y = Settings.SCENE_HEIGHT * 0.7;
-//
-//        // create player
-//        player = new Player(image, layer, Settings.PLAYER_HEALTH, 0, x, y, 0, 0, 0, 0, Settings.PLAYER_SPEED, input);
-//    }
 
     /**
      * Make hostages
@@ -105,7 +73,6 @@ public class Controller {
         if (random && rnd.nextInt(Settings.ENEMY_SPAWN_RANDOMNESS) != 0) {
             return;
         }
-
         // image
         Image image = Main.enemyImage;
 
@@ -122,14 +89,10 @@ public class Controller {
 
         // manage sprite
         objects.add(enemy);
-
     }
-    private void checkCollisions() {
-        int i=0;
-        collision = false;
-        hostageCollision = false;
-        Iterator<Person> iterator=objects.listIterator();
 
+    private void checkCollisions() {
+        Iterator<Person> iterator=objects.listIterator();
         while (iterator.hasNext()) {
             Person tempPerson=iterator.next();
             //System.out.println(i++);
@@ -143,48 +106,35 @@ public class Controller {
 //                        Thread.currentThread().interrupt();
 //                    }
 //                    end();
-//
 //                }
 //            }
             if(tempPerson instanceof Hostages) {
                 Hostages tempHostage = (Hostages) tempPerson;
                 if (thePlayer.CharacterCollision(tempHostage)){//&& firstHostage == false && tempHostage.getName() == "speed") { //if player hits hostage, true
-                    //hostageCollision = true;
-                    //firstHostage = true;
-                    //hostageCount++;
-                    //updateScore();
-                    System.out.println("WORKING");
                     tempHostage.removeFromLayer();
                     iterator.remove();
                     theScore.increaseScore();
 //                } else if (thePlayer.CharacterCollision(tempHostage)){// && secondHostage == false && tempHostage.getName() == "sword") { //if player hits hostage, true
-////                    hostageCollision = true;
-////                    secondHostage = true;
-//                    //hostageCount++;
-//                    //updateScore();
 //                    //objects.remove(object);
 //                    theScore.increaseScore();
 //                } else if (thePlayer.CharacterCollision(tempHostage)){//&& thirdHostage == false && tempHostage.getName() == "axe") { //if player hits hostage, true
-////                    hostageCollision = true;
-////                    thirdHostage = true;
-//                    //hostageCount++;
-//                    //updateScore();
 //                    //objects.remove(object);
 //                    theScore.increaseScore();
 //                } else if (thePlayer.CharacterCollision(tempHostage)){// && fourthHostage == false && tempHostage.getName() == "health") { //if player hits hostage, true
-////                    hostageCollision = true;
-////                    fourthHostage = true;
-//                    //hostageCount++;
-//                    //updateScore();
 //                    //objects.remove(object);
 //                    theScore.increaseScore();
                 }
             }
             else if(tempPerson instanceof Enemies){
                 Enemies tempEnemy = (Enemies) tempPerson;
+                if(tempEnemy.checkBounds()){
+                    tempEnemy.removeFromLayer();
+                    iterator.remove();
+                }
                 if (thePlayer.CharacterCollision(tempEnemy)) { //if player hits enemy, true
-                    //collision = true;
-                    //System.out.println("ENEMy");
+                    tempEnemy.removeFromLayer();
+                    iterator.remove();
+                    thePlayer.getDamaged();
                 }
             }
         }
