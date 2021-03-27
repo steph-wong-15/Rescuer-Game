@@ -16,6 +16,12 @@ public class Controller {
     Score theScore;
     List<Person> objects = new ArrayList<>();
 
+    /**
+     * Controls the moving parts of the game layer
+     * @param pane get game layer where characters loaded
+     * @param player the player
+     * @param score communicates with game layer to display the score
+     */
     Controller(Pane pane,Player player,Score score) {
         layer = pane;
         scene = pane.getScene();
@@ -24,6 +30,10 @@ public class Controller {
         spawnHostages();
     }
 
+    /**
+     * Where all the necessary components are called to run
+     * and update game while playing
+     */
     public void tick() {
         thePlayer.processInput();
         spawnEnemies(true);
@@ -66,7 +76,7 @@ public class Controller {
 
     /**
      * Make enemies
-     * @param random
+     * @param random random
      */
     private void spawnEnemies(boolean random) {
         Random rnd = new Random();
@@ -91,6 +101,9 @@ public class Controller {
         objects.add(enemy);
     }
 
+    /**
+     * Check for all types of collisions
+     */
     private void checkCollisions() {
         Iterator<Person> iterator=objects.listIterator();
         while (iterator.hasNext()) {

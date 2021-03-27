@@ -13,12 +13,10 @@ import java.util.*; //import arraylist
 
 public class Player extends Person{
   double speed;
-
   double playerMinX;
   double playerMaxX;
   double playerMinY;
   double playerMaxY;
-
   Input input;
 
   private Player(Image image, Pane layer, int health, int damage, double x, double y, double r, double dx, double dy, double dr, double speed, Input input) {
@@ -29,7 +27,7 @@ public class Player extends Person{
   }
 
   /**
-   * Make player
+   * Make player instance
    */
   public static Player createPlayer(Pane pane) {
     //image
@@ -48,6 +46,9 @@ public class Player extends Person{
     return new Player(image, pane, Settings.PLAYER_HEALTH, 0, x, y, 0, 0, 0, 0, Settings.PLAYER_SPEED, input);
   }
 
+  /**
+   * Hit box for player
+   */
   private void bounds() {
     playerMinX = 0 - image.getWidth() / 2.0;
     playerMaxX = Settings.SCENE_WIDTH - image.getWidth() / 2.0;
@@ -55,6 +56,9 @@ public class Player extends Person{
     playerMaxY = Settings.SCENE_HEIGHT -image.getHeight() / 2.0;
   }
 
+  /**
+   * PLayer movement and edge detection
+   */
   @Override
     public void move() {
     super.move();
@@ -73,6 +77,9 @@ public class Player extends Person{
     }
     }
 
+  /**
+   * Takes player input for controls
+   */
   public void processInput() {
     // up and down
     if( input.isMoveUp()) {

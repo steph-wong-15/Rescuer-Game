@@ -7,10 +7,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
-import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import java.util.*;
 import java.io.IOException;
 /**
  * StartMenu
@@ -18,14 +16,6 @@ import java.io.IOException;
  */
 
 public class StartMenu {
-
-
-//    boolean over = false; //check if game is over
-//    boolean collision = false; //check collision with enemy
-//    boolean hostageCollision = false; //hostage collision
-//    boolean goalState = false; //goalstate if true
-//    int hostageCount = 0;
-
     public AnimationTimer gameLoop;
     Stage mainWindow;
     Scene gameScene;
@@ -56,7 +46,7 @@ public class StartMenu {
         group.getChildren().addAll( playfieldLayer,scoreLayer);
         root.setCenter(group);
         root.setBottom(pauseButton);
-        root.setAlignment(pauseButton,Pos.CENTER);
+        BorderPane.setAlignment(pauseButton,Pos.CENTER);
         //get stage from start menu to change scenes with same stage
         mainWindow = (Stage) (((Node) mouseEvent.getSource()).getScene().getWindow());
         mainWindow.setScene(gameScene);
