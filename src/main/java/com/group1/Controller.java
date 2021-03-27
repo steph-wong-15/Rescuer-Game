@@ -5,6 +5,7 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
@@ -97,7 +98,6 @@ public class Controller {
 
     /**
      * Make enemies
-     *
      * @param random
      */
     private void spawnEnemies(boolean random) {
@@ -125,9 +125,14 @@ public class Controller {
 
     }
     private void checkCollisions() {
+        int i=0;
         collision = false;
         hostageCollision = false;
-        for (Person object : objects) {
+        Iterator<Person> iterator=objects.listIterator();
+
+        while (iterator.hasNext()) {
+            Person tempPerson=iterator.next();
+            //System.out.println(i++);
 //            for (Goal end : goals) {
 //                if (player.CharacterCollision(end)) { //if player hits Goal, true
 //                    collisionText.setText("You win!");
@@ -141,43 +146,45 @@ public class Controller {
 //
 //                }
 //            }
-            if(object instanceof Hostages) {
-                Hostages tempHostage = (Hostages) object;
+            if(tempPerson instanceof Hostages) {
+                Hostages tempHostage = (Hostages) tempPerson;
                 if (thePlayer.CharacterCollision(tempHostage)){//&& firstHostage == false && tempHostage.getName() == "speed") { //if player hits hostage, true
                     //hostageCollision = true;
                     //firstHostage = true;
                     //hostageCount++;
                     //updateScore();
-                    //objects.remove(object);
+                    System.out.println("WORKING");
+                    tempHostage.removeFromLayer();
+                    iterator.remove();
                     theScore.increaseScore();
-                } else if (thePlayer.CharacterCollision(tempHostage)){// && secondHostage == false && tempHostage.getName() == "sword") { //if player hits hostage, true
-//                    hostageCollision = true;
-//                    secondHostage = true;
-                    //hostageCount++;
-                    //updateScore();
-                    //objects.remove(object);
-                    theScore.increaseScore();
-                } else if (thePlayer.CharacterCollision(tempHostage)){//&& thirdHostage == false && tempHostage.getName() == "axe") { //if player hits hostage, true
-//                    hostageCollision = true;
-//                    thirdHostage = true;
-                    //hostageCount++;
-                    //updateScore();
-                    //objects.remove(object);
-                    theScore.increaseScore();
-                } else if (thePlayer.CharacterCollision(tempHostage)){// && fourthHostage == false && tempHostage.getName() == "health") { //if player hits hostage, true
-//                    hostageCollision = true;
-//                    fourthHostage = true;
-                    //hostageCount++;
-                    //updateScore();
-                    //objects.remove(object);
-                    theScore.increaseScore();
+//                } else if (thePlayer.CharacterCollision(tempHostage)){// && secondHostage == false && tempHostage.getName() == "sword") { //if player hits hostage, true
+////                    hostageCollision = true;
+////                    secondHostage = true;
+//                    //hostageCount++;
+//                    //updateScore();
+//                    //objects.remove(object);
+//                    theScore.increaseScore();
+//                } else if (thePlayer.CharacterCollision(tempHostage)){//&& thirdHostage == false && tempHostage.getName() == "axe") { //if player hits hostage, true
+////                    hostageCollision = true;
+////                    thirdHostage = true;
+//                    //hostageCount++;
+//                    //updateScore();
+//                    //objects.remove(object);
+//                    theScore.increaseScore();
+//                } else if (thePlayer.CharacterCollision(tempHostage)){// && fourthHostage == false && tempHostage.getName() == "health") { //if player hits hostage, true
+////                    hostageCollision = true;
+////                    fourthHostage = true;
+//                    //hostageCount++;
+//                    //updateScore();
+//                    //objects.remove(object);
+//                    theScore.increaseScore();
                 }
             }
-            else if(object instanceof Enemies){
-                Enemies tempEnemy = (Enemies) object;
+            else if(tempPerson instanceof Enemies){
+                Enemies tempEnemy = (Enemies) tempPerson;
                 if (thePlayer.CharacterCollision(tempEnemy)) { //if player hits enemy, true
                     //collision = true;
-                    System.out.println("ENEMy");
+                    //System.out.println("ENEMy");
                 }
             }
         }
