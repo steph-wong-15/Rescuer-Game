@@ -14,6 +14,7 @@ public class Controller {
     Scene scene;
     Player thePlayer;
     Score theScore;
+    Boolean goal;
     List<Person> objects = new ArrayList<>();
 
     /**
@@ -45,6 +46,7 @@ public class Controller {
         // update sprites in scene
         thePlayer.updateUI();
         objects.forEach(sprite -> sprite.updateUI());
+        spawnGoal();
     }
 
     /**
@@ -79,26 +81,37 @@ public class Controller {
      * @param random random
      */
     private void spawnEnemies(boolean random) {
-        Random rnd = new Random();
-        if (random && rnd.nextInt(Settings.ENEMY_SPAWN_RANDOMNESS) != 0) {
-            return;
+        if(goal==null){
+            Random rnd = new Random();
+            if (random && rnd.nextInt(Settings.ENEMY_SPAWN_RANDOMNESS) != 0) {
+                return;
+            }
+            // image
+            Image image = Main.enemyImage;
+
+            // random speed
+            double speed = rnd.nextDouble() * 1.0 + 2.0;
+
+            // make enemy is always fully inside the screen, no part of it is outside
+            // y position: right on top of the view, so that it becomes visible with the next game iteration
+            double x = rnd.nextDouble() * (Settings.SCENE_WIDTH - image.getWidth());
+            double y = -image.getHeight();
+
+            // create a sprite
+            Enemies enemy = new Enemies(image, layer, 1, 1, x, 0, speed, 0, 1, 1);
+
+            // manage sprite
+            objects.add(enemy);
         }
-        // image
-        Image image = Main.enemyImage;
+    }
 
-        // random speed
-        double speed = rnd.nextDouble() * 1.0 + 2.0;
-
-        // make enemy is always fully inside the screen, no part of it is outside
-        // y position: right on top of the view, so that it becomes visible with the next game iteration
-        double x = rnd.nextDouble() * (Settings.SCENE_WIDTH - image.getWidth());
-        double y = -image.getHeight();
-
-        // create a sprite
-        Enemies enemy = new Enemies(image, layer, 1, 1, x, 0, speed, 0, 1, 1);
-
-        // manage sprite
-        objects.add(enemy);
+    /**
+     * Create Bonus reward
+     */
+    private void spawnGoal(){
+        if(theScore.goal()){
+            objects.add(Goal.createGoal(layer));
+        }
     }
 
     /**
@@ -108,7 +121,16 @@ public class Controller {
         Iterator<Person> iterator=objects.listIterator();
         while (iterator.hasNext()) {
             Person tempPerson=iterator.next();
-            //System.out.println(i++);
+            if(tempPerson instanceof Goal){
+                Goal tempGoal = (Goal)tempPerson;
+                if(thePlayer.CharacterCollision(tempGoal))
+                {
+                    tempGoal.removeFromLayer();
+                    iterator.remove();
+                    theScore.end();
+                }
+            }
+
 //            for (Goal end : goals) {
 //                if (player.CharacterCollision(end)) { //if player hits Goal, true
 //                    collisionText.setText("You win!");

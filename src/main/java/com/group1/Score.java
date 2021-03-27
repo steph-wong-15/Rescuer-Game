@@ -4,7 +4,7 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.text.Font;
@@ -13,10 +13,7 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextBoundsType;
 
 public class Score {
-    boolean over = false; //check if game is over
-    boolean collision = false; //check collision with enemy
     boolean hostageCollision = false; //hostage collision
-    boolean goalState = false; //goalstate if true
     int hostageCount = 0;
     Text collisionText;
     Pane layer;
@@ -44,38 +41,19 @@ public class Score {
     }
 
     /**
-     * Makes bonus reward
-     */
-    public Goal createGoal() {
-        Image image = Main.greenImage;
-        // center horizontally, position at 70% vertically
-        double x = (Settings.SCENE_WIDTH - image.getWidth()) / 2.0;
-        double y = Settings.SCENE_HEIGHT * 0.7;
-        // create goal
-        return new Goal(image, layer, 1, 0, x, y, 0, 0, 0, 0);
-    }
-
-    /**
-     * Increase score
-     */
-    public void increaseScore() {
-        hostageCount++;
-    }
-
-    /**
      * Update score for score layer
      */
     public void updateScore() {
-        if (hostageCollision&&hostageCount<4){
+        if (hostageCollision && hostageCount < 4) {
             collisionText.setFill(Color.GREEN);
             collisionText.setStroke(Color.GREEN);
             collisionText.setText("Hostaged rescued. \nNicely done!");
             collisionText.setFill(Color.RED);
             collisionText.setStroke(Color.BLACK);
-        }else if (hostageCount==4) {
-            collisionText.setText("You saved four hostages!\n Go back to start!");
-            createGoal();
-        }
+//        }else if (hostageCount==4) {
+//            collisionText.setText("You saved four hostages!\n Go back to start!");
+//            createGoal();
+//        }
 //        }else if (collision && over == false) {
 //            collisionText.setText("Collision!\n Losing hp!");
 //            thePlayer.getDamaged();
@@ -90,12 +68,27 @@ public class Score {
 //       } else {
 //            collisionText.setText("");
 //        }
-        System.out.println(hostageCount);
+            System.out.println(hostageCount);
+        }
     }
 
-//    public void end() { //ending screen
-//        ImagePattern pattern = new ImagePattern(Main.winnerImage);
-//
+    /**
+     * Increase score
+     */
+    public void increaseScore() {
+        hostageCount++;
+    }
+    public boolean goal(){
+        if(hostageCount>=4){
+            return true;
+        }
+        return false;
+    }
+    public void end() { //ending screen
+        BackgroundSize backgroundSize= new BackgroundSize(Settings.SCENE_WIDTH,Settings.SCENE_HEIGHT,true,true,true,false);
+        BackgroundImage backgroundImage= new BackgroundImage(Main.winnerImage, BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.CENTER, backgroundSize);
+        layer.setBackground(new Background(backgroundImage));
+
 //        Group root = new Group();
 //
 //        // create layers
@@ -150,6 +143,6 @@ public class Score {
 //
 //        System.out.println("Try again next time.");
 //
-//    }
+    }
 }
 
