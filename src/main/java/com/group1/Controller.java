@@ -13,21 +13,22 @@ public class Controller {
     Pane layer;
     Scene scene;
     Player thePlayer;
+    boolean end;
     Score theScore;
-    boolean win;
     List<Person> objects = new ArrayList<>();
 
     /**
      * Controls the moving parts of the game layer
-     * @param pane get game layer where characters loaded
+     *
+     * @param pane   get game layer where characters loaded
      * @param player the player
-     * @param score communicates with game layer to display the score
+     * @param score  communicates with game layer to display the score
      */
-    Controller(Pane pane,Player player,Score score) {
+    Controller(Pane pane, Player player, Score score) {
         layer = pane;
         scene = pane.getScene();
-        theScore=score;
-        thePlayer=player;
+        theScore = score;
+        thePlayer = player;
         spawnHostages();
     }
 
@@ -46,6 +47,7 @@ public class Controller {
         // update sprites in scene
         thePlayer.updateUI();
         objects.forEach(sprite -> sprite.updateUI());
+        removeDead();
         spawnGoal();
     }
 
@@ -81,7 +83,7 @@ public class Controller {
      * @param random random
      */
     private void spawnEnemies(boolean random) {
-        if(!win){
+        if (!end) {
             Random rnd = new Random();
             if (random && rnd.nextInt(Settings.ENEMY_SPAWN_RANDOMNESS) != 0) {
                 return;
@@ -102,12 +104,11 @@ public class Controller {
 
             // manage sprite
             objects.add(enemy);
-        }
-        else{
-            Iterator<Person> iterator=objects.listIterator();
+        } else {
+            Iterator<Person> iterator = objects.listIterator();
             while (iterator.hasNext()) {
-                Person tempPerson=iterator.next();
-                if(tempPerson instanceof Enemies){
+                Person tempPerson = iterator.next();
+                if (tempPerson instanceof Enemies) {
                     tempPerson.removeFromLayer();
                     iterator.remove();
                 }
@@ -118,8 +119,8 @@ public class Controller {
     /**
      * Create Bonus reward
      */
-    private void spawnGoal(){
-        if(theScore.goal()){
+    private void spawnGoal() {
+        if (theScore.goal()) {
             objects.add(Goal.createGoal(layer));
         }
     }
@@ -128,20 +129,19 @@ public class Controller {
      * Check for all types of collisions
      */
     private void checkCollisions() {
-        Iterator<Person> iterator=objects.listIterator();
+        Iterator<Person> iterator = objects.listIterator();
         while (iterator.hasNext()) {
-            Person tempPerson=iterator.next();
-            if(tempPerson instanceof Goal){
-                if(thePlayer.CharacterCollision(tempPerson))
-                {
-                    win=true;
+            Person tempPerson = iterator.next();
+            if (tempPerson instanceof Goal) {
+                if (thePlayer.CharacterCollision(tempPerson)) {
+                    end = true;
                     tempPerson.removeFromLayer();
                     iterator.remove();
                     end();
                 }
             }
-            if(tempPerson instanceof Hostages) {
-                if (thePlayer.CharacterCollision(tempPerson)){//&& firstHostage == false && tempHostage.getName() == "speed") { //if player hits hostage, true
+            if (tempPerson instanceof Hostages) {
+                if (thePlayer.CharacterCollision(tempPerson)) {//&& firstHostage == false && tempHostage.getName() == "speed") { //if player hits hostage, true
                     tempPerson.removeFromLayer();
                     iterator.remove();
                     theScore.increaseScore();
@@ -155,10 +155,9 @@ public class Controller {
 //                    //objects.remove(object);
 //                    theScore.increaseScore();
                 }
-            }
-            else if(tempPerson instanceof Enemies){
+            } else if (tempPerson instanceof Enemies) {
                 Enemies tempEnemy = (Enemies) tempPerson;
-                if(tempEnemy.checkBounds()){
+                if (tempEnemy.checkBounds()) {
                     tempEnemy.removeFromLayer();
                     iterator.remove();
                 }
@@ -172,15 +171,36 @@ public class Controller {
     }
 
     /**
+     * Check health and remove o health characters
+     */
+    private void removeDead() {
+        System.out.println(thePlayer.getHealth());
+        if (thePlayer.getHealth() < 1) {
+            thePlayer.removeFromLayer();
+            end = true;
+            loss();
+        }
+    }
+
+    /**
      * Ending background when player wins
      */
-    public void end() {
+    private void end() {
         BackgroundSize backgroundSize = new BackgroundSize(Settings.SCENE_WIDTH, Settings.SCENE_HEIGHT, true, true, true, false);
         BackgroundImage backgroundImage = new BackgroundImage(Main.winnerImage, BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.CENTER, backgroundSize);
         layer.setBackground(new Background(backgroundImage));
     }
 
+    /**
+     * Ending background when player loses
+     */
+    public void loss() { //ending screen
+        BackgroundSize backgroundSize = new BackgroundSize(Settings.SCENE_WIDTH, Settings.SCENE_HEIGHT, true, true, true, false);
+        BackgroundImage backgroundImage = new BackgroundImage(Main.loserImage, BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.CENTER, backgroundSize);
+        layer.setBackground(new Background(backgroundImage));
+    }
 }
+
 
 
 

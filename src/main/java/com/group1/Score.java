@@ -18,9 +18,10 @@ public class Score {
     Text collisionText;
     Pane layer;
     Player thePlayer;
+
     Score(Pane pane, Player player) {
         layer = pane;
-        thePlayer=player;
+        thePlayer = player;
         createScoreLayer();
     }
 
@@ -28,7 +29,7 @@ public class Score {
      * Layer that displays text when events occur
      */
     private void createScoreLayer() {
-        collisionText=new Text();
+        collisionText = new Text();
         collisionText.setFont(Font.font(null, FontWeight.BOLD, 30));
         collisionText.setStroke(Color.BLACK);
         collisionText.setFill(Color.RED);
@@ -81,43 +82,16 @@ public class Score {
 
     /**
      * Check if winner has all 4 hostages
+     *
      * @return true if all hostages are rescued, false otherwise
      */
-    public boolean goal(){
-        if(hostageCount>=4){
-            hostageCount=0;
+    public boolean goal() {
+        if (hostageCount >= 4) {
+            hostageCount = 0;
             return true;
         }
         return false;
     }
-
-//
-//    public void loss() { //ending screen
-//        ImagePattern pattern = new ImagePattern(Main.loserImage);
-//
-//        Group root = new Group();
-//
-//        // create layers
-//        playfieldLayer = new Pane();
-//        scoreLayer = new Pane();
-//        Button pauseButton =new Button("Quit");
-//
-//        root.getChildren().add( playfieldLayer);
-//        root.getChildren().add( scoreLayer);
-//        root.getChildren().add(pauseButton);
-//        pauseButton.setOnAction(e->{
-//
-//            gameLoop.stop();
-//            System.exit(0);
-//
-//        });
-//
-//        gameScene = new Scene( root, Settings.SCENE_WIDTH, Settings.SCENE_HEIGHT);
-//        gameScene.setFill(pattern);
-//        mainWindow.setScene( gameScene);
-//        mainWindow.show();
-//
-//        System.out.println("Try again next time.");
-//
 }
+
 

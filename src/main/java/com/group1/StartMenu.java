@@ -113,34 +113,4 @@ public class StartMenu {
             mainWindow.close();
         });
     }
-
-//    public void loss() { //ending screen
-//        ImagePattern pattern = new ImagePattern(Main.loserImage);
-//
-//        Group root = new Group();
-//
-//        // create layers
-//        playfieldLayer = new Pane();
-//        scoreLayer = new Pane();
-//        Button pauseButton =new Button("Quit");
-//
-//        root.getChildren().add( playfieldLayer);
-//        root.getChildren().add( scoreLayer);
-//        root.getChildren().add(pauseButton);
-//        pauseButton.setOnAction(e->{
-//
-//            gameLoop.stop();
-//            System.exit(0);
-//
-//        });
-//
-//        gameScene = new Scene( root, Settings.SCENE_WIDTH, Settings.SCENE_HEIGHT);
-//        gameScene.setFill(pattern);
-//        mainWindow.setScene( gameScene);
-//        mainWindow.show();
-//
-//        System.out.println("Try again next time.");
-//
-//    }
-//
 }
