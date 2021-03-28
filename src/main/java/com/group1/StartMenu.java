@@ -57,7 +57,7 @@ public class StartMenu {
         //////////////////////Game loop/////////////////////////////////////
         Player thePlayer= Player.createPlayer(playfieldLayer);
         Score score = new Score(scoreLayer,thePlayer);
-        Controller controller = new Controller(root,thePlayer,score);
+        Controller controller = new Controller(playfieldLayer,thePlayer,score);
         gameLoop = new AnimationTimer() {
             @Override
             public void handle(long now) {

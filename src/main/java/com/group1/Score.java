@@ -80,41 +80,12 @@ public class Score {
     }
     public boolean goal(){
         if(hostageCount>=4){
+            hostageCount=0;
             return true;
         }
         return false;
     }
-    public void end() { //ending screen
-        BackgroundSize backgroundSize= new BackgroundSize(Settings.SCENE_WIDTH,Settings.SCENE_HEIGHT,true,true,true,false);
-        BackgroundImage backgroundImage= new BackgroundImage(Main.winnerImage, BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.CENTER, backgroundSize);
-        layer.setBackground(new Background(backgroundImage));
 
-//        Group root = new Group();
-//
-//        // create layers
-//        playfieldLayer = new Pane();
-//        scoreLayer = new Pane();
-//        Button pauseButton =new Button("Quit");
-//
-//        root.getChildren().add( playfieldLayer);
-//        root.getChildren().add( scoreLayer);
-//        root.getChildren().add(pauseButton);
-//        pauseButton.setOnAction(e->{
-//
-//            gameLoop.stop();
-//            System.exit(0);
-//
-//        });
-//
-//        gameScene = new Scene( root, Settings.SCENE_WIDTH, Settings.SCENE_HEIGHT);
-//        gameScene.setFill(pattern);
-//        mainWindow.setScene( gameScene);
-//        mainWindow.show();
-//
-//        System.out.println("Thanks for playing!");
-//
-//
-//    }
 //
 //    public void loss() { //ending screen
 //        ImagePattern pattern = new ImagePattern(Main.loserImage);
@@ -143,6 +114,5 @@ public class Score {
 //
 //        System.out.println("Try again next time.");
 //
-    }
 }
 

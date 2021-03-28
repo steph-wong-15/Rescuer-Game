@@ -2,7 +2,7 @@ package com.group1;
 
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.*;
 import javafx.scene.text.Text;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -14,7 +14,7 @@ public class Controller {
     Scene scene;
     Player thePlayer;
     Score theScore;
-    Boolean goal;
+    boolean win;
     List<Person> objects = new ArrayList<>();
 
     /**
@@ -81,7 +81,7 @@ public class Controller {
      * @param random random
      */
     private void spawnEnemies(boolean random) {
-        if(goal==null){
+        if(!win){
             Random rnd = new Random();
             if (random && rnd.nextInt(Settings.ENEMY_SPAWN_RANDOMNESS) != 0) {
                 return;
@@ -103,6 +103,16 @@ public class Controller {
             // manage sprite
             objects.add(enemy);
         }
+        else{
+            Iterator<Person> iterator=objects.listIterator();
+            while (iterator.hasNext()) {
+                Person tempPerson=iterator.next();
+                if(tempPerson instanceof Enemies){
+                    tempPerson.removeFromLayer();
+                    iterator.remove();
+                }
+            }
+        }
     }
 
     /**
@@ -122,12 +132,12 @@ public class Controller {
         while (iterator.hasNext()) {
             Person tempPerson=iterator.next();
             if(tempPerson instanceof Goal){
-                Goal tempGoal = (Goal)tempPerson;
-                if(thePlayer.CharacterCollision(tempGoal))
+                if(thePlayer.CharacterCollision(tempPerson))
                 {
-                    tempGoal.removeFromLayer();
+                    win=true;
+                    tempPerson.removeFromLayer();
                     iterator.remove();
-                    theScore.end();
+                    end();
                 }
             }
 
@@ -144,9 +154,8 @@ public class Controller {
 //                }
 //            }
             if(tempPerson instanceof Hostages) {
-                Hostages tempHostage = (Hostages) tempPerson;
-                if (thePlayer.CharacterCollision(tempHostage)){//&& firstHostage == false && tempHostage.getName() == "speed") { //if player hits hostage, true
-                    tempHostage.removeFromLayer();
+                if (thePlayer.CharacterCollision(tempPerson)){//&& firstHostage == false && tempHostage.getName() == "speed") { //if player hits hostage, true
+                    tempPerson.removeFromLayer();
                     iterator.remove();
                     theScore.increaseScore();
 //                } else if (thePlayer.CharacterCollision(tempHostage)){// && secondHostage == false && tempHostage.getName() == "sword") { //if player hits hostage, true
@@ -173,6 +182,11 @@ public class Controller {
                 }
             }
         }
+    }
+    public void end() { //ending screen
+        BackgroundSize backgroundSize = new BackgroundSize(Settings.SCENE_WIDTH, Settings.SCENE_HEIGHT, true, true, true, false);
+        BackgroundImage backgroundImage = new BackgroundImage(Main.winnerImage, BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.CENTER, backgroundSize);
+        layer.setBackground(new Background(backgroundImage));
     }
 
 }
