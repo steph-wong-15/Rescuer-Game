@@ -140,19 +140,6 @@ public class Controller {
                     end();
                 }
             }
-
-//            for (Goal end : goals) {
-//                if (player.CharacterCollision(end)) { //if player hits Goal, true
-//                    collisionText.setText("You win!");
-//                    goalState = true;
-//                    try {
-//                        Thread.sleep(500);
-//                    } catch (InterruptedException ex) {
-//                        Thread.currentThread().interrupt();
-//                    }
-//                    end();
-//                }
-//            }
             if(tempPerson instanceof Hostages) {
                 if (thePlayer.CharacterCollision(tempPerson)){//&& firstHostage == false && tempHostage.getName() == "speed") { //if player hits hostage, true
                     tempPerson.removeFromLayer();
@@ -183,7 +170,11 @@ public class Controller {
             }
         }
     }
-    public void end() { //ending screen
+
+    /**
+     * Ending background when player wins
+     */
+    public void end() {
         BackgroundSize backgroundSize = new BackgroundSize(Settings.SCENE_WIDTH, Settings.SCENE_HEIGHT, true, true, true, false);
         BackgroundImage backgroundImage = new BackgroundImage(Main.winnerImage, BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.CENTER, backgroundSize);
         layer.setBackground(new Background(backgroundImage));

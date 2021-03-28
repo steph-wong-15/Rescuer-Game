@@ -78,6 +78,11 @@ public class Score {
     public void increaseScore() {
         hostageCount++;
     }
+
+    /**
+     * Check if winner has all 4 hostages
+     * @return true if all hostages are rescued, false otherwise
+     */
     public boolean goal(){
         if(hostageCount>=4){
             hostageCount=0;
