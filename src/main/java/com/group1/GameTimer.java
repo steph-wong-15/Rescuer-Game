@@ -12,14 +12,16 @@ public abstract class GameTimer extends AnimationTimer {
 
     @Override
     public void start() {
-        super.start();
-        running =true;
+        if(running){
+            super.start();
+        }
     }
 
     @Override
     public void stop() {
-        super.stop();
-        running =false;
+        if(!running){
+            super.stop();
+        }
     }
 
     public abstract void tick(long now);

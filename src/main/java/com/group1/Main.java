@@ -22,6 +22,9 @@ public class Main extends Application {
     public static Image healthImg;
     public static Image hostageImg;
     public static Image settingImg;
+    public static Image closeImg;
+    public static Image uiBg;
+    public static Image playImg;
 
     /**
      * loads starting screen UI
@@ -33,7 +36,7 @@ public class Main extends Application {
         Parent startMenu = FXMLLoader.load(getClass().getResource("StartMenu.fxml"));
         Scene scene1 = new Scene(startMenu);
         stage.setScene(scene1);
-        stage.setTitle("Start");
+        stage.setTitle("Game");
         stage.show();
 
     }
@@ -52,7 +55,10 @@ public class Main extends Application {
         loserImage = new Image(getClass().getResource("/photos/death.png").toExternalForm());
         healthImg = new Image(getClass().getResource("/photos/Heart1.png").toExternalForm(),50,50,false,true);
         hostageImg = new Image(getClass().getResource("/photos/hostage.png").toExternalForm(),55,60,false,true);
-        settingImg= new Image(getClass().getResource("/photos/settings.png").toExternalForm(),30,30,false,true);
+        settingImg= new Image(getClass().getResource("/photos/settings.png").toExternalForm(),40,40,false,true);
+        closeImg= new Image(getClass().getResource("/photos/close.png").toExternalForm(),50,50,false,true);
+        uiBg=new Image(getClass().getResource("/photos/uiBG.png").toExternalForm(),1000,200,false,true);
+        playImg= new Image(getClass().getResource("/photos/play.png").toExternalForm(),50,50,false,true);
     }
 
     public static void main(String[]args){

@@ -10,6 +10,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -47,11 +48,17 @@ public class StartMenu {
 
         //HUD
         HBox hud = new HBox();
+        hud.setPrefSize(Settings.SCENE_WIDTH,120);
+        BackgroundSize hudBackgroundSize= new BackgroundSize(Settings.SCENE_WIDTH,Settings.SCENE_HEIGHT/6,true,true,true,false);
+        BackgroundImage hudBackgroundImage= new BackgroundImage(Main.uiBg, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, hudBackgroundSize);
+        hud.setBackground(new Background(hudBackgroundImage));
         Label healthStatus = new Label();
         healthStatus.setFont(Font.font("Cambria",40));
+        healthStatus.setTextFill(Color.web("#FFFFFF"));
         healthStatus.setPadding(new Insets(7,15,0,15));
         Label hostageStatus = new Label();
         hostageStatus.setFont(Font.font("Cambria",40));
+        hostageStatus.setTextFill(Color.web("#FFFFFF"));
         hostageStatus.setPadding(new Insets(7,0,0,5));
         ImageView hostage= new ImageView(Main.hostageImg);
         ImageView health = new ImageView(Main.healthImg);
@@ -59,6 +66,7 @@ public class StartMenu {
         Button pauseButton =new Button();
         ImageView settings = new ImageView(Main.settingImg);
         pauseButton.setGraphic(settings);
+        pauseButton.setStyle("-fx-background-color: transparent;");
         hud.setMargin(pauseButton,new Insets(5,0,0,25));
         hud.setAlignment(Pos.CENTER);
         hud.getChildren().addAll(health,healthStatus,hostage,hostageStatus,pauseButton);
@@ -68,6 +76,7 @@ public class StartMenu {
         root.setCenter(group);
         root.setBottom(hud);
         BorderPane.setAlignment(pauseButton,Pos.CENTER);
+
         //get stage from start menu to change scenes with same stage
         mainWindow = (Stage) (((Node) mouseEvent.getSource()).getScene().getWindow());
         mainWindow.setScene(gameScene);
@@ -111,9 +120,15 @@ public class StartMenu {
         BorderPane borderPane = new BorderPane();
         HBox hbox = new HBox();
         hbox.setPrefSize(Settings.SCENE_WIDTH / 2, Settings.SCENE_HEIGHT / 2);
-        Button quitButton = new Button("QUIT");
+        Button quitButton = new Button();
+        ImageView quit= new ImageView(Main.closeImg);
+        quitButton.setGraphic(quit);
+        quitButton.setStyle("-fx-background-color: transparent;");
         hbox.setSpacing(10);
-        Button resumeButton = new Button("RESUME");
+        Button resumeButton = new Button();
+        ImageView resume = new ImageView(Main.playImg);
+        resumeButton.setGraphic(resume);
+        resumeButton.setStyle("-fx-background-color: transparent;");
         hbox.getChildren().addAll(quitButton, resumeButton);
         hbox.setAlignment(Pos.CENTER);
         borderPane.setCenter(hbox);
