@@ -174,7 +174,6 @@ public class Controller {
      * Check health and remove o health characters
      */
     private void removeDead() {
-        System.out.println(thePlayer.getHealth());
         if (thePlayer.getHealth() < 1) {
             thePlayer.removeFromLayer();
             end = true;

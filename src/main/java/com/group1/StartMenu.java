@@ -23,6 +23,7 @@ public class StartMenu {
     public AnimationTimer gameLoop;
     Stage mainWindow;
     Scene gameScene;
+    boolean running;
 
     /**
      * Main game method where game loop runs
@@ -81,11 +82,13 @@ public class StartMenu {
         gameLoop = new AnimationTimer() {
             @Override
             public void handle(long now) {
+
                 controller.tick();
                 score.updateScore();
             }
         };
         gameLoop.start();
+
         //////////////////////Game loop/////////////////////////////////////
 
         //Check for pauseButton
@@ -131,6 +134,9 @@ public class StartMenu {
         quitButton.setOnAction(e -> {
             stage.close();
             mainWindow.close();
+        });
+        stage.setOnCloseRequest(e->{
+            gameLoop.start();
         });
     }
 }
