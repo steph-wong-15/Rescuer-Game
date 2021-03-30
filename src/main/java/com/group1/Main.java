@@ -19,6 +19,9 @@ public class Main extends Application {
     public static Image greenImage;
     public static Image winnerImage;
     public static Image loserImage;
+    public static Image healthImg;
+    public static Image hostageImg;
+    public static Image settingImg;
 
     /**
      * loads starting screen UI
@@ -47,6 +50,9 @@ public class Main extends Application {
         myImage = new Image(getClass().getResource("/photos/background.png").toExternalForm());
         winnerImage = new Image(getClass().getResource("/photos/winner.png").toExternalForm());
         loserImage = new Image(getClass().getResource("/photos/death.png").toExternalForm());
+        healthImg = new Image(getClass().getResource("/photos/Heart1.png").toExternalForm(),50,50,false,true);
+        hostageImg = new Image(getClass().getResource("/photos/hostage.png").toExternalForm(),55,60,false,true);
+        settingImg= new Image(getClass().getResource("/photos/settings.png").toExternalForm(),30,30,false,true);
     }
 
     public static void main(String[]args){

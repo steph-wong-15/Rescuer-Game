@@ -3,6 +3,7 @@ package com.group1;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
@@ -14,14 +15,16 @@ import javafx.scene.text.TextBoundsType;
 
 public class Score {
     boolean hostageCollision = false; //hostage collision
-    int hostageCount = 0;
+    int hostageCount;
     Text collisionText;
     Pane layer;
     Player thePlayer;
-
-    Score(Pane pane, Player player) {
+    Label healthStatus,hostageStatus;
+    Score(Pane pane, Player player,Label health, Label hostage) {
         layer = pane;
         thePlayer = player;
+        healthStatus=health;
+        hostageStatus=hostage;
         createScoreLayer();
     }
 
@@ -45,12 +48,14 @@ public class Score {
      * Update score for score layer
      */
     public void updateScore() {
-        if (hostageCollision && hostageCount < 4) {
-            collisionText.setFill(Color.GREEN);
-            collisionText.setStroke(Color.GREEN);
-            collisionText.setText("Hostaged rescued. \nNicely done!");
-            collisionText.setFill(Color.RED);
-            collisionText.setStroke(Color.BLACK);
+        hostageStatus.setText(String.valueOf(hostageCount));
+        healthStatus.setText(String.valueOf(thePlayer.getHealth()));
+//        if (hostageCollision && hostageCount < 4) {
+//            collisionText.setFill(Color.GREEN);
+//            collisionText.setStroke(Color.GREEN);
+//            collisionText.setText("Hostaged rescued. \nNicely done!");
+//            collisionText.setFill(Color.RED);
+//            collisionText.setStroke(Color.BLACK);
 //        }else if (hostageCount==4) {
 //            collisionText.setText("You saved four hostages!\n Go back to start!");
 //            createGoal();
@@ -69,8 +74,6 @@ public class Score {
 //       } else {
 //            collisionText.setText("");
 //        }
-            System.out.println(hostageCount);
-        }
     }
 
     /**
