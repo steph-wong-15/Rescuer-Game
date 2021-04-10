@@ -58,19 +58,16 @@ public class Controller {
         // image
         Image image = Main.hostageImage;
 
-        // random speed
-        double speed = 0;
-
         // make enemy is always fully inside the screen, no part of it is outside
         // y position: right on top of the view, so that it becomes visible with the next game iteration
         double x = 200;
         double y = 50;
 
         // create a sprite
-        Hostages hostage = new Hostages(image, layer, 1, 1, x, 0, speed, 0, 1, 1, "speed");
-        Hostages hostage2 = new Hostages(image, layer, 1, 1, x - 150, 0, speed, 0, 1, 1, "health");
-        Hostages hostage3 = new Hostages(image, layer, 1, 1, x + 200, 0, speed, 0, 1, 1, "sword");
-        Hostages hostage4 = new Hostages(image, layer, 1, 1, x + 300, 0, speed, 0, 1, 1, "axe");
+        Hostages hostage = new Hostages(image, layer, x, 0, "speed");
+        Hostages hostage2 = new Hostages(image, layer, x - 150, 0, "health");
+        Hostages hostage3 = new Hostages(image, layer, + 200, 0, "sword");
+        Hostages hostage4 = new Hostages(image, layer,x + 300, 0,"axe");
         // manage sprite
         objects.add(hostage);
         objects.add(hostage2);
@@ -100,7 +97,7 @@ public class Controller {
             double y = -image.getHeight();
 
             // create a sprite
-            Enemies enemy = new Enemies(image, layer, 1, 1, x, 0, speed, 0, 1, 1);
+            Enemies enemy = new Enemies(image, layer, x, 0);
 
             // manage sprite
             objects.add(enemy);

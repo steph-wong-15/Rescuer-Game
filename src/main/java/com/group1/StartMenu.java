@@ -48,7 +48,7 @@ public class StartMenu {
 
         //HUD
         HBox hud = new HBox();
-        hud.setPrefSize(Settings.SCENE_WIDTH,120);
+        hud.setPrefSize(Settings.SCENE_WIDTH,150);
         BackgroundSize hudBackgroundSize= new BackgroundSize(Settings.SCENE_WIDTH,Settings.SCENE_HEIGHT/6,true,true,true,false);
         BackgroundImage hudBackgroundImage= new BackgroundImage(Main.uiBg, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, hudBackgroundSize);
         hud.setBackground(new Background(hudBackgroundImage));

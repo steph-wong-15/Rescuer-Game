@@ -10,10 +10,11 @@ import javafx.scene.layout.Pane;
  */
 
 class Hostages extends Person{
-
     String name;
-  public Hostages(Image image, Pane layer, int health, int damage, double x, double y, double r, double dx, double dy, double dr, String name) {
-        super(image, layer, health, damage, x, y, r, dx, dy, dr);
+
+  public Hostages(Image image, Pane layer, double x, double y, String name) {
+        super(image, layer, x, y);
+        health=1;
         this.name = name;
 
   }

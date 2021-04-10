@@ -13,17 +13,14 @@ import java.util.*; //import arraylist
 
 public class Player extends Person{
   double speed;
-  double playerMinX;
-  double playerMaxX;
-  double playerMinY;
-  double playerMaxY;
   Input input;
 
-  private Player(Image image, Pane layer, int health, int damage, double x, double y, double r, double dx, double dy, double dr, double speed, Input input) {
-        super(image, layer, health, damage, x, y, r, dx, dy, dr);
+  private Player(Image image, Pane layer, double x, double y, Input input) {
+        super(image, layer, x, y);
         this.input = input;
-        this.speed = speed;
-        bounds();
+        speed=Settings.PLAYER_SPEED;
+        health=Settings.PLAYER_HEALTH;
+        damage=1;
   }
 
   /**
@@ -43,39 +40,17 @@ public class Player extends Person{
     double y = Settings.SCENE_HEIGHT * 0.7;
 
     // create player
-    return new Player(image, pane, Settings.PLAYER_HEALTH, 0, x, y, 0, 0, 0, 0, Settings.PLAYER_SPEED, input);
+    return new Player(image, pane, x, y, input);
   }
-
-  /**
-   * Hit box for player
-   */
-  private void bounds() {
-    playerMinX = 0 - image.getWidth() / 2.0;
-    playerMaxX = Settings.SCENE_WIDTH - image.getWidth() / 2.0;
-    playerMinY = 0 - image.getHeight() / 2.0;
-    playerMaxY = Settings.SCENE_HEIGHT -image.getHeight() / 2.0;
-  }
-
+  
   /**
    * PLayer movement and edge detection
    */
   @Override
-    public void move() {
+  public void move() {
     super.move();
-    // ensure the player can't move outside of the screen
-    // vertical
-    if (Double.compare(y, playerMinY) < 0) {
-      y = playerMinY;
-    } else if (Double.compare(y, playerMaxY) > 0) {
-      y = playerMaxY;
-    }
-    // horizontal
-    if (Double.compare(x, playerMinX) < 0) {
-      x = playerMinX;
-    } else if (Double.compare(x, playerMaxX) > 0) {
-      x = playerMaxX;
-    }
-    }
+    checkBounds();
+  }
 
   /**
    * Takes player input for controls
@@ -97,23 +72,6 @@ public class Player extends Person{
     } else { //if no input set speed to zero
       dx = 0.0;
     }
-  }
-
-  public double speedUp(double speed){ //import speed
-    speed = speed*2.0; //doubles player speed, useful for getting a better score
-    return speed;
-  } 
-
-  public void freezeEnemies(){
-    //freezeEnemies
-  }
-
-  public void sword(){
-    //sword
-  }
-
-  public void axe(){
-    //axe
   }
 
 }
