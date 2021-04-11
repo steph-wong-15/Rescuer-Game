@@ -18,7 +18,7 @@ import javafx.scene.text.TextBoundsType;
  * Keeps track of game score
  */
 public class Score {
-    boolean hostageCollision = false; //hostage collision
+    boolean end = false;
     int hostageCount;
     Text collisionText;
     Pane layer;

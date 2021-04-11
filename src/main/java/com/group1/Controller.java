@@ -15,7 +15,6 @@ public class Controller {
     Pane layer;
     Scene scene;
     Player thePlayer;
-    boolean end;
     Score theScore;
     List<Person> objects = new ArrayList<>();
     int enemyCount;
@@ -56,7 +55,7 @@ public class Controller {
         checkCollisions();
         //end game
         playerDead();
-        if(end){
+        if(theScore.end){
             removeCharacters();
         }
         spawnGoal();
@@ -138,7 +137,7 @@ public class Controller {
             Person tempPerson = iterator.next();
             if (tempPerson instanceof Goal) {
                 if (thePlayer.CharacterCollision(tempPerson)) {
-                    end = true;
+                    theScore.end = true;
                     tempPerson.removeFromLayer();
                     iterator.remove();
                     end();
@@ -168,7 +167,7 @@ public class Controller {
     private void playerDead() {
         if (thePlayer.getHealth() < 1) {
             thePlayer.removeFromLayer();
-            end = true;
+            theScore.end = true;
             loss();
         }
     }

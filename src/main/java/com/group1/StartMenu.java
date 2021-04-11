@@ -81,6 +81,7 @@ public class StartMenu {
         mainWindow.setScene(gameScene);
         mainWindow.centerOnScreen();
         mainWindow.show();
+
         //////////////////////UI for main game screen////////////////////////
 
         //////////////////////Game loop/////////////////////////////////////
@@ -90,9 +91,11 @@ public class StartMenu {
         gameLoop = new AnimationTimer() {
             @Override
             public void handle(long now) {
-
                 controller.tick();
                 score.updateScore();
+                if(score.end){
+                    hud.getChildren().clear();
+                }
             }
         };
         gameLoop.start();
@@ -153,5 +156,8 @@ public class StartMenu {
             mainWindow.close();
         });
         stage.setOnCloseRequest(e-> gameLoop.start());
+    }
+    private void endHUD(HBox hud){
+
     }
 }
