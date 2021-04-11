@@ -24,7 +24,6 @@ public class StartMenu {
     public AnimationTimer gameLoop;
     Stage mainWindow;
     Scene gameScene;
-    boolean running;
 
     /**
      * Main game method where game loop runs
@@ -120,6 +119,9 @@ public class StartMenu {
         BorderPane borderPane = new BorderPane();
         HBox hbox = new HBox();
         hbox.setPrefSize(Settings.SCENE_WIDTH / 2, Settings.SCENE_HEIGHT / 2);
+        BackgroundSize backgroundSize= new BackgroundSize(Settings.SCENE_WIDTH/2,Settings.SCENE_HEIGHT/2,true,true,true,false);
+        BackgroundImage backgroundImage= new BackgroundImage(Main.bg, BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.CENTER, backgroundSize);
+        hbox.setBackground(new Background(backgroundImage));
         Button quitButton = new Button();
         ImageView quit= new ImageView(Main.closeImg);
         quitButton.setGraphic(quit);
@@ -141,7 +143,7 @@ public class StartMenu {
         stage.show();
         ///////////////////////UI for setting popup window///////////////////
 
-        //Check for quitButton and resumeButton
+        //Check for quitButton, resumeButton, and window close
         resumeButton.setOnAction(e -> {
             stage.close();
             gameLoop.start();
@@ -150,8 +152,6 @@ public class StartMenu {
             stage.close();
             mainWindow.close();
         });
-        stage.setOnCloseRequest(e->{
-            gameLoop.start();
-        });
+        stage.setOnCloseRequest(e-> gameLoop.start());
     }
 }

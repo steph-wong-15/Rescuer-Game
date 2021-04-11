@@ -9,7 +9,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
-
+/**
+ * Main class where where game gets called and assets load
+ */
 public class Main extends Application {
     //image imports
     public static Image playerImage;
@@ -25,6 +27,7 @@ public class Main extends Application {
     public static Image closeImg;
     public static Image uiBg;
     public static Image playImg;
+    public static Image bg;
 
     /**
      * loads starting screen UI
@@ -59,8 +62,13 @@ public class Main extends Application {
         closeImg= new Image(getClass().getResource("/photos/close.png").toExternalForm(),50,50,false,true);
         uiBg=new Image(getClass().getResource("/photos/uiBG.png").toExternalForm(),1000,200,false,true);
         playImg= new Image(getClass().getResource("/photos/play.png").toExternalForm(),50,50,false,true);
+        bg = new Image(getClass().getResource("/photos/backgroundStart.png").toExternalForm());
     }
 
+    /**
+     * main function that is called when program runs
+     * @param args args
+     */
     public static void main(String[]args){
         Application.launch();
     }

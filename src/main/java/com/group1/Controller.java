@@ -3,7 +3,6 @@ package com.group1;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
-import javafx.scene.text.Text;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -43,13 +42,14 @@ public class Controller {
         }
         //move
         thePlayer.move();
-        objects.forEach(sprite -> sprite.move());
+        objects.forEach(Person::move);
         // check collisions
         checkCollisions();
         // update sprites in scene
         thePlayer.updateUI();
-        objects.forEach(sprite -> sprite.updateUI());
-        removeDead();
+        objects.forEach(Person::updateUI);
+        //end game
+        playerDead();
         if(end){
             removeEnemies();
         }
@@ -86,7 +86,7 @@ public class Controller {
         double x = rnd.nextDouble() * (Settings.SCENE_WIDTH-image.getWidth());
         double y = rnd.nextDouble() * (Settings.SCENE_HEIGHT-image.getHeight());
         //enemy cant spawn at players starting location
-        if((x>thePlayer.x+image.getWidth()||x<thePlayer.x-image.getWidth())&&y>thePlayer.y+image.getHeight()||y<thePlayer.y-image.getHeight()){
+        if((x>thePlayer.x+2*image.getWidth()||x<thePlayer.x-2*image.getWidth())&&y>thePlayer.y+image.getHeight()||y<thePlayer.y-image.getHeight()){
             // create a sprite
             Enemies enemy = new Enemies(image, layer, x, y);
 
@@ -155,7 +155,7 @@ public class Controller {
     /**
      * Check health and remove o health characters
      */
-    private void removeDead() {
+    private void playerDead() {
         if (thePlayer.getHealth() < 1) {
             thePlayer.removeFromLayer();
             end = true;
