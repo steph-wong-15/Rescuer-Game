@@ -13,6 +13,10 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextBoundsType;
 
+/**
+ * Score class
+ * Keeps track of game score
+ */
 public class Score {
     boolean hostageCollision = false; //hostage collision
     int hostageCount;
@@ -20,6 +24,14 @@ public class Score {
     Pane layer;
     Player thePlayer;
     Label healthStatus,hostageStatus;
+
+    /**
+     * Constructor for score
+     * @param pane Layer that enemies is drawn on
+     * @param player Player instance that score is based on
+     * @param health Label that shows health status of player
+     * @param hostage Label that shows hostage count
+     */
     Score(Pane pane, Player player,Label health, Label hostage) {
         layer = pane;
         thePlayer = player;
@@ -50,30 +62,6 @@ public class Score {
     public void updateScore() {
         hostageStatus.setText(String.valueOf(hostageCount));
         healthStatus.setText(String.valueOf(thePlayer.getHealth()));
-//        if (hostageCollision && hostageCount < 4) {
-//            collisionText.setFill(Color.GREEN);
-//            collisionText.setStroke(Color.GREEN);
-//            collisionText.setText("Hostaged rescued. \nNicely done!");
-//            collisionText.setFill(Color.RED);
-//            collisionText.setStroke(Color.BLACK);
-//        }else if (hostageCount==4) {
-//            collisionText.setText("You saved four hostages!\n Go back to start!");
-//            createGoal();
-//        }
-//        }else if (collision && over == false) {
-//            collisionText.setText("Collision!\n Losing hp!");
-//            thePlayer.getDamaged();
-//            if (thePlayer.isAlive() == false) {
-//                over = true;
-//                collisionText.setText("Game over, 0 HP.");
-//                System.out.println("Player has died");
-//                loss();
-//            }
-//        }else if (goalState==true) {
-//            collisionText.setText("You win!");
-//       } else {
-//            collisionText.setText("");
-//        }
     }
 
     /**
@@ -85,7 +73,6 @@ public class Score {
 
     /**
      * Check if winner has all 4 hostages
-     *
      * @return true if all hostages are rescued, false otherwise
      */
     public boolean goal() {

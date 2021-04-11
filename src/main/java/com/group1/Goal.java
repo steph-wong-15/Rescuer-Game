@@ -3,7 +3,12 @@ package com.group1;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 
+/**
+ * Bonus reward
+ * Extends off the Person class to generate bonus
+ */
 class Goal extends Person{
+
     /**
      * Goal Generator
      * Extends off the Person class to generate end state

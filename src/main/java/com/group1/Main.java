@@ -41,7 +41,6 @@ public class Main extends Application {
         stage.setScene(scene1);
         stage.setTitle("Game");
         stage.show();
-
     }
 
     /**
@@ -72,6 +71,5 @@ public class Main extends Application {
     public static void main(String[]args){
         Application.launch();
     }
-
 
 }

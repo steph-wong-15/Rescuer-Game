@@ -16,7 +16,7 @@ public class Player extends Person{
     /**
      * Constructor for player
      * @param image Player image
-     * @param layer Layer that character is drawn on
+     * @param layer Layer that player is drawn on
      * @param x Starting location x
      * @param y Starting location y
      * @param input Player key control input
