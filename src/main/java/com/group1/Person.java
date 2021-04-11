@@ -19,6 +19,7 @@ public abstract class Person {
     double y;
     double dx; //speed
     double dy;
+    double speed;
     int damage;
     int health;
 
@@ -62,5 +63,18 @@ public abstract class Person {
     public boolean CharacterCollision(Person otherSprite) {
         return (otherSprite.x + otherSprite.w >= x && otherSprite.y + otherSprite.h >= y && otherSprite.x <= x + w && otherSprite.y <= y + h);
     }
-
+    public void checkBounds() {
+        //vertical
+        if (y< 0) {
+            y = 0;
+        } else if (Double.compare(y, Settings.SCENE_HEIGHT - h) > 0) {
+            y = Settings.SCENE_HEIGHT - h;
+        }
+        // horizontal
+        if (x< 0) {
+            x = 0;
+        } else if (Double.compare(x, Settings.SCENE_WIDTH - w) > 0) {
+            x = Settings.SCENE_WIDTH - w;
+        }
+    }
 }

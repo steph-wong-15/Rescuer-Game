@@ -16,10 +16,10 @@ public class Controller {
     boolean end;
     Score theScore;
     List<Person> objects = new ArrayList<>();
+    int enemyCount;
 
     /**
      * Controls the moving parts of the game layer
-     *
      * @param pane   get game layer where characters loaded
      * @param player the player
      * @param score  communicates with game layer to display the score
@@ -38,7 +38,9 @@ public class Controller {
      */
     public void tick() {
         thePlayer.processInput();
-        spawnEnemies(true);
+        if (enemyCount < 10) {
+            spawnEnemies();
+        }
         //move
         thePlayer.move();
         objects.forEach(sprite -> sprite.move());
@@ -48,6 +50,9 @@ public class Controller {
         thePlayer.updateUI();
         objects.forEach(sprite -> sprite.updateUI());
         removeDead();
+        if(end){
+            removeEnemies();
+        }
         spawnGoal();
     }
 
@@ -58,16 +63,11 @@ public class Controller {
         // image
         Image image = Main.hostageImage;
 
-        // make enemy is always fully inside the screen, no part of it is outside
-        // y position: right on top of the view, so that it becomes visible with the next game iteration
-        double x = 200;
-        double y = 50;
-
         // create a sprite
-        Hostages hostage = new Hostages(image, layer, x, 0, "speed");
-        Hostages hostage2 = new Hostages(image, layer, x - 150, 0, "health");
-        Hostages hostage3 = new Hostages(image, layer, + 200, 0, "sword");
-        Hostages hostage4 = new Hostages(image, layer,x + 300, 0,"axe");
+        Hostages hostage = new Hostages(image, layer, 0, 0, "speed");
+        Hostages hostage2 = new Hostages(image, layer, Settings.SCENE_WIDTH- image.getWidth(), 0, "health");
+        Hostages hostage3 = new Hostages(image, layer, 0, Settings.SCENE_HEIGHT-image.getHeight(), "sword");
+        Hostages hostage4 = new Hostages(image, layer,Settings.SCENE_WIDTH- image.getWidth(), Settings.SCENE_HEIGHT-image.getHeight(),"axe");
         // manage sprite
         objects.add(hostage);
         objects.add(hostage2);
@@ -77,38 +77,35 @@ public class Controller {
 
     /**
      * Make enemies
-     * @param random random
      */
-    private void spawnEnemies(boolean random) {
-        if (!end) {
-            Random rnd = new Random();
-            if (random && rnd.nextInt(Settings.ENEMY_SPAWN_RANDOMNESS) != 0) {
-                return;
-            }
-            // image
-            Image image = Main.enemyImage;
-
-            // random speed
-            double speed = rnd.nextDouble() * 1.0 + 2.0;
-
-            // make enemy is always fully inside the screen, no part of it is outside
-            // y position: right on top of the view, so that it becomes visible with the next game iteration
-            double x = rnd.nextDouble() * (Settings.SCENE_WIDTH - image.getWidth());
-            double y = -image.getHeight();
-
+    private void spawnEnemies() {
+        Random rnd = new Random();
+        Image image = Main.enemyImage;
+        // make enemy is always fully inside the screen, no part of it is outside
+        // y position: right on top of the view, so that it becomes visible with the next game iteration
+        double x = rnd.nextDouble() * (Settings.SCENE_WIDTH-image.getWidth());
+        double y = rnd.nextDouble() * (Settings.SCENE_HEIGHT-image.getHeight());
+        //enemy cant spawn at players starting location
+        if((x>thePlayer.x+image.getWidth()||x<thePlayer.x-image.getWidth())&&y>thePlayer.y+image.getHeight()||y<thePlayer.y-image.getHeight()){
             // create a sprite
-            Enemies enemy = new Enemies(image, layer, x, 0);
+            Enemies enemy = new Enemies(image, layer, x, y);
 
             // manage sprite
             objects.add(enemy);
-        } else {
-            Iterator<Person> iterator = objects.listIterator();
-            while (iterator.hasNext()) {
-                Person tempPerson = iterator.next();
-                if (tempPerson instanceof Enemies) {
-                    tempPerson.removeFromLayer();
-                    iterator.remove();
-                }
+            enemyCount++;
+        }
+    }
+
+    /**
+     * remove enemies when game is over
+     */
+    private void removeEnemies(){
+        Iterator<Person> iterator = objects.listIterator();
+        while (iterator.hasNext()) {
+            Person tempPerson = iterator.next();
+            if (tempPerson instanceof Enemies) {
+                tempPerson.removeFromLayer();
+                iterator.remove();
             }
         }
     }
@@ -142,26 +139,14 @@ public class Controller {
                     tempPerson.removeFromLayer();
                     iterator.remove();
                     theScore.increaseScore();
-//                } else if (thePlayer.CharacterCollision(tempHostage)){// && secondHostage == false && tempHostage.getName() == "sword") { //if player hits hostage, true
-//                    //objects.remove(object);
-//                    theScore.increaseScore();
-//                } else if (thePlayer.CharacterCollision(tempHostage)){//&& thirdHostage == false && tempHostage.getName() == "axe") { //if player hits hostage, true
-//                    //objects.remove(object);
-//                    theScore.increaseScore();
-//                } else if (thePlayer.CharacterCollision(tempHostage)){// && fourthHostage == false && tempHostage.getName() == "health") { //if player hits hostage, true
-//                    //objects.remove(object);
-//                    theScore.increaseScore();
                 }
             } else if (tempPerson instanceof Enemies) {
                 Enemies tempEnemy = (Enemies) tempPerson;
-                if (tempEnemy.checkBounds()) {
-                    tempEnemy.removeFromLayer();
-                    iterator.remove();
-                }
                 if (thePlayer.CharacterCollision(tempEnemy)) { //if player hits enemy, true
                     tempEnemy.removeFromLayer();
                     iterator.remove();
                     thePlayer.getDamaged();
+                    enemyCount--;
                 }
             }
         }

@@ -12,7 +12,6 @@ import java.util.*; //import arraylist
  */
 
 public class Player extends Person{
-    double speed;
     Input input;
 
     private Player(Image image, Pane layer, double x, double y, Input input) {
@@ -73,18 +72,5 @@ public class Player extends Person{
         dx = 0.0;
       }
     }
-    public void checkBounds() {
-      //vertical
-      if (y< 0) {
-        y = 0;
-      } else if (Double.compare(y, Settings.SCENE_HEIGHT - h) > 0) {
-        y = Settings.SCENE_HEIGHT - h;
-      }
-      // horizontal
-      if (x< 0) {
-        x = 0;
-      } else if (Double.compare(x, Settings.SCENE_WIDTH - w) > 0) {
-        x = Settings.SCENE_WIDTH - w;
-      }
-    }
+
 }
