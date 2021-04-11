@@ -4,8 +4,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
-import java.util.Iterator;
-
 /**
  * Person abstract Superclass
  * Gives attributes to Enemy, Goal, Hostage and Player subclasses
@@ -21,10 +19,6 @@ public abstract class Person {
     double y;
     double dx; //speed
     double dy;
-    double personMinX; //hitbox
-    double personMaxX;
-    double personMinY;
-    double personMaxY;
     int damage;
     int health;
 
@@ -38,7 +32,6 @@ public abstract class Person {
         this.w = image.getWidth(); // Get the Width & height of Image
         this.h = image.getHeight();
         addToLayer();
-        setCharacterBounds();
     }
 
     public void move() {
@@ -66,33 +59,8 @@ public abstract class Person {
         health -= 1;
     }
 
-    /**
-     * Hit box for player
-     */
-    private void setCharacterBounds() {
-        personMinX = 0 - image.getWidth() / 2.0;
-        personMaxX = Settings.SCENE_WIDTH - image.getWidth() / 2.0;
-        personMinY = 0 - image.getHeight() / 2.0;
-        personMaxY = Settings.SCENE_HEIGHT - image.getHeight() / 2.0;
-    }
-
     public boolean CharacterCollision(Person otherSprite) {
         return (otherSprite.x + otherSprite.w >= x && otherSprite.y + otherSprite.h >= y && otherSprite.x <= x + w && otherSprite.y <= y + h);
-    }
-
-    public boolean checkBounds() {
-        if (Double.compare(y, personMinY) < 0) {
-            y = personMinY;
-        } else if (Double.compare(y, personMaxY) > 0) {
-            y = personMaxY;
-        }
-        // horizontal
-        if (Double.compare(x, personMinX) < 0) {
-            x = personMinX;
-        } else if (Double.compare(x, personMaxX) > 0) {
-            x = personMaxX;
-        }
-        return false;
     }
 
 }
