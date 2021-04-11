@@ -8,6 +8,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * Where main game loop runs, characters and rewards live here
+ */
 public class Controller {
     Pane layer;
     Scene scene;
@@ -40,18 +43,21 @@ public class Controller {
         if (enemyCount < 10) {
             spawnEnemies();
         }
-        //move
+        //move, checkBounds & updateUI for all characters
         thePlayer.move();
-        objects.forEach(Person::move);
+        thePlayer.checkBounds();
+        thePlayer.updateUI();
+        for (Person character: objects ) {
+            character.move();
+            character.checkBounds();
+            character.updateUI();
+        }
         // check collisions
         checkCollisions();
-        // update sprites in scene
-        thePlayer.updateUI();
-        objects.forEach(Person::updateUI);
         //end game
         playerDead();
         if(end){
-            removeEnemies();
+            removeCharacters();
         }
         spawnGoal();
     }
@@ -99,11 +105,15 @@ public class Controller {
     /**
      * remove enemies when game is over
      */
-    private void removeEnemies(){
+    private void removeCharacters(){
         Iterator<Person> iterator = objects.listIterator();
         while (iterator.hasNext()) {
             Person tempPerson = iterator.next();
             if (tempPerson instanceof Enemies) {
+                tempPerson.removeFromLayer();
+                iterator.remove();
+            }
+            if (tempPerson instanceof Hostages) {
                 tempPerson.removeFromLayer();
                 iterator.remove();
             }

@@ -10,10 +10,17 @@ import java.util.*; //import arraylist
  * Player Class
  * Extends off the Person class to generate the main character
  */
-
 public class Player extends Person{
     Input input;
 
+    /**
+     * Constructor for player
+     * @param image Player image
+     * @param layer Layer that character is drawn on
+     * @param x Starting location x
+     * @param y Starting location y
+     * @param input Player key control input
+     */
     private Player(Image image, Pane layer, double x, double y, Input input) {
           super(image, layer, x, y);
           this.input = input;
@@ -40,15 +47,6 @@ public class Player extends Person{
 
       // create player
       return new Player(image, pane, x, y, input);
-    }
-
-    /**
-     * PLayer movement and edge detection
-     */
-    @Override
-    public void move() {
-      super.move();
-      checkBounds();
     }
 
     /**

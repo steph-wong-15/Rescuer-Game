@@ -25,7 +25,6 @@ class Enemies extends Person{
         }
         x += dx;
         y += dy;
-        checkBounds();
     }
 
 }

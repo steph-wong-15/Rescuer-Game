@@ -15,11 +15,11 @@ import javafx.scene.text.Font;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import java.io.IOException;
+
 /**
  * StartMenu
  * Executes the program functions
  */
-
 public class StartMenu {
     public AnimationTimer gameLoop;
     Stage mainWindow;
