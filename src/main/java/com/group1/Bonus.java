@@ -5,13 +5,19 @@ import javafx.scene.layout.Pane;
 
 import java.util.Random;
 
+/**
+ * Bonus reward Class
+ * Extends off the Person class to generate the Bonus
+ * Singleton
+ */
 public class Bonus extends Person{
     private static Bonus bonus;
     String name;
+
     /**
      * Bonus constructor
      * @param image Hostage image
-     * @param layer Layer that hostage is drawn on
+     * @param layer Layer that bonus is drawn on
      * @param x     Starting location x
      * @param y     Starting location x
      * @param name  unique id
@@ -20,6 +26,12 @@ public class Bonus extends Person{
         super(image, layer, x, y);
         this.name=name;
     }
+
+    /**
+     * Create bonus reward instance
+     * @param layer Layer that bonus is drawn on
+     * @return instance of bonus
+     */
     public static Bonus createBonus(Pane layer){
         Random r= new Random();
         double xPos =(Settings.SCENE_WIDTH-Main.bonus.getWidth())*r.nextDouble();

@@ -9,6 +9,7 @@ import java.util.*; //import arraylist
 /**
  * Player Class
  * Extends off the Person class to generate the main character
+ * Singleton
  */
 public class Player extends Person{
     Input input;
@@ -31,6 +32,8 @@ public class Player extends Person{
 
     /**
      * Make player instance
+     * @param pane Where player is contained
+     * @return return player instance
      */
     public static Player createPlayer(Pane pane) {
       //image

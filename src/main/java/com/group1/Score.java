@@ -98,7 +98,6 @@ public class Score {
      * Win
      */
     public void win(){
-        System.out.println("true");
         win=true;
         end=true;
     }

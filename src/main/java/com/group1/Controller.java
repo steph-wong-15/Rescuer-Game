@@ -39,7 +39,7 @@ public class Controller {
      */
     public void tick() {
         thePlayer.processInput();
-        if (enemyCount < 4) {
+        if (enemyCount < 10) {
             spawnEnemies();
         }
         //move, checkBounds & updateUI for all characters
@@ -178,7 +178,6 @@ public class Controller {
             }
         }
     }
-
 
     /**
      * Check health and remove o health characters
