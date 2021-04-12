@@ -55,9 +55,9 @@ public class Main extends Application {
         myImage = new Image(getClass().getResource("/photos/background.png").toExternalForm());
         winnerImage = new Image(getClass().getResource("/photos/winner.png").toExternalForm());
         loserImage = new Image(getClass().getResource("/photos/death.png").toExternalForm());
-        healthImg = new Image(getClass().getResource("/photos/Heart1.png").toExternalForm(),50,50,false,true);
-        hostageImg = new Image(getClass().getResource("/photos/hostage.png").toExternalForm(),55,60,false,true);
-        settingImg= new Image(getClass().getResource("/photos/settings.png").toExternalForm(),40,40,false,true);
+        healthImg = new Image(getClass().getResource("/photos/Heart1.png").toExternalForm(),60,60,false,true);
+        hostageImg = new Image(getClass().getResource("/photos/hostage.png").toExternalForm(),65,70,false,true);
+        settingImg= new Image(getClass().getResource("/photos/settings.png").toExternalForm(),60,60,false,true);
         closeImg= new Image(getClass().getResource("/photos/close.png").toExternalForm(),50,50,false,true);
         uiBg=new Image(getClass().getResource("/photos/uiBG.png").toExternalForm(),1000,200,false,true);
         playImg= new Image(getClass().getResource("/photos/play.png").toExternalForm(),50,50,false,true);

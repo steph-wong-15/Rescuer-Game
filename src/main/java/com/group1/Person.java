@@ -86,6 +86,21 @@ public abstract class Person {
     }
 
     /**
+     * Get x position
+     * @return x position
+     */
+    public double getX(){
+        return x;
+    }
+
+    /**
+     * Get y position
+     * @return y position
+     */
+    public double getY(){
+        return y;
+    }
+    /**
      * Check for collision with other characters
      * @param otherSprite
      * @return

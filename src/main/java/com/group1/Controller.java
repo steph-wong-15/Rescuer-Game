@@ -52,7 +52,7 @@ public class Controller {
             character.updateUI();
         }
         // check collisions
-        checkCollisions();
+        checkPlayerCollisions();
         //end game
         playerDead();
         if(theScore.end){
@@ -73,7 +73,8 @@ public class Controller {
         Hostages hostage2 = new Hostages(image, layer, Settings.SCENE_WIDTH- image.getWidth(), 0, "health");
         Hostages hostage3 = new Hostages(image, layer, 0, Settings.SCENE_HEIGHT-image.getHeight(), "sword");
         Hostages hostage4 = new Hostages(image, layer,Settings.SCENE_WIDTH- image.getWidth(), Settings.SCENE_HEIGHT-image.getHeight(),"axe");
-        // manage sprite
+
+        // add sprite
         objects.add(hostage);
         objects.add(hostage2);
         objects.add(hostage3);
@@ -86,15 +87,16 @@ public class Controller {
     private void spawnEnemies() {
         Random rnd = new Random();
         Image image = Main.enemyImage;
+
         // make enemy is always fully inside the screen, no part of it is outside
         // y position: right on top of the view, so that it becomes visible with the next game iteration
         double x = rnd.nextDouble() * (Settings.SCENE_WIDTH-image.getWidth());
         double y = rnd.nextDouble() * (Settings.SCENE_HEIGHT-image.getHeight());
+
         //enemy cant spawn at players starting location
         if((x>thePlayer.x+2*image.getWidth()||x<thePlayer.x-2*image.getWidth())&&y>thePlayer.y+image.getHeight()||y<thePlayer.y-image.getHeight()){
             // create a sprite
             Enemies enemy = new Enemies(image, layer, x, y);
-
             // manage sprite
             objects.add(enemy);
             enemyCount++;
@@ -131,7 +133,7 @@ public class Controller {
     /**
      * Check for all types of collisions
      */
-    private void checkCollisions() {
+    private void checkPlayerCollisions() {
         Iterator<Person> iterator = objects.listIterator();
         while (iterator.hasNext()) {
             Person tempPerson = iterator.next();
@@ -161,6 +163,7 @@ public class Controller {
         }
     }
 
+
     /**
      * Check health and remove o health characters
      */
@@ -184,7 +187,7 @@ public class Controller {
     /**
      * Ending background when player loses
      */
-    public void loss() { //ending screen
+    public void loss() {
         BackgroundSize backgroundSize = new BackgroundSize(Settings.SCENE_WIDTH, Settings.SCENE_HEIGHT, true, true, true, false);
         BackgroundImage backgroundImage = new BackgroundImage(Main.loserImage, BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.CENTER, backgroundSize);
         layer.setBackground(new Background(backgroundImage));
