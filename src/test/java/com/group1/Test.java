@@ -30,7 +30,7 @@ class PlayerSettingsTest{
     private final double heightCheck = Settings.SCENE_HEIGHT;
     private final double speedCheck = Settings.PLAYER_SPEED;
     private final int healthCheck = Settings.PLAYER_HEALTH;
-    private final double spawnCheck = Settings.ENEMY_SPAWN_RANDOMNESS;
+
 
     /**
      * Settings variables, equal to the values in Settings
@@ -61,10 +61,4 @@ class PlayerSettingsTest{
         assertEquals(3, healthCheck);
     }
 
-    @Test
-    void spawnChecker() {
-        assertEquals(30, spawnCheck);
-    }
 }
-
-
