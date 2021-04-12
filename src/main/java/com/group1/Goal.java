@@ -8,8 +8,8 @@ import javafx.scene.layout.Pane;
  * Extends off the Person class to generate bonus
  */
 class Goal extends Person{
-
-    /**
+    private static Goal goal;
+        /**
      * Goal Generator
      * Extends off the Person class to generate end state
      */
@@ -22,11 +22,15 @@ class Goal extends Person{
      * Makes bonus reward
      */
     public static Goal createGoal(Pane pane) {
+
+    if (goal == null) {
         Image image = Main.greenImage;
         // center horizontally, position at 70% vertically
         double x = (Settings.SCENE_WIDTH - image.getWidth()) / 2.0;
         double y = Settings.SCENE_HEIGHT * 0.7;
         // create goal
         return new Goal(image, pane, x, y);
+        }
+    return goal;
     }
 }

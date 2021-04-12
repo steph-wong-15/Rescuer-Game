@@ -18,12 +18,14 @@ import javafx.scene.text.TextBoundsType;
  * Keeps track of game score
  */
 public class Score {
-    boolean end = false;
+    boolean end ;
+    boolean win;
     int hostageCount;
-    Text collisionText;
     Pane layer;
     Player thePlayer;
-    Label healthStatus,hostageStatus;
+    Label healthStatus,hostageStatus,endScoreStatus;
+    boolean bonus;
+    long time,timeUsed,timeLimit;
 
     /**
      * Constructor for score
@@ -32,28 +34,14 @@ public class Score {
      * @param health Label that shows health status of player
      * @param hostage Label that shows hostage count
      */
-    Score(Pane pane, Player player,Label health, Label hostage) {
+    Score(Pane pane, Player player,Label health, Label hostage,Label endScore) {
         layer = pane;
         thePlayer = player;
         healthStatus=health;
         hostageStatus=hostage;
-        createScoreLayer();
-    }
-
-    /**
-     * Layer that displays text when events occur
-     */
-    private void createScoreLayer() {
-        collisionText = new Text();
-        collisionText.setFont(Font.font(null, FontWeight.BOLD, 30));
-        collisionText.setStroke(Color.BLACK);
-        collisionText.setFill(Color.RED);
-        double x = (Settings.SCENE_WIDTH - collisionText.getBoundsInLocal().getWidth()) / 2;
-        double y = (Settings.SCENE_HEIGHT - collisionText.getBoundsInLocal().getHeight()) / 2;
-        collisionText.relocate(x, y);
-        collisionText.setBoundsType(TextBoundsType.VISUAL);
-        layer.getChildren().add(collisionText);
-
+        endScoreStatus=endScore;
+        time = System.currentTimeMillis();
+        timeLimit=300;// upper bound for how time allowed
     }
 
     /**
@@ -62,6 +50,22 @@ public class Score {
     public void updateScore() {
         hostageStatus.setText(String.valueOf(hostageCount));
         healthStatus.setText(String.valueOf(thePlayer.getHealth()));
+        if(!end){
+           timeUsed=(System.currentTimeMillis()-time)/1000;
+        }
+        if(win){
+            if(bonus){
+                endScoreStatus.setText(String.valueOf(99999));
+            }else {
+                endScoreStatus.setText(String.valueOf(2*hostageCount*(timeLimit-timeUsed)));
+            }
+        }else{
+                if(bonus){
+                    endScoreStatus.setText(String.valueOf(99*(timeLimit-timeUsed)));
+                }else {
+                    endScoreStatus.setText(String.valueOf(hostageCount*(timeLimit-timeUsed)));
+                }
+        }
     }
 
     /**
@@ -81,6 +85,22 @@ public class Score {
             return true;
         }
         return false;
+    }
+
+    /**
+     * Bonus collected
+     */
+    public void bonusCollected(){
+        bonus=true;
+    }
+
+    /**
+     * Win
+     */
+    public void win(){
+        System.out.println("true");
+        win=true;
+        end=true;
     }
 }
 

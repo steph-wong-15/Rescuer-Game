@@ -39,7 +39,7 @@ public class Controller {
      */
     public void tick() {
         thePlayer.processInput();
-        if (enemyCount < 10) {
+        if (enemyCount < 4) {
             spawnEnemies();
         }
         //move, checkBounds & updateUI for all characters
@@ -94,7 +94,7 @@ public class Controller {
         double y = rnd.nextDouble() * (Settings.SCENE_HEIGHT-image.getHeight());
 
         //enemy cant spawn at players starting location
-        if((x>thePlayer.x+2*image.getWidth()||x<thePlayer.x-2*image.getWidth())&&y>thePlayer.y+image.getHeight()||y<thePlayer.y-image.getHeight()){
+        if((x>thePlayer.x+image.getWidth()||x<thePlayer.x-image.getWidth())&&y>thePlayer.y+image.getHeight()||y<thePlayer.y-image.getHeight()){
             // create a sprite
             Enemies enemy = new Enemies(image, layer, x, y);
             // manage sprite
@@ -118,6 +118,14 @@ public class Controller {
                 tempPerson.removeFromLayer();
                 iterator.remove();
             }
+            if(tempPerson instanceof Goal){
+                tempPerson.removeFromLayer();
+                iterator.remove();
+            }
+            if(tempPerson instanceof Bonus){
+                tempPerson.removeFromLayer();
+                iterator.remove();
+            }
         }
     }
 
@@ -127,6 +135,7 @@ public class Controller {
     private void spawnGoal() {
         if (theScore.goal()) {
             objects.add(Goal.createGoal(layer));
+            objects.add(Bonus.createBonus(layer));
         }
     }
 
@@ -139,10 +148,17 @@ public class Controller {
             Person tempPerson = iterator.next();
             if (tempPerson instanceof Goal) {
                 if (thePlayer.CharacterCollision(tempPerson)) {
-                    theScore.end = true;
+                    theScore.win();
                     tempPerson.removeFromLayer();
                     iterator.remove();
                     end();
+                }
+            }
+            if (tempPerson instanceof Bonus) {
+                if (thePlayer.CharacterCollision(tempPerson)) {
+                    tempPerson.removeFromLayer();
+                    iterator.remove();
+                    theScore.bonusCollected();
                 }
             }
             if (tempPerson instanceof Hostages) {

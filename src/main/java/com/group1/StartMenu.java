@@ -70,6 +70,16 @@ public class StartMenu {
         hud.setAlignment(Pos.CENTER);
         hud.getChildren().addAll(health,healthStatus,hostage,hostageStatus,pauseButton);
 
+        //Ending score HUD
+        Label endScore = new Label();
+        endScore.setFont(Font.font("Cambria",70));
+        endScore.setTextFill(Color.web("#fcb603"));
+        endScore.setPadding(new Insets(7,15,0,15));
+        Label endScoreTag = new Label("SCORE:");
+        endScoreTag.setFont(Font.font("Cambria",70));
+        endScoreTag.setTextFill(Color.web("#fcb603"));
+        endScoreTag.setPadding(new Insets(7,15,0,15));
+
         //Stack layers together
         group.getChildren().addAll( playfieldLayer,scoreLayer);
         root.setCenter(group);
@@ -86,7 +96,7 @@ public class StartMenu {
 
         //////////////////////Game loop/////////////////////////////////////
         Player thePlayer= Player.createPlayer(playfieldLayer);
-        Score score = new Score(scoreLayer,thePlayer,healthStatus,hostageStatus);
+        Score score = new Score(scoreLayer,thePlayer,healthStatus,hostageStatus,endScore);
         Controller controller = new Controller(playfieldLayer,thePlayer,score);
         gameLoop = new AnimationTimer() {
             @Override
@@ -95,6 +105,7 @@ public class StartMenu {
                 score.updateScore();
                 if(score.end){
                     hud.getChildren().clear();
+                    hud.getChildren().addAll(endScoreTag,endScore);
                 }
             }
         };
@@ -156,8 +167,5 @@ public class StartMenu {
             mainWindow.close();
         });
         stage.setOnCloseRequest(e-> gameLoop.start());
-    }
-    private void endHUD(HBox hud){
-
     }
 }
