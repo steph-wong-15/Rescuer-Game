@@ -4,7 +4,7 @@ If there's any miscellaneous questions, please email us at any of our respective
 
 ## Running the game
 
-To build the game, and run it, firstly download the .zip file containing all the appropriate files (including the pom.xml file, which is needed for the proper version of javafx and required modules), and let Intelijj handle it. After doing that, navigate to the filepath, `"\src\main\java\com\group1"`, just right click on and execute Main.java, which will build and run your game. It will open up the opening screen, and you'll see a button to click on to [play the game](https://cdn.discordapp.com/attachments/499778411007574018/831379229470883840/unknown.png). In the file path, "\src\main\java\module-info.java", this should automatically require JavaFX modules `javafx.controls;` and `requires javafx.fxml; ` respectively. 
+To build the game, and run it, firstly download the entire project folder as a .zip file, which contains all the appropriate files (including the pom.xml file, which is needed for the proper version of javafx and required modules), and let Intelijj handle it after extracting the folder. After doing that, navigate to the filepath, `"\src\main\java\com\group1"`, just right click on and execute Main.java, which will build and run your game. It will open up the opening screen, and you'll see a button to click on to [play the game](https://cdn.discordapp.com/attachments/499778411007574018/831379229470883840/unknown.png). In the file path, "\src\main\java\module-info.java", this should automatically require JavaFX modules `javafx.controls;` and `requires javafx.fxml; ` respectively. 
 
 
 ## Testing
