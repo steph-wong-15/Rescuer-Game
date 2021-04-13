@@ -30,6 +30,11 @@ public class Player extends Person{
     }
 
     /**
+     * Player default constructor
+     */
+    Player(){ damage = 1; speed=Settings.PLAYER_SPEED; health=Settings.PLAYER_HEALTH;}
+
+    /**
      * Make player instance
      */
     public static Player createPlayer(Pane pane) {
