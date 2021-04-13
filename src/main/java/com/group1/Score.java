@@ -52,7 +52,7 @@ public class Score {
     /**
      * Getter for hostageCount
      */
-    public int getScore(){
+    public int getHostageCount(){
         return hostageCount;
     }
     
