@@ -38,4 +38,5 @@ class Goal extends Person{
         }
     return goal;
     }
+
 }

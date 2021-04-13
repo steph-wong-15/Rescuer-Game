@@ -81,6 +81,8 @@ public abstract class Person {
      * Getter for character health
      * @return
      */
+
+
     public int getHealth() {
         return health;
     }
@@ -107,11 +109,26 @@ public abstract class Person {
     public double getY(){
         return y;
     }
+
+    /**
+     * Get speed as a double
+     * @return speed
+     */
+    public double getSpeed(){return speed;}
+
+    /**
+     * Get damage as a double
+     * @return damage
+     */
+
+    public int getDamageNum(){return damage;}
+
     /**
      * Check for collision with other characters
      * @param otherSprite
      * @return
      */
+
     public boolean CharacterCollision(Person otherSprite) {
         return (otherSprite.x + otherSprite.w >= x && otherSprite.y + otherSprite.h >= y && otherSprite.x <= x + w && otherSprite.y <= y + h);
     }

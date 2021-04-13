@@ -102,18 +102,58 @@ class ScoreTest {
  * Values must be at the right constants or tests will fail
  */
 class GoalTest {
+
+    /**
+     * goalHealth asserts that getHealth returns the proper goal value of 1 - which is true!)
+     * ScoreGoalTestWorks asserts that if we run getDamaged,
+     */
     Goal tempGoal = new Goal();
 
     @Test
-    @DisplayName("seeing the goal health")
-    void goalHealth() {
+    void goalHealthTest() {
         assertEquals(1, tempGoal.getHealth());
     }
 
     @Test
-    @DisplayName("seeing the goal health after")
-    void goalDamaged() {
+    void goalDamagedTest() {
         tempGoal.getDamaged();
         assertEquals(0, tempGoal.getHealth());
     }
 }
+
+class HostageTest {
+
+/**
+ * hostageHealth asserts that getHealth returns the proper goal value of 1 - which is true!)
+ */
+Hostages tempHostages = new Hostages();
+
+    @Test
+    void hostageHealthTest() {
+        assertEquals(1, tempHostages.getHealth());
+    }
+}
+
+class PlayerTest {
+
+    /**
+     * PlayerHealth asserts that getHealth returns the proper goal value of PLAYER_HEALTH, a settings value - which is true!)
+     */
+    Player tempPlayer = new Player();
+
+    @Test
+    void playerHealthTest() {
+        assertEquals(Settings.PLAYER_HEALTH, tempPlayer.getHealth());
+    }
+    @Test
+    void playerSpeedTest() {
+        assertEquals(Settings.PLAYER_SPEED, tempPlayer.getSpeed());
+    }
+
+    @Test
+    void playerDamageTest(){
+        assertEquals(1, tempPlayer.getDamageNum());
+    }
+
+}
+
