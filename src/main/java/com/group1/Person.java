@@ -110,11 +110,16 @@ public abstract class Person {
         return y;
     }
 
+<<<<<<< HEAD
     /**
+=======
+        /**
+>>>>>>> 912b391cc553c6dfb0a10454bfc991ccd3843d63
      * Get speed as a double
      * @return speed
      */
     public double getSpeed(){return speed;}
+<<<<<<< HEAD
 
     /**
      * Get damage as a double
@@ -122,6 +127,9 @@ public abstract class Person {
      */
 
     public int getDamageNum(){return damage;}
+=======
+    
+>>>>>>> 912b391cc553c6dfb0a10454bfc991ccd3843d63
 
     /**
      * Check for collision with other characters
