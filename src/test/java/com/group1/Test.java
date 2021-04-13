@@ -50,7 +50,11 @@ class PlayerSettingsTest{
     }
 
 }
-
+/**
+ * ScoreTest Class
+ * Tests all the params in Score.java to see if all the methods work and values are initialized properly
+ * Values must be at the right constants or tests will fail
+ */
 class ScoreTest {
     /**
      * Imitates the hostageCount variable in Score, and utilize the methods in hostageCount with it
@@ -58,7 +62,7 @@ class ScoreTest {
      * HostageCountCheck asserts that the hostageCount variable is initialized to zero
      * ScoreTestWorks asserts that the increaseScore() method works, and will increment 0 -> 1
      * EqualScoreTest asserts incrementing tempHostageCount manually is equal to increaseScore()
-     * GoalTestWorks asserts that if we increment hostageCount to 4, which is >=4, the return value of goal() will be EQUAL to true
+     * ScoreGoalTestWorks asserts that if we increment hostageCount to 4, which is >=4, the return value of goal() will be EQUAL to true
      */
     Score test = new Score();
     private int tempHostageCount= test.getHostageCount();
@@ -83,16 +87,33 @@ class ScoreTest {
     }
 
     @Test
-    public void GoalTestWorks() {
+    public void ScoreGoalTestWorks() {
         for(int i = 0; i<5;i++){
             test.increaseScore();
         }
-        boolean goalTester = test.goal();
-        assertEquals(goalTester, true);
+        boolean ScoreGoalTester = test.goal();
+        assertEquals(ScoreGoalTester, true);
+    }
+}
+
+/**
+ * GoalTest Class
+ * Tests all the params in Score.java to see if all the methods work and values are initialized properly
+ * Values must be at the right constants or tests will fail
+ */
+class GoalTest {
+    Goal tempGoal = new Goal();
+
+    @Test
+    @DisplayName("seeing the goal health")
+    void goalHealth() {
+        assertEquals(1, tempGoal.getHealth());
     }
 
-
-
-
-
+    @Test
+    @DisplayName("seeing the goal health after")
+    void goalDamaged() {
+        tempGoal.getDamaged();
+        assertEquals(0, tempGoal.getHealth());
+    }
 }
