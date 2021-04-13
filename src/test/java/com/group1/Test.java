@@ -8,18 +8,6 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
- * Juniper Initial Class
- * Mere check to see if tests function properly
- */
-class JUnitJupiterInitializeTest{
-    int jupiter = 0;
-    @Test
-    void addition() {
-        assertEquals(0, jupiter);
-    }
-}
-
-/**
  * PlayerSettingsTest Class
  * Tests all the params in Settings.java to see if they are the right values
  * Values must be at the right constants or tests will fail
@@ -60,5 +48,51 @@ class PlayerSettingsTest{
     void healthChecker() {
         assertEquals(3, healthCheck);
     }
+
+}
+
+class ScoreTest {
+    /**
+     * Imitates the hostageCount variable in Score, and utilize the methods in hostageCount with it
+     *
+     * HostageCountCheck asserts that the hostageCount variable is initialized to zero
+     * ScoreTestWorks asserts that the increaseScore() method works, and will increment 0 -> 1
+     * EqualScoreTest asserts incrementing tempHostageCount manually is equal to increaseScore()
+     * GoalTestWorks asserts that if we increment hostageCount to 4, which is >=4, the return value of goal() will be EQUAL to true
+     */
+    Score test = new Score();
+    private int tempHostageCount= test.getHostageCount();
+
+    @Test
+    void HostageCountCheck() {
+        assertEquals(0, tempHostageCount);
+    }
+
+    @Test
+    public void ScoreTestWorks() {
+        test.increaseScore();
+        assertEquals(1,test.getHostageCount());
+    }
+
+    @Test
+    public void EqualScoreTest() {
+        tempHostageCount +=1;
+        test.increaseScore();
+
+        assertEquals(tempHostageCount, test.getHostageCount());
+    }
+
+    @Test
+    public void GoalTestWorks() {
+        for(int i = 0; i<5;i++){
+            test.increaseScore();
+        }
+        boolean goalTester = test.goal();
+        assertEquals(goalTester, true);
+    }
+
+
+
+
 
 }
