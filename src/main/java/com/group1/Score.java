@@ -44,6 +44,19 @@ public class Score {
         timeLimit=300;// upper bound for how time allowed
     }
 
+        /**
+     * Empty constructor used for testing methods
+     */
+    public Score() {}
+
+    /**
+     * Getter for hostageCount
+     */
+    public int getScore(){
+        return hostageCount;
+    }
+    
+
     /**
      * Update score for score layer
      */
