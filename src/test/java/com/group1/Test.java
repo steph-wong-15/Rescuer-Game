@@ -1,5 +1,6 @@
 package com.group1;
 
+import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -8,11 +9,11 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
- * PlayerSettingsTest Class
+ * SettingsTest Class
  * Tests all the params in Settings.java to see if they are the right values
  * Values must be at the right constants or tests will fail
  */
-class PlayerSettingsTest{
+class SettingsTest{
 
     private final double widthCheck = Settings.SCENE_WIDTH;
     private final double heightCheck = Settings.SCENE_HEIGHT;
@@ -98,14 +99,14 @@ class ScoreTest {
 
 /**
  * GoalTest Class
- * Tests all the params in Score.java to see if all the methods work and values are initialized properly
+ * Tests all the params in Goal.java to see if all the methods work and values are initialized properly
  * Values must be at the right constants or tests will fail
  */
 class GoalTest {
 
     /**
      * goalHealth asserts that getHealth returns the proper goal value of 1 - which is true!)
-     * ScoreGoalTestWorks asserts that if we run getDamaged,
+     * ScoreGoalTestWorks asserts that if we run getDamaged, and Goal gets removed, it decrements health by 1 for our Main
      */
     Goal tempGoal = new Goal();
 
@@ -120,7 +121,11 @@ class GoalTest {
         assertEquals(0, tempGoal.getHealth());
     }
 }
-
+/**
+ * HostageTest Class
+ * Tests all the params in Hostages.java to see if all the methods work and values are initialized properly
+ * Values must be at the right constants or tests will fail
+ */
 class HostageTest {
 
 /**
@@ -132,12 +137,27 @@ Hostages tempHostages = new Hostages();
     void hostageHealthTest() {
         assertEquals(1, tempHostages.getHealth());
     }
+    @Test
+    void hostageDamagedHealthTest() {
+        tempHostages.getDamaged(); //-1 health
+        assertEquals(0, tempHostages.getHealth());
+    }
+
+
 }
+
+/**
+ * PlayerTest Class
+ * Tests all the params in Player.java to see if all the methods work and values are initialized properly
+ * Values must be at the right constants (Settings values!) or tests will fail
+ */
 
 class PlayerTest {
 
     /**
-     * PlayerHealth asserts that getHealth returns the proper goal value of PLAYER_HEALTH, a settings value - which is true!)
+     * PlayerHealth asserts that getHealth returns the proper goal value of PLAYER_HEALTH, a settings value - which is true!
+     * PlayerSpeed asserts that getSpeed returns the proper goal value of PLAYER_SPEED, a settings value - which is true!)
+     * PlayerDamage asserts that getDamage returns the proper goal value of 1, which is true!)
      */
     Player tempPlayer = new Player();
 
@@ -156,4 +176,36 @@ class PlayerTest {
     }
 
 }
+/**
+ * EnemiesTest Class
+ * Tests all the params in Enemies.java to see if all the methods work and values are initialized properly
+ * Values must be at the right constants or tests will fail
+ */
+
+class EnemiesTest {
+
+    /**
+     * EnemiesHealth asserts that getHealth returns the proper goal value of 1, which is true!
+     * EnemiesSpeed asserts that getSpeed returns the proper goal value of 2, which is true!
+     * EnemiesDamage asserts that getDamage returns the proper goal value of 1, which is true!
+     */
+    Enemies tempEnemies = new Enemies();
+
+    @Test
+    void playerHealthTest() {
+        assertEquals(1, tempEnemies.getHealth());
+    }
+    @Test
+    void playerSpeedTest() {
+        assertEquals(2, tempEnemies.getSpeed());
+    }
+
+    @Test
+    void playerDamageTest(){
+        assertEquals(1, tempEnemies.getDamageNum());
+    }
+
+}
+
+
 
