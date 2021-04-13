@@ -63,7 +63,9 @@ class ScoreTest {
      * HostageCountCheck asserts that the hostageCount variable is initialized to zero
      * ScoreTestWorks asserts that the increaseScore() method works, and will increment 0 -> 1
      * EqualScoreTest asserts incrementing tempHostageCount manually is equal to increaseScore()
-     * ScoreGoalTestWorks asserts that if we increment hostageCount to 4, which is >=4, the return value of goal() will be EQUAL to true
+     * ScoreGoalTestWorks asserts that if we increment hostageCount to a value >=4, the return value of goal() will be EQUAL to true
+     * EndVarFalse asserts that the End bool variable in Score is false. This is important, as if end var isn't initialized as false then the game will skip ahead
+     * WinVarFalse asserts that the Win bool variable in Score is false. This is important, as if win var isn't initialized as false, the game will skip ahead
      */
     Score test = new Score();
     private int tempHostageCount= test.getHostageCount();
@@ -95,6 +97,19 @@ class ScoreTest {
         boolean ScoreGoalTester = test.goal();
         assertEquals(ScoreGoalTester, true);
     }
+
+    @Test
+    public void EndVarFalse(){
+        boolean tempEnd = test.getEnd();
+        assertEquals(tempEnd,false);
+    }
+
+    @Test
+    public void WinVarFalse(){
+        boolean tempWin = test.getWin();
+        assertEquals(tempWin, false);
+    }
+
 }
 
 /**

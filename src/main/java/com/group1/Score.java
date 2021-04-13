@@ -18,7 +18,7 @@ import javafx.scene.text.TextBoundsType;
  * Keeps track of game score
  */
 public class Score {
-    boolean end ;
+    boolean end;
     boolean win;
     int hostageCount;
     Pane layer;
@@ -44,7 +44,7 @@ public class Score {
         timeLimit=300;// upper bound for how time allowed
     }
 
-        /**
+    /**
      * Empty constructor used for testing methods
      */
     public Score() {}
@@ -55,7 +55,20 @@ public class Score {
     public int getHostageCount(){
         return hostageCount;
     }
-    
+
+    /**
+     * Getter for boolean end variable
+     */
+    public boolean getEnd(){
+        return end;
+    }
+    /**
+     * Getter for boolean win variable
+     */
+    public boolean getWin(){
+        return win;
+    }
+
 
     /**
      * Update score for score layer
