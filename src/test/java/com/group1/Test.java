@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 /**
  * SettingsTest Class
@@ -101,13 +102,13 @@ class ScoreTest {
     @Test
     public void EndVarFalse(){
         boolean tempEnd = test.getEnd();
-        assertEquals(tempEnd,false);
+        assertFalse(tempEnd);
     }
 
     @Test
     public void WinVarFalse(){
         boolean tempWin = test.getWin();
-        assertEquals(tempWin, false);
+        assertFalse(tempWin);
     }
 
 }
@@ -207,16 +208,16 @@ class EnemiesTest {
     Enemies tempEnemies = new Enemies();
 
     @Test
-    void playerHealthTest() {
+    void enemiesHealthTest() {
         assertEquals(1, tempEnemies.getHealth());
     }
     @Test
-    void playerSpeedTest() {
+    void enemiesSpeedTest() {
         assertEquals(2, tempEnemies.getSpeed());
     }
 
     @Test
-    void playerDamageTest(){
+    void enemiesDamageTest(){
         assertEquals(1, tempEnemies.getDamageNum());
     }
 
