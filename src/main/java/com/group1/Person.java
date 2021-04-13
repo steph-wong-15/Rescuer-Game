@@ -107,6 +107,14 @@ public abstract class Person {
     public double getY(){
         return y;
     }
+
+        /**
+     * Get speed as a double
+     * @return speed
+     */
+    public double getSpeed(){return speed;}
+    
+
     /**
      * Check for collision with other characters
      * @param otherSprite
