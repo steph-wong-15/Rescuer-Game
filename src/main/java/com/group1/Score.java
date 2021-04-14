@@ -81,7 +81,7 @@ public class Score {
         }
         if(win){
             if(bonus){
-                endScoreStatus.setText(String.valueOf(99999));
+                endScoreStatus.setText(String.valueOf(5000+timeLimit-timeUsed));
             }else {
                 endScoreStatus.setText(String.valueOf(2*hostageCount*(timeLimit-timeUsed)));
             }
