@@ -42,6 +42,13 @@ public abstract class Person {
     }
 
     /**
+     * Person default constructor
+     */
+
+    public Person(){}
+
+
+    /**
      * default move function
      */
     public void move() {
@@ -74,6 +81,8 @@ public abstract class Person {
      * Getter for character health
      * @return
      */
+
+
     public int getHealth() {
         return health;
     }
@@ -100,11 +109,34 @@ public abstract class Person {
     public double getY(){
         return y;
     }
+
+<<<<<<< HEAD
+    /**
+=======
+        /**
+>>>>>>> 912b391cc553c6dfb0a10454bfc991ccd3843d63
+     * Get speed as a double
+     * @return speed
+     */
+    public double getSpeed(){return speed;}
+<<<<<<< HEAD
+
+    /**
+     * Get damage as a double
+     * @return damage
+     */
+
+    public int getDamageNum(){return damage;}
+=======
+    
+>>>>>>> 912b391cc553c6dfb0a10454bfc991ccd3843d63
+
     /**
      * Check for collision with other characters
      * @param otherSprite
      * @return
      */
+
     public boolean CharacterCollision(Person otherSprite) {
         return (otherSprite.x + otherSprite.w >= x && otherSprite.y + otherSprite.h >= y && otherSprite.x <= x + w && otherSprite.y <= y + h);
     }

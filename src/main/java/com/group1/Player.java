@@ -31,6 +31,11 @@ public class Player extends Person{
     }
 
     /**
+     * Player default constructor
+     */
+    Player(){ damage = 1; speed=Settings.PLAYER_SPEED; health=Settings.PLAYER_HEALTH;}
+
+    /**
      * Make player instance
      * @param pane Where player is contained
      * @return return player instance

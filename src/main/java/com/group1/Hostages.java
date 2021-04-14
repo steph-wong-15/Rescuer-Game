@@ -26,6 +26,12 @@ class Hostages extends Person{
       }
 
     /**
+     * Person default constructor
+     */
+
+    Hostages(){health=1;}
+
+    /**
      * hostage are held hostage so the cant move
      */
       public void move() {

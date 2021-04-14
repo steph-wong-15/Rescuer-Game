@@ -27,6 +27,11 @@ class Enemies extends Person{
     }
 
     /**
+     * Enemies default constructor
+     */
+    Enemies(){ health = 1; damage =1; speed=2;}
+
+    /**
      * Movement for enemy is horizontal and can randomly change every second from left to right
      */
     public void move(){

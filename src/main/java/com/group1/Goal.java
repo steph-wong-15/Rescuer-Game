@@ -15,8 +15,13 @@ class Goal extends Person{
      */
     private Goal(Image image, Pane layer, double x, double y) {
         super(image, layer, x, y);
-        health =1;
+        health = 1;
     }
+
+    /**
+     * Goal default constructor
+     */
+    Goal(){ health = 1;}
 
     /**
      * Makes bonus reward
@@ -33,4 +38,5 @@ class Goal extends Person{
         }
     return goal;
     }
+
 }
