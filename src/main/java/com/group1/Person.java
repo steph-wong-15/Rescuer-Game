@@ -21,7 +21,6 @@ public abstract class Person {
     double speed;
     int damage;
     int health;
-    int border=15;
 
     /**
      * Person superclass constructor
@@ -82,8 +81,6 @@ public abstract class Person {
      * Getter for character health
      * @return
      */
-
-
     public int getHealth() {
         return health;
     }
@@ -121,7 +118,6 @@ public abstract class Person {
      * Get damage as a double
      * @return damage
      */
-
     public int getDamageNum(){return damage;}
 
     /**
@@ -129,7 +125,6 @@ public abstract class Person {
      * @param otherSprite
      * @return
      */
-
     public boolean CharacterCollision(Person otherSprite) {
         return (otherSprite.x + otherSprite.w >= x && otherSprite.y + otherSprite.h >= y && otherSprite.x <= x + w && otherSprite.y <= y + h);
     }
@@ -139,16 +134,16 @@ public abstract class Person {
      */
     public void checkBounds() {
         //vertical
-        if (y< border) {
-            y = border;
-        } else if (Double.compare(y, Settings.SCENE_HEIGHT - h-border) > 0) {
-            y = Settings.SCENE_HEIGHT - h-border;
+        if (y< 0) {
+            y = 0;
+        } else if (Double.compare(y, Settings.SCENE_HEIGHT - h) > 0) {
+            y = Settings.SCENE_HEIGHT - h;
         }
         // horizontal
-        if (x< border) {
-            x = border;
-        } else if (Double.compare(x, Settings.SCENE_WIDTH - w-border) > 0) {
-            x = Settings.SCENE_WIDTH - w-border;
+        if (x< 0) {
+            x = 0;
+        } else if (Double.compare(x, Settings.SCENE_WIDTH - w) > 0) {
+            x = Settings.SCENE_WIDTH - w;
         }
     }
 }
