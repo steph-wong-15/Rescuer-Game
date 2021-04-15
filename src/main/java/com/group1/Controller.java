@@ -17,7 +17,9 @@ public class Controller {
     Player thePlayer;
     Score theScore;
     List<Person> objects = new ArrayList<>();
+    List<Unbreakable> walls = new ArrayList<>();
     int enemyCount;
+    int border=15;
 
     /**
      * Controls the moving parts of the game layer
@@ -38,6 +40,9 @@ public class Controller {
      * and update game while playing
      */
     public void tick() {
+
+        createWalls();
+
         thePlayer.processInput();
         if (enemyCount < 10) {
             spawnEnemies();
@@ -69,10 +74,10 @@ public class Controller {
         Image image = Main.hostageImage;
 
         // create a sprite
-        Hostages hostage = new Hostages(image, layer, 0, 0, "speed");
-        Hostages hostage2 = new Hostages(image, layer, Settings.SCENE_WIDTH- image.getWidth(), 0, "health");
-        Hostages hostage3 = new Hostages(image, layer, 0, Settings.SCENE_HEIGHT-image.getHeight(), "sword");
-        Hostages hostage4 = new Hostages(image, layer,Settings.SCENE_WIDTH- image.getWidth(), Settings.SCENE_HEIGHT-image.getHeight(),"axe");
+        Hostages hostage = new Hostages(image, layer, border, border, "speed");
+        Hostages hostage2 = new Hostages(image, layer, Settings.SCENE_WIDTH- image.getWidth()-border, border, "health");
+        Hostages hostage3 = new Hostages(image, layer, border, Settings.SCENE_HEIGHT-image.getHeight(), "sword");
+        Hostages hostage4 = new Hostages(image, layer,Settings.SCENE_WIDTH- image.getWidth()-border, Settings.SCENE_HEIGHT-image.getHeight(),"axe");
 
         // add sprite
         objects.add(hostage);
@@ -126,6 +131,10 @@ public class Controller {
                 tempPerson.removeFromLayer();
                 iterator.remove();
             }
+            if(tempPerson instanceof Unbreakable){
+                tempPerson.removeFromLayer();
+                iterator.remove();
+            }
         }
     }
 
@@ -176,8 +185,15 @@ public class Controller {
                     enemyCount--;
                 }
             }
+            if (tempPerson instanceof Unbreakable){
+                if (thePlayer.CharacterCollision(tempPerson)) {
+                    thePlayer.x = (Settings.SCENE_WIDTH - thePlayer.image.getWidth()) / 2.0;
+                    thePlayer.y = Settings.SCENE_HEIGHT * 0.7;
+                }
+            }
+
+            }
         }
-    }
 
     /**
      * Check health and remove o health characters
@@ -206,6 +222,33 @@ public class Controller {
         BackgroundSize backgroundSize = new BackgroundSize(Settings.SCENE_WIDTH, Settings.SCENE_HEIGHT, true, true, true, false);
         BackgroundImage backgroundImage = new BackgroundImage(Main.loserImage, BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.CENTER, backgroundSize);
         layer.setBackground(new Background(backgroundImage));
+    }
+
+    /**
+     * Creates the unbreakable walls
+     */
+
+    private void createWalls() {
+        // image
+        Image image = Main.wallImg;
+        Image image1 = Main.wallImgA;
+        Image image2 = Main.wallImgB;
+
+        // create an unbreakable walls
+        Unbreakable wall1 = new Unbreakable(image, layer, 400, 405);
+        Unbreakable wall2 = new Unbreakable(image, layer, 100, 305);
+        Unbreakable wall3 = new Unbreakable(image, layer, 450, 205);
+        Unbreakable wall4 = new Unbreakable(image, layer, 300, 15);
+        Unbreakable wall5 = new Unbreakable(image1, layer, 0, 0);
+        Unbreakable wall6 = new Unbreakable(image1, layer, Settings.SCENE_WIDTH-border, 0);
+        Unbreakable wall7 = new Unbreakable(image2, layer, 0, 0);
+        Unbreakable wall8 = new Unbreakable(image2, layer, 0, Settings.SCENE_HEIGHT-border);
+
+        objects.add(wall1);
+        objects.add(wall2);
+        objects.add(wall3);
+        objects.add(wall4);
+
     }
 }
 

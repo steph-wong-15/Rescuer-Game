@@ -1,20 +1,13 @@
 package com.group1;
 
-public class Unbreakable extends Wall{
+import javafx.scene.image.Image;
+import javafx.scene.layout.Pane;
 
-    private boolean boundaryWall;
+public class Unbreakable extends Person{
 
-    public Unbreakable(int[][] size, String colour, boolean passable, int[][] location, boolean boundaryWall) {
-        super(size, colour, passable, location);
-        this.boundaryWall = boundaryWall;
-    }
 
-    public boolean isBoundaryWall() {
-        return boundaryWall;
-    }
-
-    public void setBoundaryWall(boolean boundaryWall) {
-        this.boundaryWall = boundaryWall;
+    public Unbreakable(Image image, Pane layer, double x, double y) {
+        super(image, layer, x, y);
     }
 
 }
