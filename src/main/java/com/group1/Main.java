@@ -29,6 +29,7 @@ public class Main extends Application {
     public static Image playImg;
     public static Image bg;
     public static Image bonus;
+    public static Image wallImg;
 
     /**
      * loads starting screen UI
@@ -64,6 +65,9 @@ public class Main extends Application {
         playImg= new Image(getClass().getResource("/photos/play.png").toExternalForm(),50,50,false,true);
         bg = new Image(getClass().getResource("/photos/backgroundStart.png").toExternalForm());
         bonus = new Image(getClass().getResource("/photos/purple.png").toExternalForm());
+        wallImg = new Image(getClass().getResource("/photos/wall.png").toExternalForm(),150,50,false,true);
+
+
     }
 
     /**

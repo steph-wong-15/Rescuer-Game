@@ -17,6 +17,7 @@ public class Controller {
     Player thePlayer;
     Score theScore;
     List<Person> objects = new ArrayList<>();
+    List<Unbreakable> walls = new ArrayList<>();
     int enemyCount;
 
     /**
@@ -38,6 +39,9 @@ public class Controller {
      * and update game while playing
      */
     public void tick() {
+
+        createWalls();
+
         thePlayer.processInput();
         if (enemyCount < 4) {
             spawnEnemies();
@@ -126,6 +130,10 @@ public class Controller {
                 tempPerson.removeFromLayer();
                 iterator.remove();
             }
+            if(tempPerson instanceof Unbreakable){
+                tempPerson.removeFromLayer();
+                iterator.remove();
+            }
         }
     }
 
@@ -176,8 +184,15 @@ public class Controller {
                     enemyCount--;
                 }
             }
+            if (tempPerson instanceof Unbreakable){
+                if (thePlayer.CharacterCollision(tempPerson)) {
+                    thePlayer.x = (Settings.SCENE_WIDTH - thePlayer.image.getWidth()) / 2.0;
+                    thePlayer.y = Settings.SCENE_HEIGHT * 0.7;
+                }
+            }
+
+            }
         }
-    }
 
 
     /**
@@ -207,6 +222,28 @@ public class Controller {
         BackgroundSize backgroundSize = new BackgroundSize(Settings.SCENE_WIDTH, Settings.SCENE_HEIGHT, true, true, true, false);
         BackgroundImage backgroundImage = new BackgroundImage(Main.loserImage, BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.CENTER, backgroundSize);
         layer.setBackground(new Background(backgroundImage));
+    }
+
+    /**
+     * Creates the unbreakable walls
+     */
+
+    private void createWalls() {
+        // image
+        Image image = Main.wallImg;
+
+        // create an unbreakable walls
+        Unbreakable wall1 = new Unbreakable(image, layer, 400, 405);
+        Unbreakable wall2 = new Unbreakable(image, layer, 100, 305);
+        Unbreakable wall3 = new Unbreakable(image, layer, 450, 205);
+        Unbreakable wall4 = new Unbreakable(image, layer, 300, 25);
+
+        objects.add(wall1);
+        objects.add(wall2);
+        objects.add(wall3);
+        objects.add(wall4);
+
+
     }
 }
 
