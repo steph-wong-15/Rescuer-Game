@@ -79,4 +79,19 @@ public class Player extends Person{
       }
     }
 
+    /**
+     * Speed getter
+     * @return speed of player
+     */
+    public double getSpeed(){
+        return speed;
+    }
+
+    /**
+     * Damage getter
+     * @return damage of player
+     */
+    public int getDamageNum(){
+        return damage;
+    }
 }

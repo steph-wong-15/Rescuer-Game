@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * Values must be at the right constants or tests will fail
  */
 
-class EnemyTest {
+public class EnemyTest {
 
     /**
      * EnemiesHealth asserts that getHealth returns the proper goal value of 1, which is true!
@@ -19,11 +19,11 @@ class EnemyTest {
     Enemies tempEnemies = new Enemies();
 
     @Test
-    void enemiesHealthTest() {
+    public void enemiesHealthTest() {
         assertEquals(1, tempEnemies.getHealth());
     }
     @Test
-    void enemiesSpeedTest() {
+    public void enemiesSpeedTest() {
         //assertEquals(2, tempEnemies.getSpeed());
     }
 

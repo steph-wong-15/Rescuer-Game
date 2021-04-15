@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * Values must be at the right constants (Settings values!) or tests will fail
  */
 
-class PlayerTest {
+public class PlayerTest {
 
     /**
      * PlayerHealth asserts that getHealth returns the proper goal value of PLAYER_HEALTH, a settings value - which is true!
@@ -19,17 +19,17 @@ class PlayerTest {
     Player tempPlayer = new Player();
 
     @Test
-    void playerHealthTest() {
+    public void playerHealthTest() {
         assertEquals(Settings.PLAYER_HEALTH, tempPlayer.getHealth());
     }
     @Test
-    void playerSpeedTest() {
-        //assertEquals(Settings.PLAYER_SPEED, tempPlayer.getSpeed());
+    public void playerSpeedTest() {
+        assertEquals(Settings.PLAYER_SPEED, tempPlayer.getSpeed());
     }
 
     @Test
-    void playerDamageTest(){
-        //assertEquals(1, tempPlayer.getDamageNum());
+    public void playerDamageTest(){
+        assertEquals(1, tempPlayer.getDamageNum());
     }
 
 }

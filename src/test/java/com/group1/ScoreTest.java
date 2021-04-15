@@ -1,15 +1,15 @@
 package com.group1;
 
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * ScoreTest Class
  * Tests all the params in Score.java to see if all the methods work and values are initialized properly
  * Values must be at the right constants or tests will fail
  */
-class ScoreTest {
+public class ScoreTest {
     /**
      * Imitates the hostageCount variable in Score, and utilize the methods in hostageCount with it
      *
@@ -24,18 +24,18 @@ class ScoreTest {
     private int tempHostageCount= test.getHostageCount();
 
     @Test
-    void HostageCountCheck() {
+    public void HostageCountCheck() {
         assertEquals(0, tempHostageCount);
     }
 
     @Test
-    void ScoreTestWorks() {
+    public void ScoreTestWorks() {
         test.increaseScore();
         assertEquals(1,test.getHostageCount());
     }
 
     @Test
-    void EqualScoreTest() {
+    public void EqualScoreTest() {
         tempHostageCount +=1;
         test.increaseScore();
 
@@ -43,22 +43,22 @@ class ScoreTest {
     }
 
     @Test
-    void ScoreGoalTestWorks() {
+    public void ScoreGoalTestWorks() {
         for(int i = 0; i<5;i++){
             test.increaseScore();
         }
         boolean ScoreGoalTester = test.goal();
-        assertEquals(ScoreGoalTester, true);
+        assertTrue(ScoreGoalTester);
     }
 
     @Test
-    void EndVarFalse(){
+    public void EndVarFalse(){
         boolean tempEnd = test.getEnd();
         assertFalse(tempEnd);
     }
 
     @Test
-    void WinVarFalse(){
+    public void WinVarFalse(){
         boolean tempWin = test.getWin();
         assertFalse(tempWin);
     }

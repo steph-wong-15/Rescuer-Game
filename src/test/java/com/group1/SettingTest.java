@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * Tests all the params in Settings.java to see if they are the right values
  * Values must be at the right constants or tests will fail
  */
-class SettingTest {
+public class SettingTest {
 
     private final double widthCheck = Settings.SCENE_WIDTH;
     private final double heightCheck = Settings.SCENE_HEIGHT;
@@ -26,22 +26,22 @@ class SettingTest {
      */
 
     @Test
-    void widthChecker() {
+    public void widthChecker() {
         assertEquals(750.0, widthCheck);
     }
 
     @Test
-    void heightChecker() {
+    public void heightChecker() {
         assertEquals(500.0, heightCheck);
     }
 
     @Test
-    void speedChecker() {
+    public void speedChecker() {
         assertEquals(3.0, speedCheck);
     }
 
     @Test
-    void healthChecker() {
+    public void healthChecker() {
         assertEquals(3, healthCheck);
     }
 

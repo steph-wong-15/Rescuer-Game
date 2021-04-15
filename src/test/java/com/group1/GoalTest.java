@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * Tests all the params in Goal.java to see if all the methods work and values are initialized properly
  * Values must be at the right constants or tests will fail
  */
-class GoalTest {
+public class GoalTest {
 
     /**
      * goalHealth asserts that getHealth returns the proper goal value of 1 - which is true!)
@@ -17,12 +17,12 @@ class GoalTest {
     Goal tempGoal = new Goal();
 
     @Test
-    void goalHealthTest() {
+    public void goalHealthTest() {
         assertEquals(1, tempGoal.getHealth());
     }
 
     @Test
-    void goalDamagedTest() {
+    public void goalDamagedTest() {
         tempGoal.getDamaged();
         assertEquals(0, tempGoal.getHealth());
     }
