@@ -21,6 +21,7 @@ public abstract class Person {
     double speed;
     int damage;
     int health;
+    int border=15;
 
     /**
      * Person superclass constructor
@@ -110,16 +111,11 @@ public abstract class Person {
         return y;
     }
 
-<<<<<<< HEAD
     /**
-=======
-        /**
->>>>>>> 912b391cc553c6dfb0a10454bfc991ccd3843d63
      * Get speed as a double
      * @return speed
      */
     public double getSpeed(){return speed;}
-<<<<<<< HEAD
 
     /**
      * Get damage as a double
@@ -127,9 +123,6 @@ public abstract class Person {
      */
 
     public int getDamageNum(){return damage;}
-=======
-    
->>>>>>> 912b391cc553c6dfb0a10454bfc991ccd3843d63
 
     /**
      * Check for collision with other characters
@@ -146,16 +139,16 @@ public abstract class Person {
      */
     public void checkBounds() {
         //vertical
-        if (y< 0) {
-            y = 0;
-        } else if (Double.compare(y, Settings.SCENE_HEIGHT - h) > 0) {
-            y = Settings.SCENE_HEIGHT - h;
+        if (y< border) {
+            y = border;
+        } else if (Double.compare(y, Settings.SCENE_HEIGHT - h-border) > 0) {
+            y = Settings.SCENE_HEIGHT - h-border;
         }
         // horizontal
-        if (x< 0) {
-            x = 0;
-        } else if (Double.compare(x, Settings.SCENE_WIDTH - w) > 0) {
-            x = Settings.SCENE_WIDTH - w;
+        if (x< border) {
+            x = border;
+        } else if (Double.compare(x, Settings.SCENE_WIDTH - w-border) > 0) {
+            x = Settings.SCENE_WIDTH - w-border;
         }
     }
 }
