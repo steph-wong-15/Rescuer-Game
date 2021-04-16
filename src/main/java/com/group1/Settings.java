@@ -9,4 +9,5 @@ public class Settings {
     public static double SCENE_HEIGHT = 500;
     public static double PLAYER_SPEED = 3.0;
     public static int PLAYER_HEALTH = 3;
+    public static int TIME_LIMIT=300;
 }

@@ -1,17 +1,7 @@
 package com.group1;
 
-import javafx.scene.Group;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.ImagePattern;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
-import javafx.scene.text.Text;
-import javafx.scene.text.TextBoundsType;
 
 /**
  * Score class
@@ -25,7 +15,8 @@ public class Score {
     Player thePlayer;
     Label healthStatus,hostageStatus,endScoreStatus;
     boolean bonus;
-    long time,timeUsed,timeLimit;
+    long time,timeUsed,timeLimit,scoreTime;
+    long endScore;
 
     /**
      * Constructor for score
@@ -41,13 +32,15 @@ public class Score {
         hostageStatus=hostage;
         endScoreStatus=endScore;
         time = System.currentTimeMillis();
-        timeLimit=300;// upper bound for how time allowed
+        timeLimit=Settings.TIME_LIMIT;// upper bound for how time allowed
     }
 
     /**
-     * Empty constructor used for testing methods
+     * Constructor used for testing methods (doesn't have pane)
      */
-    public Score() {}
+    public Score() {
+        timeLimit=Settings.TIME_LIMIT;// upper bound for how time allowed
+    }
 
     /**
      * Getter for hostageCount
@@ -62,6 +55,7 @@ public class Score {
     public boolean getEnd(){
         return end;
     }
+
     /**
      * Getter for boolean win variable
      */
@@ -69,6 +63,19 @@ public class Score {
         return win;
     }
 
+    /**
+     * Setter for boolean win variable
+     */
+    public void setEnd(boolean end) {
+        this.end = end;
+    }
+
+    /**
+     * Setter for boolean win variable
+     */
+    public void setWin(boolean win) {
+        this.win = win;
+    }
 
     /**
      * Update score for score layer
@@ -76,24 +83,32 @@ public class Score {
     public void updateScore() {
         hostageStatus.setText(String.valueOf(hostageCount));
         healthStatus.setText(String.valueOf(thePlayer.getHealth()));
-        if(!end){
-           timeUsed=(System.currentTimeMillis()-time)/1000;
-        }
-        if(win){
-            if(bonus){
-                endScoreStatus.setText(String.valueOf(5000+10*(timeLimit-timeUsed)));
-            }else {
-                endScoreStatus.setText(String.valueOf(4000+10*(timeLimit-timeUsed)));
-            }
-        }else{
-                if(bonus){
-                    endScoreStatus.setText(String.valueOf(99*(timeLimit-timeUsed)));
-                }else {
-                    endScoreStatus.setText(String.valueOf(hostageCount*(timeLimit-timeUsed)));
-                }
-        }
+        endScoreStatus.setText(String.valueOf(calculateScore()));
     }
 
+    /**
+     * Calculate Score
+     */
+    public long calculateScore(){
+        if(!end){
+            timeUsed=(System.currentTimeMillis()-time)/1000;
+        }
+        scoreTime=Math.max(0,timeLimit-timeUsed); //Make score is not negative
+        if(win){
+            if(bonus){
+                endScore=5000+10*(scoreTime);
+            }else {
+                endScore=4000+10*(scoreTime);
+            }
+        }else{
+            if(bonus){
+                endScore=99*(scoreTime);
+            }else {
+                endScore=hostageCount*(scoreTime);
+            }
+        }
+        return endScore;
+    }
     /**
      * Increase score
      */
@@ -126,6 +141,20 @@ public class Score {
     public void win(){
         win=true;
         end=true;
+    }
+
+    /**
+     * Set timeUsed (testing purposes)
+     */
+    public void setTimeUsed(int t){
+        timeUsed=t;
+    }
+
+    /**
+     * Get ending score
+     */
+    public long getEndScore(){
+        return endScore;
     }
 }
 
