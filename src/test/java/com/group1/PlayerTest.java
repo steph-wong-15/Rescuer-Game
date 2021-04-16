@@ -1,11 +1,8 @@
 package com.group1;
 
-import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 /**
  * PlayerTest Class
