@@ -77,7 +77,7 @@ public abstract class Person {
 
     /**
      * Getter for character health
-     * @return
+     * @return health
      */
     public int getHealth() {
         return health;
@@ -119,9 +119,23 @@ public abstract class Person {
     public int getDamageNum(){return damage;}
 
     /**
+     * Set speed as a double
+     */
+    public void setX(double x) {
+        this.x = x;
+    }
+
+    /**
+     * Set speed as a double
+     */
+    public void setY(double y) {
+        this.y = y;
+    }
+
+    /**
      * Check for collision with other characters
-     * @param otherSprite
-     * @return
+     * @param otherSprite other character
+     * @return true if collided
      */
     public boolean CharacterCollision(Person otherSprite) {
         return (otherSprite.x + otherSprite.w >= x && otherSprite.y + otherSprite.h >= y && otherSprite.x <= x + w && otherSprite.y <= y + h);
