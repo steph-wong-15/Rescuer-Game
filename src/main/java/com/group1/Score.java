@@ -78,6 +78,14 @@ public class Score {
     }
 
     /**
+     * Setter for hostageCount
+     * @param hostageCount number of hostages
+     */
+    public void setHostageCount(int hostageCount) {
+        this.hostageCount = hostageCount;
+    }
+
+    /**
      * Update score for score layer
      */
     public void updateScore() {

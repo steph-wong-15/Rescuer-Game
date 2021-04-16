@@ -35,6 +35,18 @@ public class Controller {
     }
 
     /**
+     * Constructor without spawnHostages() and createWalls()
+     * @param pane   get game layer where characters loaded
+     * @param player the player
+     * @param score  communicates with game layer to display the score
+     */
+    Controller(Pane pane, Player player, Score score, String test) {
+        layer = pane;
+        scene = pane.getScene();
+        theScore = score;
+        thePlayer = player;
+    }
+    /**
      * Where all the necessary components are called to run
      * and update game while playing
      */
@@ -86,7 +98,7 @@ public class Controller {
     /**
      * Make enemies
      */
-    private void spawnEnemies() {
+    public void spawnEnemies() {
         Random rnd = new Random();
         Image image = Main.enemyImage;
 
@@ -108,7 +120,7 @@ public class Controller {
     /**
      * remove enemies when game is over
      */
-    private void removeCharacters(){
+    public void removeCharacters(){
         Iterator<Person> iterator = objects.listIterator();
         while (iterator.hasNext()) {
             Person tempPerson = iterator.next();
@@ -138,7 +150,7 @@ public class Controller {
     /**
      * Create Bonus reward
      */
-    private void spawnGoal() {
+    public void spawnGoal() {
         if (theScore.goal()) {
             objects.add(Goal.createGoal(layer));
             objects.add(Bonus.createBonus(layer));
@@ -148,7 +160,7 @@ public class Controller {
     /**
      * Check for all types of collisions
      */
-    private void checkPlayerCollisions() {
+    public void checkPlayerCollisions() {
         Iterator<Person> iterator = objects.listIterator();
         while (iterator.hasNext()) {
             Person tempPerson = iterator.next();
@@ -194,7 +206,7 @@ public class Controller {
     /**
      * Check health and remove o health characters
      */
-    private void playerDead() {
+    public void playerDead() {
         if (thePlayer.getHealth() < 1) {
             thePlayer.removeFromLayer();
             theScore.end = true;

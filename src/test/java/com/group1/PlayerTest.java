@@ -3,6 +3,9 @@ package com.group1;
 import javafx.scene.layout.Pane;
 import org.junit.Before;
 import org.junit.jupiter.api.Test;
+
+import java.util.Random;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
@@ -67,4 +70,51 @@ public class PlayerTest {
         assert(!testPane.getChildren().contains(tempPlayer.imageView));
     }
 
+    @Test
+    public void EnemyCollisionTest(){
+        Enemies enemy= new Enemies(testPane);
+        int rndX= new Random().nextInt((int)Settings.SCENE_WIDTH);
+        int rndY= new Random().nextInt((int)Settings.SCENE_HEIGHT);
+        tempPlayer.setX(rndX);
+        tempPlayer.setY(rndY);
+        enemy.setX(rndX);
+        enemy.setY(rndY);
+        assert(tempPlayer.CharacterCollision(enemy));
+    }
+
+    @Test
+    public void HostageCollisionTest(){
+         Hostages hostage =new Hostages(testPane);
+        int rndX= new Random().nextInt((int)Settings.SCENE_WIDTH);
+        int rndY= new Random().nextInt((int)Settings.SCENE_HEIGHT);
+        tempPlayer.setX(rndX);
+        tempPlayer.setY(rndY);
+        hostage.setX(rndX);
+        hostage.setY(rndY);
+        assert(tempPlayer.CharacterCollision(hostage));
+    }
+
+    @Test
+    public void BonusCollisionTest(){
+        Bonus bonus =new Bonus(testPane);
+        int rndX= new Random().nextInt((int)Settings.SCENE_WIDTH);
+        int rndY= new Random().nextInt((int)Settings.SCENE_HEIGHT);
+        tempPlayer.setX(rndX);
+        tempPlayer.setY(rndY);
+        bonus.setX(rndX);
+        bonus.setY(rndY);
+        assert(tempPlayer.CharacterCollision(bonus));
+    }
+
+    @Test
+    public void GoalCollisionTest(){
+        Goal goal =new Goal(testPane);
+        int rndX= new Random().nextInt((int)Settings.SCENE_WIDTH);
+        int rndY= new Random().nextInt((int)Settings.SCENE_HEIGHT);
+        tempPlayer.setX(rndX);
+        tempPlayer.setY(rndY);
+        goal.setX(rndX);
+        goal.setY(rndY);
+        assert(tempPlayer.CharacterCollision(goal));
+    }
 }
