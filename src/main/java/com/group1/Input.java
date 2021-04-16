@@ -21,11 +21,10 @@ public class Input {
     // will vary when you let the user customize the key codes or when you add support for a 2nd player
     // -------------------------------------------------
 
-    private KeyCode upKey = KeyCode.UP;
-    private KeyCode downKey = KeyCode.DOWN;
-    private KeyCode leftKey = KeyCode.LEFT;
-    private KeyCode rightKey = KeyCode.RIGHT;
-
+    public KeyCode upKey = KeyCode.UP;
+    public KeyCode downKey = KeyCode.DOWN;
+    public KeyCode leftKey = KeyCode.LEFT;
+    public KeyCode rightKey = KeyCode.RIGHT;
 
     Scene scene;
 
