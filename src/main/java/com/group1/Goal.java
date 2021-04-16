@@ -1,6 +1,7 @@
 package com.group1;
 
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
 /**
@@ -21,7 +22,11 @@ class Goal extends Person{
     /**
      * Goal default constructor
      */
-    Goal(){ health = 1;}
+    Goal(Pane pane){
+        health=1;
+        layer=pane;
+        imageView=new ImageView(Main.hostageImage);
+    }
 
     /**
      * Makes bonus reward
