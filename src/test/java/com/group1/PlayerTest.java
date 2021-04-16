@@ -1,6 +1,7 @@
 package com.group1;
 
 import javafx.scene.layout.Pane;
+import org.junit.Before;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -17,6 +18,7 @@ public class PlayerTest {
      * PlayerSpeed asserts that getSpeed returns the proper goal value of PLAYER_SPEED, a settings value - which is true!)
      * PlayerDamage asserts that getDamage returns the proper goal value of 1, which is true!)
      */
+
     Pane testPane = new Pane();
     Player tempPlayer = new Player(testPane);
 
@@ -24,10 +26,12 @@ public class PlayerTest {
     public void healthTest() {
         assertEquals(Settings.PLAYER_HEALTH, tempPlayer.getHealth());
     }
+
     @Test
     public void speedTest() {
         assertEquals(Settings.PLAYER_SPEED, tempPlayer.getSpeed());
     }
+
     @Test
     public void damageTest(){
         assertEquals(1, tempPlayer.getDamageNum());

@@ -1,6 +1,7 @@
 package com.group1;
 
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
 
@@ -29,7 +30,11 @@ class Hostages extends Person{
      * Person default constructor
      */
 
-    Hostages(){health=1;}
+    Hostages(Pane pane){
+        health=1;
+        layer=pane;
+        imageView=new ImageView(Main.hostageImage);
+    }
 
     /**
      * hostage are held hostage so the cant move
