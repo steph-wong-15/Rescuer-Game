@@ -1,6 +1,7 @@
 package com.group1;
 
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
 import java.util.Random;
@@ -29,7 +30,13 @@ class Enemies extends Person{
     /**
      * Enemies default constructor
      */
-    Enemies(){ health = 1; damage =1; speed=2;}
+    Enemies(Pane pane){
+        health=1;
+        damage =1;
+        speed =2;
+        layer=pane;
+        imageView=new ImageView(Main.hostageImage);
+    }
 
     /**
      * Movement for enemy is horizontal and can randomly change every second from left to right
