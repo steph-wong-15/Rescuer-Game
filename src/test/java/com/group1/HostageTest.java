@@ -16,14 +16,18 @@ public class HostageTest {
 Hostages tempHostages = new Hostages();
 
     @Test
-    public void hostageHealthTest() {
+    public void healthTest() {
         assertEquals(1, tempHostages.getHealth());
     }
+
     @Test
-    public void hostageDamagedHealthTest() {
+    public void damagedHealthTest() {
         tempHostages.getDamaged(); //-1 health
         assertEquals(0, tempHostages.getHealth());
     }
 
-
+    @Test
+    public void speedTest(){
+        assertEquals(0,tempHostages.getSpeed());
+    }
 }

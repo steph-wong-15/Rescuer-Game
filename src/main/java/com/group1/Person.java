@@ -44,9 +44,7 @@ public abstract class Person {
     /**
      * Person default constructor
      */
-
     public Person(){}
-
 
     /**
      * default move function

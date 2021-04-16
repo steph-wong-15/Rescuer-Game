@@ -2,6 +2,7 @@ package com.group1;
 
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
 import java.util.*; //import arraylist
@@ -31,9 +32,15 @@ public class Player extends Person{
     }
 
     /**
-     * Player default constructor
+     * Player constructor without input
      */
-    Player(){ damage = 1; speed=Settings.PLAYER_SPEED; health=Settings.PLAYER_HEALTH;}
+    Player(Pane pane){
+        damage = 1;
+        speed=Settings.PLAYER_SPEED;
+        health=Settings.PLAYER_HEALTH;
+        layer=pane;
+        imageView=new ImageView(Main.playerImage);
+    }
 
     /**
      * Make player instance
