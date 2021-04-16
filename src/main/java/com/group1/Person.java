@@ -132,16 +132,16 @@ public abstract class Person {
      */
     public void checkBounds() {
         //vertical
-        if (y< 0) {
-            y = 0;
-        } else if (Double.compare(y, Settings.SCENE_HEIGHT - h) > 0) {
-            y = Settings.SCENE_HEIGHT - h;
+        if (y< 15) {
+            y = 15;
+        } else if (Double.compare(y, Settings.SCENE_HEIGHT - h-15) > 0) {
+            y = Settings.SCENE_HEIGHT - h-15;
         }
         // horizontal
-        if (x< 0) {
-            x = 0;
-        } else if (Double.compare(x, Settings.SCENE_WIDTH - w) > 0) {
-            x = Settings.SCENE_WIDTH - w;
+        if (x< 15) {
+            x = 15;
+        } else if (Double.compare(x, Settings.SCENE_WIDTH - w-15) > 0) {
+            x = Settings.SCENE_WIDTH - w-15;
         }
     }
 }
