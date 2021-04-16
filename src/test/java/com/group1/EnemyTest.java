@@ -1,5 +1,6 @@
 package com.group1;
 
+import javafx.scene.layout.Pane;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -16,7 +17,8 @@ public class EnemyTest {
      * EnemiesSpeed asserts that getSpeed returns the proper goal value of 2, which is true!
      * EnemiesDamage asserts that getDamage returns the proper goal value of 1, which is true!
      */
-    Enemies tempEnemies = new Enemies();
+    Pane testPane = new Pane();
+    Enemies tempEnemies = new Enemies(testPane);
 
     @Test
     public void enemiesHealthTest() {
@@ -30,6 +32,29 @@ public class EnemyTest {
     @Test
     public void enemiesDamageTest(){
         assertEquals(1, tempEnemies.getDamageNum());
+    }
+
+    @Test
+    public void moveTest(){
+        double x=tempEnemies.getX();
+        double y =tempEnemies.getY();
+        tempEnemies.move();
+        assertEquals(x+tempEnemies.dx,tempEnemies.getX());
+        assertEquals(y+tempEnemies.dy,tempEnemies.getY());
+    }
+
+    @Test
+    public void addPlayerTest(){
+        tempEnemies.addToLayer();
+        assert(testPane.getChildren().contains(tempEnemies.imageView));
+    }
+
+    @Test
+    public void removePlayerTest(){
+        tempEnemies.addToLayer();
+        assert(testPane.getChildren().contains(tempEnemies.imageView));
+        tempEnemies.removeFromLayer();
+        assert(!testPane.getChildren().contains(tempEnemies.imageView));
     }
 
 }

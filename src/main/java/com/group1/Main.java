@@ -66,7 +66,7 @@ public class Main extends Application {
         uiBg=new Image(getClass().getResource("/photos/uiBG.png").toExternalForm(),1000,200,false,true);
         playImg= new Image(getClass().getResource("/photos/play.png").toExternalForm(),50,50,false,true);
         bg = new Image(getClass().getResource("/photos/backgroundStart.png").toExternalForm());
-        //bonus = new Image(getClass().getResource("/photos/purple.png").toExternalForm());
+        bonus = new Image(getClass().getResource("/photos/purple.png").toExternalForm());
         wallImg = new Image(getClass().getResource("/photos/wall.png").toExternalForm(),150,50,false,true);
 
     }
