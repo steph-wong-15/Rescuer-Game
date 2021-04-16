@@ -17,7 +17,6 @@ public class Controller {
     Player thePlayer;
     Score theScore;
     List<Person> objects = new ArrayList<>();
-    List<Unbreakable> walls = new ArrayList<>();
     int enemyCount;
 
     /**
@@ -32,6 +31,7 @@ public class Controller {
         theScore = score;
         thePlayer = player;
         spawnHostages();
+        createWalls();
     }
 
     /**
@@ -39,8 +39,6 @@ public class Controller {
      * and update game while playing
      */
     public void tick() {
-
-        createWalls();
 
         thePlayer.processInput();
         if (enemyCount < 10) {
@@ -190,7 +188,6 @@ public class Controller {
                     thePlayer.y = Settings.SCENE_HEIGHT * 0.7;
                 }
             }
-
             }
         }
 
