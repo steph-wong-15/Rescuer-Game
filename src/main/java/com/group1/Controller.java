@@ -34,6 +34,9 @@ public class Controller {
         spawnHostages();
         createWalls();
     }
+        /** Default Empty Constructor
+     */
+    public Controller() {}
 
     /**
      * Where all the necessary components are called to run
