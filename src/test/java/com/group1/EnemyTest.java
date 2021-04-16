@@ -24,12 +24,12 @@ public class EnemyTest {
     }
     @Test
     public void enemiesSpeedTest() {
-        //assertEquals(2, tempEnemies.getSpeed());
+        assertEquals(2, tempEnemies.getSpeed());
     }
 
     @Test
     public void enemiesDamageTest(){
-        //assertEquals(1, tempEnemies.getDamageNum());
+        assertEquals(1, tempEnemies.getDamageNum());
     }
 
 }
