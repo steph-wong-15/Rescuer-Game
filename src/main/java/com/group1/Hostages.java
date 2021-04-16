@@ -27,9 +27,8 @@ class Hostages extends Person{
       }
 
     /**
-     * Person default constructor
+     * Default constructor
      */
-
     Hostages(Pane pane){
         health=1;
         layer=pane;

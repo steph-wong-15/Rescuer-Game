@@ -32,7 +32,8 @@ public class Input {
     public Input( Scene scene) {
         this.scene = scene;
     }
-
+    public Input() {}   
+    
     public void addListeners() {
 
         scene.addEventFilter(KeyEvent.KEY_PRESSED, keyPressedEventHandler);

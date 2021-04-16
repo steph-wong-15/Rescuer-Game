@@ -1,6 +1,7 @@
 package com.group1;
 
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
 import java.util.Random;
@@ -25,6 +26,15 @@ public class Bonus extends Person{
     private Bonus(Image image, Pane layer, double x, double y, String name) {
         super(image, layer, x, y);
         this.name=name;
+    }
+
+    /**
+     * Default constructor
+     */
+    Bonus(Pane pane){
+        health=1;
+        layer=pane;
+        imageView=new ImageView(Main.bonus);
     }
 
     /**

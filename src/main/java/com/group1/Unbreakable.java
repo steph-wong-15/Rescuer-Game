@@ -10,4 +10,8 @@ public class Unbreakable extends Person{
         super(image, layer, x, y);
     }
 
+    //walls are stationary
+    public void move(){
+    }
 }
+
