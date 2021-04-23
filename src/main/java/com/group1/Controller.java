@@ -132,7 +132,7 @@ public class Controller {
                 tempPerson.removeFromLayer();
                 iterator.remove();
             }
-            if(tempPerson instanceof Unbreakable){
+            if(tempPerson instanceof Trap){
                 tempPerson.removeFromLayer();
                 iterator.remove();
             }
@@ -187,7 +187,7 @@ public class Controller {
                     enemyCount--;
                 }
             }
-            if (tempPerson instanceof Unbreakable){
+            if (tempPerson instanceof Trap){
                 if (thePlayer.CharacterCollision(tempPerson)) {
                     thePlayer.speed=0.5;
                 }
@@ -235,14 +235,14 @@ public class Controller {
 
 
         // create an unbreakable walls
-        Unbreakable wall1 = new Unbreakable(image, layer, 400, 405);
-        Unbreakable wall2 = new Unbreakable(image, layer, 100, 305);
-        Unbreakable wall3 = new Unbreakable(image, layer, 450, 205);
-        Unbreakable wall4 = new Unbreakable(image, layer, 300, 30);
-        Unbreakable wall5 = new Unbreakable(image1, layer, 0, 0);
-        Unbreakable wall6 = new Unbreakable(image1, layer, Settings.SCENE_WIDTH-border, 0);
-        Unbreakable wall7 = new Unbreakable(image2, layer, 0, 0);
-        Unbreakable wall8 = new Unbreakable(image2, layer, 0, Settings.SCENE_HEIGHT-border);
+        Trap wall1 = new Trap(image, layer, 400, 405);
+        Trap wall2 = new Trap(image, layer, 100, 305);
+        Trap wall3 = new Trap(image, layer, 450, 205);
+        Trap wall4 = new Trap(image, layer, 300, 30);
+        Trap wall5 = new Trap(image1, layer, 0, 0);
+        Trap wall6 = new Trap(image1, layer, Settings.SCENE_WIDTH-border, 0);
+        Trap wall7 = new Trap(image2, layer, 0, 0);
+        Trap wall8 = new Trap(image2, layer, 0, Settings.SCENE_HEIGHT-border);
 
         objects.add(wall1);
         objects.add(wall2);

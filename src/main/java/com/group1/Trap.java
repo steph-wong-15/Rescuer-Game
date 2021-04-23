@@ -4,14 +4,14 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
-public class Unbreakable extends Person{
+public class Trap extends Person{
 
 
-    public Unbreakable(Image image, Pane layer, double x, double y) {
+    public Trap(Image image, Pane layer, double x, double y) {
         super(image, layer, x, y);
     }
 
-    Unbreakable(Pane pane){
+    Trap(Pane pane){
         layer=pane;
         imageView=new ImageView(Main.wallImg);
     }
