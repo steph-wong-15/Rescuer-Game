@@ -238,7 +238,7 @@ public class Controller {
         Unbreakable wall1 = new Unbreakable(image, layer, 400, 405);
         Unbreakable wall2 = new Unbreakable(image, layer, 100, 305);
         Unbreakable wall3 = new Unbreakable(image, layer, 450, 205);
-        Unbreakable wall4 = new Unbreakable(image, layer, 300, 15);
+        Unbreakable wall4 = new Unbreakable(image, layer, 300, 30);
         Unbreakable wall5 = new Unbreakable(image1, layer, 0, 0);
         Unbreakable wall6 = new Unbreakable(image1, layer, Settings.SCENE_WIDTH-border, 0);
         Unbreakable wall7 = new Unbreakable(image2, layer, 0, 0);
