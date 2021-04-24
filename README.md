@@ -14,3 +14,8 @@ Tests can all be run in **Intelijj**, by navigating to `"src/test/java/com/group
 For example, if I want to run ScoreTest, here is an [example.](https://cdn.discordapp.com/attachments/499778411007574018/831377806683930674/unknown.png) 
 
 As you can see, all you have to do is right click on a file, and it will run all the appropriate tests corresponding to the class you selected. 
+
+
+## Building JAR files for game and javadoc
+
+Navigate to Maven control panel(this may vary depending on your ide) and click package.  Both game and javadoc jar files will be generated and will be located in the target folder.  Alternatively you can use `mvn package` command in terminal to build jar files, and will also be generated to target folder.
