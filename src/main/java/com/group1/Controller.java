@@ -34,9 +34,12 @@ public class Controller {
         spawnHostages();
         createWalls();
     }
-        /** Default Empty Constructor
+    /**
+     * Default Constructor
      */
-    public Controller() {}
+    public Controller() {
+
+    }
 
     /**
      * Where all the necessary components are called to run
@@ -70,7 +73,7 @@ public class Controller {
     /**
      * Make hostages
      */
-    private void spawnHostages() {
+    public void spawnHostages() {
         // image
         Image image = Main.hostageImage;
 
@@ -90,7 +93,7 @@ public class Controller {
     /**
      * Make enemies
      */
-    private void spawnEnemies() {
+    public void spawnEnemies() {
         Random rnd = new Random();
         Image image = Main.enemyImage;
 
@@ -112,7 +115,7 @@ public class Controller {
     /**
      * remove enemies when game is over
      */
-    private void removeCharacters(){
+    public void removeCharacters(){
         Iterator<Person> iterator = objects.listIterator();
         while (iterator.hasNext()) {
             Person tempPerson = iterator.next();
@@ -142,7 +145,7 @@ public class Controller {
     /**
      * Create Bonus reward
      */
-    private void spawnGoal() {
+    public void spawnGoal() {
         if (theScore.goal()) {
             objects.add(Goal.createGoal(layer));
             objects.add(Bonus.createBonus(layer));
@@ -152,7 +155,7 @@ public class Controller {
     /**
      * Check for all types of collisions
      */
-    private void checkPlayerCollisions() {
+    public void checkPlayerCollisions() {
         thePlayer.speed=3;
         Iterator<Person> iterator = objects.listIterator();
         while (iterator.hasNext()) {
@@ -198,7 +201,7 @@ public class Controller {
     /**
      * Check health and remove o health characters
      */
-    private void playerDead() {
+    public void playerDead() {
         if (thePlayer.getHealth() < 1) {
             thePlayer.removeFromLayer();
             theScore.end = true;
