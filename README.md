@@ -11,7 +11,7 @@ To build the game, and run it, firstly download the entire project folder as a .
 
 Tests can all be run in **Intellij**, by navigating to `"src/test/java/com/group1/Test.java"`, and then right-clicking on the respective class you want to see the tests for. 
 
-For example, if I want to run ScoreTest, here is an [example.](https://cdn.discordapp.com/attachments/499778411007574018/831377806683930674/unknown.png) 
+For example, if I want to run ScoreTest.
 
 As you can see, all you have to do is right click on a file, and it will run all the appropriate tests corresponding to the class you selected. 
 
